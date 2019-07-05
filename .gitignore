@@ -1,0 +1,2 @@
+# db설정 파일 제외
+time-space/**/db.php
