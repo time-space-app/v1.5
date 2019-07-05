@@ -1,0 +1,410 @@
+<?php
+session_start();
+define('DS', DIRECTORY_SEPARATOR);
+define('GPLDIR', $_SERVER['DOCUMENT_ROOT'].DS.'time-space/manage');
+include_once GPLDIR . '/core/config/default.php';
+include_once GPLDIR_CLASS . '/GPLbase.class.php';
+$GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);//상속받은 개체 멤버클래스 사용
+$GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
+?>
+<?php //입력값 바인딩
+//게시판 공통변수 항상 페이지 상단에 위치
+$GUBN = $_REQUEST['GUBN'];
+$SEARCH = $_REQUEST['SEARCH'];
+$BOARD_ID = $_REQUEST['BOARD_ID'];
+$MODE = $_REQUEST['MODE'];
+$BOARD_SEQ = $_REQUEST['SEQ'];
+$now_page = $_REQUEST['now_page'];
+//============================
+//조회카운터+1
+	$proc_edit = "UPDATE T_BOARD SET";
+	$proc_edit .=" READCOUNT = IFNULL(READCOUNT,0) + 1";
+	$proc_edit .=" WHERE SEQ = '$BOARD_SEQ'";
+	$proc_edit .=" AND BOARD_ID = '$BOARD_ID'";
+	$result = $GPLdb5->GPLexcute_query($proc_edit); //결과값 리턴
+//정보 가져오기 쿼리정리
+	$SQL = "SELECT CONTENT, EMAIL, TITLE, USER_NM, READCOUNT, FILECNT, USER_ID, STATE";
+	$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+	$SQL .= " FROM T_BOARD";
+	$SQL .= " WHERE SEQ = '$BOARD_SEQ'";
+	$SQL .= " AND BOARD_ID = '$BOARD_ID'";
+	$ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+	$EMAIL=$ROW['EMAIL'];
+	$arremail = split("@",$EMAIL);
+	//바인딩변수값 정의
+	$CONTENT = $ROW['CONTENT'];
+	$TITLE = $ROW['TITLE'];
+	$NAME = $ROW['USER_NM'];
+	$REGDATE =  $ROW['CREATE_DT'];
+	$READCOUNT = $ROW['READCOUNT'];
+	$FILECNT = $ROW['FILECNT'];
+	$USER_ID = $ROW['USER_ID'];
+	$STATE = $ROW['STATE'];
+	if ($FILECNT > 0)
+	{
+		$SQL = "SELECT";
+		$SQL .= " SEQ,FILE_NM,FILE_SIZE,DOWN_CNT";
+		$SQL .= " ,BOARD_SEQ,BOARD_ID";
+		$SQL .= " ,CREATE_DT,CREATE_ID,UPDATE_DT,UPDATE_ID";
+		$SQL .= " FROM T_ATTACH_FILE";
+		$SQL .= " WHERE BOARD_SEQ = '$BOARD_SEQ' AND BOARD_ID = '$BOARD_ID'";
+		$SQL .= " ORDER BY SEQ ASC";
+		$fileresult = $GPLdb5->GPLexcute_query($SQL);
+	}
+	//메뉴 변수
+//메뉴 변수
+	switch ($BOARD_ID) { //notice, qa, repair, pds, faq
+		case 'notice'  : $body='1'; $title='NOTICE';break;
+		case 'repair' : $body='2'; $title='REPAIR';break;
+		case 'qa'  : $body='3'; $title='Q/A';break;
+		case 'faq'  : $body='4'; $title='FAQ';break;
+		case 'pds'  : $body='5'; $title='PDS';break;
+		default   : $body='1'; $title='NOTICE';break;
+	}
+?>
+<?php if($_SESSION['valid_level'] > 3 || $_SESSION['valid_level'] == '') { ?>
+	<?php if($_SESSION['valid_user']!=$USER_ID && $BOARD_ID=="repair" ){ //본인이 쓴 글 수정삭제기능
+	echo "<script type='text/javascript'>alert('It is a secret article.');</script>";
+	echo "<meta http-equiv='Refresh' content='0;url=list.html?now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&MODE=list'>";
+	exit;} ?>
+<?php } ?>
+<!--DOCTYPE html-->
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/htmlcharset=utf-8" />
+<link rel="stylesheet" href="/time-space/reset.css" type="text/css">
+<link rel="stylesheet" href="/time-space/css/common.css" type="text/css">
+<link rel="stylesheet" href="/time-space/board/board.css" type="text/css">
+<link href="/time-space/skin/one/design/favicon.ico" rel="shortcut icon" type="image/ico" />
+<script type="text/javascript" charset="utf-8" src="/time-space/mobile/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript"><?php include $_SERVER['DOCUMENT_ROOT']."/time-space/js/common.js"; ?></script>
+<!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<title>Time-Space HTML5</title>
+<script type="text/javascript">
+     function del_chk()
+     {
+		frm = document.del_frm;
+         if (confirm('Are you sure you want to delete?') == true) {
+        	frm.MODE.value = "delete"; 
+        	frm.FILE_DEL0.value = 'FILE_DEL0';
+    		frm.FILE_DEL1.value = 'FILE_DEL1';
+        	frm.submit();
+            return true;
+	     } else {
+	    	 frm.MODE.value = ""; 
+	         frm.FILE_DEL0.value = '';
+	    	 frm.FILE_DEL1.value = '';
+	        return false;
+	     }
+     }
+     function submitForm(frm)
+     {
+        var errorMessage = null;
+        var objFocus = null;
+        if (frm.USER_NM.value.length == 0) {
+            errorMessage = "Please input the name.";
+            objFocus = frm.USER_NM;
+           }
+        else if (frm.COMMENTS.value.length == 0) {
+            errorMessage = "Please input the comment.";
+            objFocus = frm.COMMENTS;
+           }
+        if(errorMessage != null) {
+            alert(errorMessage);
+            objFocus.focus();
+            return false;
+           }
+     }
+</script>
+</head>
+<body>
+<div id="wrap">
+<header id="page_header">
+	<a href="/"><h2>Time-Space is Html5 Makeup Web and Computer Repair</h2></a>
+	<nav>
+	<ul>
+	<li><a href="/time-space/index.html?go=pc&BOARD_ID=&SEQ=">[Home]</a></li>
+	<li><a href="/time-space/board/list.html?go=pc&BOARD_ID=notice">[Posts]</a></li>
+	<li><a href="/time-space/board/list.html?go=pc&BOARD_ID=repair">[Work Request]</a></li>
+	<li><a href="/wordpress/">[WordPress]</a></li>
+	<li>
+	<span>
+	To use new technology,
+	<a href="https://www.google.com/chrome/" target="_new">[Chrome]</a>, 
+	<a href="http://support.apple.com/downloads/#internet/" target="_new">[Safari]</a>,
+	<a href="http://www.mozilla.org/" target="_new">[Firefox]</a>,
+	<a href="http://www.opera.com/" target="_new">[Opera]</a>,
+	<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="_new">[IE]</a>
+	, install the latest version for free
+	</span>
+	</li>
+	</ul>
+	</nav>
+</header>
+<div id="contents">
+<!--로그인영역시작-->
+<?php include $_SERVER['DOCUMENT_ROOT']."/time-space/board/auth.php"; ?>
+<span class="br10"></span>
+<div id="login">
+<?php if($_SESSION['valid_user'] != "") { ?>
+	<a href="/time-space/board/logout.php"><span class="button">Log Out</span></a>
+	<a href="/time-space/board/join.html"><span class="button">Mypage</span></a>
+<?php }else{ ?>
+	<form name="form_login" id="form_login" action="" autocomplete="on" method="post">
+		<label data-icon="u" for="id">ID </label> 
+		<input id="id" name="id" placeholder="yser Id" required="required" type="text" class="type-text" />
+		<label data-icon="p" for="password">Password </label> 
+		<input id="pw" name="pw" placeholder="your Password" required="required" type="password" class="type-text" />
+		<input type="submit" value="Login" class="type-submit">
+		<!--[if lte IE 8]>
+		<a href="/time-space/board/join.html"><span class="button_ie">Join</span></a>
+		<![endif]-->
+		<![if (gte IE 9)|(!IE)]>
+		   <a href="/time-space/board/join.html"><span class="button">Join</span></a>
+		<![endif]>
+	</form>
+<?php } ?>
+</div>
+<!--로그인영역끝-->
+<section id="subposts">
+	<article class="post">
+		<header>
+		<h2>Title: <?=$TITLE?></h2>
+		<p>
+		Posted by <?=$NAME?> on
+		<time datetime="2013-06-25"><?=$REGDATE?></time>
+		<?php if ($FILECNT > 0){ ?>
+			<span>
+			<?php 
+				if($fileresult){
+					while($filerow = mysql_fetch_array($fileresult)) {	
+					?>
+					[FILES]: <a href="/time-space/manage/core/function/download.php?filename=<?=$filerow['FILE_NM']?>&target=<?=$BOARD_ID?>"><?=$filerow['FILE_NM']?></a><br/>
+				<?php } ?>
+				<?php } ?>
+			</span>
+		<?php } ?>
+		</p>
+		</header>
+		<p>
+		<?=str_replace("\r\n", "<br/>",$CONTENT);?>
+		</p>
+		<footer>
+		<p></p>
+		</footer>
+	</article>
+	<!-- 등록버튼 시작 -->
+	<div id="board_list_button_table">
+		<a href="list.html?now_page=<?=$now_page?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>&MODE=list'">
+		<span class="button">LIST</span></a>
+		<?php if($_SESSION['valid_user']==$USER_ID){ //본인이 쓴 글 수정삭제기능?>
+		<input type="button" value="DELETE" name="DELETE" class="type-btn" onclick="del_chk();" />
+		<a href="write.html?now_page=<?=$now_page?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>&MODE=edit&SEQ=<?=$BOARD_SEQ?>">
+		<span class="button">EDIT</span></a>
+		<?php }?>
+	</div>
+	<!-- COMMENT START -->
+	<?php if($BOARD_ID=="notice" || $BOARD_ID=="pds"){?>
+	<?php }else{ ?>
+	<!-- 코멘트 시작 -->
+	<div id="comment_wrap" class="post">
+	<header id="board_list_header">
+		<h2>Comment Form</h2>
+	</header>
+	<span class="br10"></span>
+	<div class="board_write_table" class="post">
+	<?php 
+		//코멘트셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,USER_ID,USER_NM,COMMENTS";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " FROM T_BOARD_COMMENT";
+		$SQL .= " WHERE BOARD_SEQ = '$BOARD_SEQ'";
+		$SQL .= " AND BOARD_ID = '$BOARD_ID'";
+		$SQL .= " ORDER BY SEQ ASC";
+		$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+		$COMMENT_MODE = ($row)?"edit":"write";
+		//$result = $GPLdb5->GPLexcute_query($SQL);
+		if($row){
+		//if($result){
+		//	while($row = mysql_fetch_array($result)) {
+		?>
+		<table summary="" class="comment_table " class="post">
+		      <caption></caption>
+		       <colgroup>
+		           <col width="20%" />
+			   <col width="55%" />
+			   <col width="20%" />
+		       </colgroup>
+		       <tbody>
+			<tr>
+			<th><?=$row['USER_NM']?></th>
+			<th><?=$row['COMMENTS']?></th>
+			<th><?=$row['CREATE_DT']?></th>
+			<th><?php //if($_SESSION['valid_user']==$USER_ID && $_SESSION['valid_name']==$NAME){ //본인이 쓴 글 삭제기능?>
+			<!-- <a href="write_ok.php?BOARD_SEQ=<?=$BOARD_SEQ?>&BOARD_ID=<?=$BOARD_ID?>&COMMENT_MODE=delete&SEQ=<?=$row['SEQ']?>">
+			DEL</a> -->
+			<?php //}?>
+			</th>
+			</tr>
+			</tbody>
+		</table>
+		<?php //}?>
+	   <?php //}?>
+	</div>
+	<?php }?>
+	<span class="br10"></span>
+	<?php if($_SESSION['valid_level'] < 3 && $_SESSION['valid_level'] > 0) { ?>
+	<!-- 테이블 시작 -->
+	   <form method="post" name="frm" id="frm" action="write_ok.php" onsubmit="return submitForm(this)" enctype="multipart/form-data" >
+	     <table summary="" class="comment_table" class="post">
+	      <caption></caption>
+	       <colgroup>
+	           <col width="20%" />
+		   <col width="55%" />
+		   <col width="25%" />
+	       </colgroup>
+	       <tbody>
+		<tr>
+		<th>NAME</th>
+		<th>COMMENT</th>
+		<th></th>
+		</tr>
+		<tr>
+		<td>
+		<input type="text" name="USER_NM" id="USER_NM" value="<?=($row['USER_NM']=="")?$_SESSION['valid_name']:$row['USER_NM'];?>" />
+		<SELECT ID="STATE" name='STATE'>
+	        <option value=''>-STATE-</option>
+	        <option value="처리중" <?=($STATE=="처리중")?"SELECTED":"";?>>처리중</option>
+	        <option value="처리완료" <?=($STATE=="처리완료")?"SELECTED":"";?>>처리완료</option>
+		</SELECT>
+		</td>
+		<td>
+		<textarea name="COMMENTS" id="COMMENTS" rows="3"><?=str_replace("<br/>", "\r\n",$row['COMMENTS']);?></textarea>
+		</td>
+		<td>
+		<!-- 등록버튼 시작 -->
+		<div id="board_list_button_table">
+		<input type="submit" value="COMMIT" name="COMMIT" class="type-btn">
+		<a href="write_ok.php?BOARD_SEQ=<?=$BOARD_SEQ?>&BOARD_ID=<?=$BOARD_ID?>&COMMENT_MODE=delete&SEQ=<?=$row['SEQ']?>">
+		<span class="button">DEL</span></a>
+		</div>
+		</td>
+		</tr>
+		</tbody>
+	   </table>
+		<div style="display:none">
+		<input type="text" value="<?=$COMMENT_MODE?>" name="COMMENT_MODE" id="COMMENT_MODE">
+		<input type="text" value="<?=$BOARD_SEQ?>" name="BOARD_SEQ" id="BOARD_SEQ">
+		<input type="text" value="<?=$BOARD_ID?>" name="BOARD_ID" id="BOARD_ID">
+		<input type="text" value="<?=$row['SEQ']?>" name="SEQ" id="SEQ">
+		<input type="text" value="<?=$_SESSION['valid_user']?>" name="USER_ID" id="USER_ID">
+		<!--<input type="text" value="<?=($ROW['USER_ID']=="")?$_SESSION['valid_user']:$ROW['USER_ID'];?>" name="USER_ID" id="USER_ID">-->
+		</div>
+	   </form>
+		<?php } ?>
+	</div>
+	<?php }?>
+	<!-- COMMENT END -->
+	<!-- 이전,다음 게시물 링크시작 -->
+	<p>&nbsp;</p>
+	<div id="prev_wrap" class="post">
+	<div class="board_write_table">
+	     <table summary="" class="write_table">
+	      <caption>Preview, Nextview Contents</caption>
+	       <colgroup>
+	           <col width="100px" />
+		   <col />
+	       </colgroup>
+	       <tbody>
+	<?php
+	//셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,TITLE";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE (SEQ = (SELECT MIN(SEQ) FROM T_BOARD WHERE SEQ > '$BOARD_SEQ' AND BOARD_ID = '$BOARD_ID')";
+		$SQL .= " OR SEQ = (SELECT MAX(SEQ) FROM T_BOARD WHERE SEQ < '$BOARD_SEQ' AND BOARD_ID = '$BOARD_ID'))";
+		$SQL .= " AND BOARD_ID = '$BOARD_ID'";
+		$SQL .= " ORDER BY TOP_NEWS DESC, SEQ DESC";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+		$Prevtcnt = mysql_num_rows($result);
+		if($Prevtcnt>0){
+			while($row = mysql_fetch_array($result)) {
+		        if ($BOARD_SEQ > $row['SEQ'])
+		        {
+		?>
+					<tr><th>Prev</th>
+					<td>
+					<a href="view.html?SEQ=<?=$row['SEQ']?>&now_page=<?=$now_page?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>&MODE=view">
+						<?=$row['TITLE']?>
+					</a>
+					<?php if($_SESSION['valid_user']!=$row[USER_ID] && $BOARD_ID=="repair" ){ //본인이 쓴 글 수정삭제기능 ?>
+					<img src="/time-space/image/iconSecret.gif">		
+					<?php } ?>
+					</td></tr>
+					<?php if ($Prevtcnt == 1) { ?>
+					 <tr><th>Next</th>
+					 <td>None</td></tr>
+					<?php } ?>
+		<?php } else if ($BOARD_SEQ < $row['SEQ']) {	
+		?>			
+					<tr><th>Next</th>
+					<td>
+					<a href="view.html?SEQ=<?=$row['SEQ']?>&now_page=<?=$now_page?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>&MODE=view">
+						<?=$row['TITLE']?>
+					</a>
+					<?php if($_SESSION['valid_user']!=$row[USER_ID] && $BOARD_ID=="repair" ){ //본인이 쓴 글 수정삭제기능 ?>
+					<img src="/time-space/image/iconSecret.gif">		
+					<?php } ?>
+					</td></tr>
+					<?php if ($Prevtcnt == 1) { ?>
+					 <tr><th>Prev</th>
+					 <td>None</td></tr>
+					<?php } ?>
+			<?php } ?>
+		<?php } ?>
+	<?php }else{ ?>
+		<tr><th>Prev</th><td>None</td></tr>
+		<tr><th>Next</th><td>None</td></tr>
+	<?php } ?>
+	</tbody>
+	</table>
+	</div>
+	</div>
+	<div style="display:none">
+	<form method="post" name="del_frm" id="del_frm" action="write_ok.php" >
+	<input type="text" value="<?=$MODE?>" name="MODE" id="MODE">
+	<input type="text" value="<?=$BOARD_SEQ?>" name="BOARD_SEQ" id="BOARD_SEQ">
+	<input type="text" value="<?=$BOARD_ID?>" name="BOARD_ID" id="BOARD_ID">
+	<input type="text" value="<?=$FILENUM[0]?>" name="FILENUM0" id="FILENUM0">
+	<input type="text" value="<?=$FILENUM[1]?>" name="FILENUM1" id="FILENUM1">
+	<input type="text" value="<?=$FILE_NM[0]?>" name="FILE_NM0" id="FILE_NM0">
+	<input type="text" value="<?=$FILE_NM[1]?>" name="FILE_NM1" id="FILE_NM1">
+	<input type="text" value="" name="FILE_DEL0" id="FILE_DEL0">
+	<input type="text" value="" name="FILE_DEL1" id="FILE_DEL1">
+	<input type="text" value="<?=$SEARCH?>" name="SEARCH" id="SEARCH">
+	<input type="text" value="<?=$GUBN?>" name="GUBN" id="GUBN">
+	<input type="text" value="<?=$now_page?>" name="now_page" id="now_page">
+	</form>
+	</div>
+</section>
+</div>
+<div id="back-to-top">Top ▲</div>
+<footer id="page_footer">
+	<p>&copy;Time-Space.biz since 2013-06-07</p>
+	<nav>
+	<ul>
+	<li><a href="http://time-space.biz">Homepage</a></li>
+	<li><a href="Preparation" class="disabled">Company Info</a></li>
+	<li><a href="Preparation" class="disabled">Service</a></li>
+	<li><a href="/time-space/index.php">Intranet</a></li>
+	</ul>
+</footer>
+</div>
+</body>
+</html>

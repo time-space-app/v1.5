@@ -1,0 +1,97 @@
+/* content 크기 */
+#wrap { width:98%; margin:0 auto; }
+#board_list_header { width: 100%; text-align:center; margin-top:10px;}
+/* board_list 에서 사용되는 글 검색 폼 크기 */
+#board_list_search { width: 100%; text-align:right}
+#board_list_search #form_search{margin-right:10px;}
+.type-select{border:1px solid #888ca5; width:90px; height:20px;}
+.type-text{border:1px solid #888ca5; width:90px; height:20px;}
+.type-submit{background-color:#eeeeee; border-width:1px;padding: 2px 7px;}
+/* 줄바꿈 너비 지정 */
+.br10 {clear:both;display:block;margin:10px 0;}
+/* board_list 에서 사용하는 글 목록 테이블 크기*/
+.board_list_table {width:100%;}
+/* 화면에 보여지는 글 목록 테이블 */
+.list_table {width: 100%;}
+/* 화면에 보여지는 caption */
+.list_table caption { display: none; } 
+/* list_table 에서 사용되는 thead */
+.list_table thead th {
+border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5;
+padding: 5px 0; text-align: center; background: #faf9fa;font-weight:bold;
+}
+/* list_table 에서 사용되는 tbody */
+.list_table tbody td {
+padding: 5px 0; text-align: center;
+border-bottom: 1px solid #e5e5e5;
+}
+/* board_list 에서 사용되는 글 등록 버튼 테이블 크기 */
+#board_list_button_table {
+width:100%; 
+margin-right: 10px;
+margin-top:10px;
+}
+/* 화면에 보여지는 글 등록 a 버튼 */
+#board_list_button_table .button {
+width:65px; 
+cursor:pointer;
+border: 1px solid #bebebe;
+padding: 6px 7px;
+text-align:center;
+margin-right: 10px;
+float:right;
+}
+/* 화면에 보여지는 글 등록 a 버튼 */
+#board_list_button_table .span-btn { 
+width:80px;
+height:33px;
+cursor:pointer;
+border: 1px solid #bebebe;
+padding: 6px 7px;
+text-align:center;
+margin-right: 10px;
+float:right;
+}  
+/* 화면에 보여지는 글 등록 a 버튼 */
+#board_list_button_table .type-btn { 
+width:80px;
+height:30px;
+background-color:#fff;
+border: 1px solid #bebebe;
+cursor:pointer; 
+margin-right: 10px;
+float:right; 
+}  
+/* 화면에 보여지는 paging */
+#board_list_paging {text-align:center;margin-top:10px;}
+#board_list_paging .selected_page{font-weight:bold; color:#FF0000;}
+/* board_write 에서 사용하는 글 목록 테이블 크기*/
+.board_write_table {width:100%;}
+/* 화면에 보여지는 글 목록 테이블 */
+.write_table {width: 100%;}
+/* 화면에 보여지는 caption */
+.write_table caption { display: none; } 
+/* write_table 에서 사용되는 thead */
+.write_table tbody th {
+border-bottom: 1px solid #e5e5e5;
+padding: 5px 0; text-align: center; background: #faf9fa;font-weight:bold;
+}
+/* 글등록 페이지 write_table 에서 사용되는 tbody */
+.write_table tbody td {padding: 5px 0;border-bottom: 1px solid #e5e5e5;}
+.write_table tbody td textarea{ width:90%;font-size:1.2em }
+/* 글보기 페이지에서 사용되는 tbody */
+.write_table tbody td.contents { padding:20px 25px;}
+/* board_prev 테이블 크기*/
+#prev_wrap{ width:100%; margin:0 auto;clear:both }
+/* 코멘트 테이블 크기*/
+#comment_wrap { width:750px; margin:0 auto;clear:both }
+/* 화면에 보여지는 코멘트 글 목록 테이블 */
+.comment_table {width:100%;}
+/* write_table 에서 사용되는 thead */
+.comment_table tbody th {
+border-bottom: 1px solid #e5e5e5;
+padding: 5px 0; text-align: center; background: #faf9fa;font-weight:bold;
+}
+/* comment등록 페이지 write_table 에서 사용되는 tbody */
+.comment_table tbody td {padding: 5px 10px;border-bottom: 1px solid #e5e5e5;}
+.comment_table tbody td textarea{ width:500px;font-size:1.2em }

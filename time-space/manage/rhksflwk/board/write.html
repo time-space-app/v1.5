@@ -1,0 +1,100 @@
+﻿<!--DOCTYPE html-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/htmlcharset=utf-8" />
+<link rel="stylesheet" href="/time-space/reset.css" type="text/css">
+<link rel="stylesheet" href="/time-space/manage/rhksflwk/board/board.css" type="text/css">
+<link href="/time-space/skin/one/design/favicon.ico" rel="shortcut icon" type="image/ico" />
+<script type="text/javascript" charset="utf-8" src="/time-space/mobile/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/time-space/js/common.js"></script>
+<!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<title>Time-Space HTML5</title>
+</head>
+<body>
+<div id="wrap">
+<header id="board_list_header">
+	<h2>Time-Space is Html5 Makeup Web and Computer Repair</h2>
+</header>
+<span class="br10"></span>
+
+<form method="post" name="frm" id="frm" action="" onsubmit="return submitForm(this)" enctype="multipart/form-data" >
+<!-- 테이블 시작 -->
+<div class="board_write_table">
+     <table summary="" class="write_table">
+      <caption></caption>
+       <colgroup>
+        <col style="width:100px;" />
+        <col />
+       </colgroup>
+       <tbody>
+     	<tr>
+		<th>SUBJECT</th>
+		<td><input type="text" size="70"  name="TITLE" id="TITLE" value="" /></td>
+	</tr>
+	<tr>
+		<th>NAME</th>
+		<td>
+		<input type="text" size="10"  name="USER_NM" id="USER_NM" value="" />
+		TOP_NEWS : <input type="checkbox" name="TOP_NEWS" id="TOP_NEWS" checked="true" />
+		</td>
+	</tr>
+	<tr>
+		<th>POPUP</th>
+		<td>
+		USE : <input type="checkbox" name="POPUP" id="POPUP" checked="true" />
+		WIDTH: <input type="text" value="" name="POPUP_W" id="POPUP_W" SIZE="10" />
+		HEIGHT: <input type="text" value="" name="POPUP_H" id="POPUP_H" SIZE="10" />
+		</td>
+	</tr>
+	<tr>
+		<th>E-MAIL</th> 
+	<td>
+		<input type="text" ID="EMAIL0" NAME="EMAIL0" VALUE="" />@
+		<input type="text" ID="EMAIL1" NAME="EMAIL1" VALUE="" />
+		<SELECT ID="DDLEMAIL" name='DDLEMAIL' size='1' style="width:100px" onchange="selectmail()">
+		        <option value=''>-SELECT-</option>
+		        <option value="naver.com">naver.com</option>
+		        <option value="nate.com">nate.com</option>
+		        <option value="gmail.com">gmail.com</option>
+		        <option value="hanmail.net">hanmail.net</option>
+		</SELECT>
+	</td> 
+	</tr>
+	<tr>
+		<th>FILE1</th>
+		<td colspan="5">
+			<input type="FILE" ID="FILEUPLOAD0" NAME="FILEUPLOAD0" />
+			<a href="#">첨부파일1</a>
+			<input type="button" value="DELETE" onclick="file_del(0);" /> 
+		</td>
+	</tr>
+	<tr>
+		<th>FILE2</th>
+		<td colspan="5">
+			<input type="FILE" ID="FILEUPLOAD1" NAME="FILEUPLOAD1" />
+			<a href="#">첨부파일2</a>
+			<input type="button" value="DELETE" onclick="file_del(1);" /> 
+		</td>
+	</tr>  
+	<tr>
+		<th>Content</th>
+		<td><textarea name="CONTENT" id="CONTENT" rows="20"></textarea></td>
+	</tr>
+       </tbody>
+     </table>
+</div>
+<!-- 등록버튼 시작 -->
+<div id="board_list_button_table">
+<a href="list.html"><span class="button">CANCEL</span></a>
+<input type="button" value="DELETE" name="DELETE" class="type-btn" onclick="del_chk(this.form);">
+<input type="submit" value="COMMIT" name="COMMIT" class="type-btn">
+</div>
+</form>
+</div>
+</body>
+</html>

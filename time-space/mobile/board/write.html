@@ -1,0 +1,177 @@
+<?php include $_SERVER['DOCUMENT_ROOT']."/time-space/mobile/header.php"; ?>
+<?php
+//게시판 공통변수 항상 페이지 상단에 위치
+$GUBN = $_REQUEST['GUBN'];
+$SEARCH = $_REQUEST['SEARCH'];
+$BOARD_ID = $_REQUEST['BOARD_ID'];
+$MODE = $_REQUEST['MODE'];
+$BOARD_SEQ = $_REQUEST['SEQ'];
+$now_page = $_REQUEST['now_page'];
+$arremail = split("@",$_SESSION['valid_email']);
+//===========================
+if($MODE == "edit"){ //&& $_SESSION['valid_user'] 로그인사용자만
+	$proc_file = "SELECT CONTENT,EMAIL,TITLE,USER_NM,REGDATE,READCOUNT,FILECNT,USER_ID,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+	$proc_file .= " FROM T_BOARD";
+	$proc_file .= " WHERE SEQ = '$BOARD_SEQ'";
+	$proc_file .= " AND BOARD_ID = '$BOARD_ID'";
+	$ROW = $GPLdb5->GPLquery_fetch_assoc_one($proc_file);
+	$EMAIL=$ROW['EMAIL'];
+	$arremail = split("@",$EMAIL);
+	if ($ROW['FILECNT'] > 0)
+	{
+		$SQL = "SELECT";
+			$SQL .= " SEQ,FILE_NM,FILE_SIZE,DOWN_CNT";
+			$SQL .= " ,BOARD_SEQ,BOARD_ID";
+			$SQL .= " FROM T_ATTACH_FILE";
+			$SQL .= " WHERE BOARD_SEQ = '$BOARD_SEQ' AND BOARD_ID = '$BOARD_ID'";
+			$SQL .= " ORDER BY SEQ ASC";
+			$fileresult = $GPLdb5->GPLexcute_query($SQL);
+			$i=0;
+			if($fileresult){
+				while($filerow = mysql_fetch_array($fileresult)) {	
+					if($filerow['FILE_NM']){
+					$FILE_NM[$i] = $filerow['FILE_NM'];
+					$FILE_NUM[$i] = $filerow['SEQ'];
+					}
+					$i++;
+				}
+		}
+	}
+}
+//메뉴 변수
+//메뉴 변수
+	switch ($BOARD_ID) { //notice, qa, repair, pds, faq
+		case 'notice'  : $body='1'; $title='NOTICE';break;
+		case 'repair' : $body='2'; $title='REPAIR';break;
+		case 'qa'  : $body='3'; $title='Q/A';break;
+		case 'faq'  : $body='4'; $title='FAQ';break;
+		case 'pds'  : $body='5'; $title='PDS';break;
+		default   : $body='1'; $title='NOTICE';break;
+	}
+?>
+<article id="container">
+	<h2><div class="title"><span><?=$BOARD_ID." 게시판"?></span></div></h2>
+	<section>
+	<!--게시판 시작-->
+	<div id="comment_wrap">
+	<form method="post" name="frm" id="frm" action="write_ok.php" onsubmit="return submitFormWrite(this)" enctype="multipart/form-data" >
+	<!-- 테이블 시작 -->
+		<div class="board_write_table">
+		     <table summary="" class="write_table">
+		      <caption></caption>
+		       <colgroup>
+		        <col style="width:100px;" />
+		        <col />
+		       </colgroup>
+		       <tbody>
+				<tr>
+					<th>SUBJECT</th>
+					<td><input type="text" name="TITLE" id="TITLE" value="<?=$ROW['TITLE']?>" size="35" /></td>
+				</tr>
+				<tr>
+					<th>NAME</th>
+					<td>
+					<input type="text" name="USER_NM" id="USER_NM" value="<?=($ROW['USER_NM']=="")?$_SESSION['valid_name']:$ROW['USER_NM'];?>" />
+					<?php if($BOARD_ID=="notice" && $_SESSION['valid_level'] == 1){?>
+					TOP_NEWS : <input type="checkbox" name="TOP_NEWS" id="TOP_NEWS" <?=($ROW['TOP_NEWS']=="on")?"checked=true":"";?>>
+					<?php }?>
+					</td>
+				</tr>
+				<?php if($BOARD_ID=="notice" && $_SESSION['valid_level'] == 1){?>
+				<tr>
+					<th>POPUP</th>
+					<td>
+					USE: <input type="checkbox" name="POPUP" id="POPUP" <?=($ROW['POPUP']=="on")?"checked=true":"";?>>
+					WIDTH:<input type="text" value="<?=$ROW['POPUP_W']?>" name="POPUP_W" id="POPUP_W" SIZE="6">
+					HEIGHT:<input type="text" value="<?=$ROW['POPUP_H']?>" name="POPUP_H" id="POPUP_H" SIZE="6">
+					</td>
+				<tr>
+				<?php }?>
+					<th>E-MAIL</th> 
+					<td>
+					<input type="text" ID="EMAIL0" NAME="EMAIL0" VALUE="<?=$arremail[0]?>" />@<br>
+					<input type="text" ID="EMAIL1" NAME="EMAIL1" VALUE="<?=$arremail[1]?>" />
+					<SELECT ID="DDLEMAIL" name='DDLEMAIL' size='1' style="width:90px" onchange="selectmail()">
+					        <option value=''>-SELECT-</option>
+					        <option value="naver.com">naver.com</option>
+					        <option value="nate.com">nate.com</option>
+					        <option value="gmail.com">gmail.com</option>
+					        <option value="hanmail.net">hanmail.net</option>
+					        <option value="yahoo.co.kr">yahoo.co.kr</option>
+					</SELECT>
+					</td> 
+				</tr>
+				<?php if($BOARD_ID=="notice" || $BOARD_ID=="pds"){?>
+				<tr>
+					<th>FILE1</th>
+					<td>
+						<input type="FILE" ID="FILEUPLOAD0" NAME="FILEUPLOAD0" />
+						<?php if($FILE_NM[0]){?>
+						<a href="/time-space/manage/core/function/download.php?filename=<?=$FILE_NM[0]?>&target=<?=$BOARD_ID?>"><?=$FILE_NM[0]?></a>
+						<input type="button" value="DELETE" onclick="file_del(0);" /> 
+						<?php }?>
+					</td>
+				</tr>
+				<tr>
+					<th>FILE2</th>
+					<td>
+						<input type="FILE" ID="FILEUPLOAD1" NAME="FILEUPLOAD1" />
+						<?php if($FILE_NM[1]){?>
+						<a href="/time-space/manage/core/function/download.php?filename=<?=$FILE_NM[1]?>&target=<?=$BOARD_ID?>"><?=$FILE_NM[1]?></a>
+						<input type="button" value="삭제" onclick="file_del(1);" /> 
+						<?php }?>
+					</td>
+				</tr>  
+				<?php }?>
+				<tr>
+					<th>Content</th>
+					<td><textarea name="CONTENT" id="CONTENT" rows="10"><?=str_replace("<br/>", "\r\n",$ROW['CONTENT']);?>
+					</textarea></td>
+				</tr>
+				<?php if($_SESSION['valid_user'] == "") { ?>
+				<tr>
+					<th>자동등록방지</th>
+					<td><span style="color:#fff"><?php echo $se_num1." + ".$se_num2." = "?></span>
+					<input type="text" name="SE_NUM" id="SE_NUM" value="" />
+					<input type="hidden" name="SE_NUM1" id="SE_NUM1" value="<?=$se_num1?>" />
+					<input type="hidden" name="SE_NUM2" id="SE_NUM2" value="<?=$se_num2?>" />
+					</td>
+				</tr>
+				<?php } ?>
+			</tbody>
+			</table>
+		</div>
+		<div style="display:none">
+		<input type="text" value="<?=$MODE?>" name="MODE" id="MODE">
+		<input type="text" value="<?=$BOARD_SEQ?>" name="BOARD_SEQ" id="BOARD_SEQ">
+		<input type="text" value="<?=$BOARD_ID?>" name="BOARD_ID" id="BOARD_ID">
+		<input type="text" value="<?=($ROW['USER_ID']=="")?$_SESSION['valid_user']:$ROW['USER_ID'];?>" name="USER_ID" id="USER_ID">
+		<input type="text" value="<?=$FILE_NUM[0]?>" name="FILE_NUM0" id="FILE_NUM0">
+		<input type="text" value="<?=$FILE_NUM[1]?>" name="FILE_NUM1" id="FILE_NUM1">
+		<input type="text" value="<?=$FILE_NM[0]?>" name="FILE_NM0" id="FILE_NM0">
+		<input type="text" value="<?=$FILE_NM[1]?>" name="FILE_NM1" id="FILE_NM1">
+		<input type="text" value="" name="FILE_DEL0" id="FILE_DEL0">
+		<input type="text" value="" name="FILE_DEL1" id="FILE_DEL1">
+		<input type="text" value="<?=$SEARCH?>" name="SEARCH" id="SEARCH">
+		<input type="text" value="<?=$GUBN?>" name="GUBN" id="GUBN">
+		<input type="text" value="<?=$now_page?>" name="now_page" id="now_page">
+		<input type="text" value="<?=$ROW['FILECNT']?>" name="FILECNT" id="FILECNT">
+		<input type="text" value="<?=$ROW['STATE']?>" name="STATE" id="STATE">
+		</div>
+	</div>
+		<sapn class="clear5"></sapn>
+		<!-- 등록버튼 시작 -->
+	<div id="board_list_button_table">
+		<a href="list.html?now_page=<?=$now_page?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>&MODE=list">
+		<span class="button">CANCEL</span></a>
+		<?php if($MODE=="edit"){?>
+		<button type="button" class="type-btn" onclick="del_chk(this.form);">DELETE</button>
+		<?php }?>
+		<button type="submit" class="type-btn">COMMIT</button>
+	</div>
+	</form>
+	<!--게시판 끝-->
+	</section>
+	<span class="clear10"></span>
+</article>
+<?php include $_SERVER['DOCUMENT_ROOT']."/time-space/mobile/footer.php"; ?>

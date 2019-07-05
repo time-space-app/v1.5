@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>타임스페이스 반응형웹+모바일웹 통합</title>
+        <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+        <link rel="shortcut icon" href="../img/icon.png">
+        <link rel="apple-touch-icon" href="../img/icon.png">
+        <link rel="apple-touch-startup-image" href="../img/startup.png">
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="stylesheet" href="framework/jquery.mobile-1.1.0.min.css" />
+		<link rel="stylesheet" href="style/style.css" />
+		<!-- action sheet plugin 스타일시트 참조 -->
+		<link rel="stylesheet" href="framework/plugin/actionsheet/jquery.mobile.actionsheet.css" />
+        <script src="framework/jquery-1.7.2.min.js"></script>
+	<script src="app.js"></script>
+	
+	<!-- google map -->
+	<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>  
+	<!-- app script -->
+	<script type="text/javascript" src="location.js"></script> 
+    	<style type="text/css">
+		#map_main #search_form input { display:inline; width:86%; padding:3px 10px; margin-left:5px; margin-top: 3px; margin-bottom: 3px; }
+		#map_main #content {
+			padding: 0;
+		}
+		#map_main,#map_main #content, #map_main #content >  #map_canvas {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+	<!-- e: google map -->
+        <script src="framework/jquery.mobile-1.1.0.min.js"></script>
+	<!-- action sheet plugin 스크립트 참조 -->
+	<script type="text/javascript" src="framework/plugin/actionsheet/jquery.mobile.actionsheet.js"></script>
+    </head>
+<?
+	/** 공통 파일 참조 */
+	include("common.php");
+	/** 데이터베이스 연결 */
+	db_open();
+	/** 전체 글 갯수 */
+	$sql = "SELECT COUNT(NUM) FROM FREE_BOARD WHERE BBS_ID=1";
+	$bbs1= mysql_fetch_row(mysql_query($sql));
+	$bbs1_count= $bbs1[0];
+	$sql = "SELECT COUNT(NUM) FROM FREE_BOARD WHERE BBS_ID=2";
+	$bbs2= mysql_fetch_row(mysql_query($sql));
+	$bbs2_count= $bbs2[0];
+	$sql = "SELECT COUNT(NUM) FROM FREE_BOARD WHERE BBS_ID=3";
+	$bbs3= mysql_fetch_row(mysql_query($sql));
+	$bbs3_count= $bbs3[0];
+	$sql = "SELECT COUNT(NUM) FROM FREE_BOARD WHERE BBS_ID=4";
+	$bbs4= mysql_fetch_row(mysql_query($sql));
+	$bbs4_count= $bbs4[0];
+	$sql = "SELECT COUNT(NUM) FROM FREE_BOARD WHERE BBS_ID=5";
+	$bbs5= mysql_fetch_row(mysql_query($sql));
+	$bbs5_count= $bbs5[0];
+	$sql = "SELECT COUNT(NUM) FROM FREE_BOARD WHERE BBS_ID=6";
+	$bbs6= mysql_fetch_row(mysql_query($sql));
+	$bbs6_count= $bbs6[0];
+	/** 데이터베이스 연결 해제 */
+	db_close();
+?>
+    <body id="container">
+        <div data-role="page" id="main" data-theme="a">
+			<div data-role="header">
+				<h1>타임스페이스 모바일게시판</h1>
+				<a data-icon="home" data-theme="a" href="/metro/" data-ajax="false">PC홈</a><!-- rel="external" 또는 data-ajax="false"-->
+			</div>
+            <div data-role="content">           	
+                <ul data-role="listview" data-inset="true">
+					<li class="titlebar1"><a href="list.php?id=1">납품정보<span class="ui-li-count"><?=$bbs1_count?></span></a></li>
+					<li class="titlebar2"><a href="list.php?id=2">공지사항<span class="ui-li-count"><?=$bbs2_count?></span></a></li>
+					<li class="titlebar3"><a href="list.php?id=3">묻고답하기<span class="ui-li-count"><?=$bbs3_count?></span></a></li>
+					<li class="titlebar4"><a href="list.php?id=4">자유게시판<span class="ui-li-count"><?=$bbs4_count?></span></a></li>
+					<li class="titlebar5"><a href="list.php?id=5">사진게시판<span class="ui-li-count"><?=$bbs5_count?></span></a></li>
+					<li class="titlebar6"><a href="list.php?id=6">동영상게시판<span class="ui-li-count"><?=$bbs6_count?></span></a></li>
+					<li><a href="location.php">구글위치정보</a></li>
+				</ul>
+            </div>
+        </div>
+    </body>
+</html>

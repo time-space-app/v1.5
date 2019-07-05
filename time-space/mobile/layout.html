@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no;" />
+
+	<title>Time-Space Web Service</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript">
+	window.addEventListener("load", function() {
+		setTimeout(loaded, 100);
+	}, false);
+	window.addEventListener("orientationchange", function() {
+		setTimeout(loaded, 100);
+	}, false);
+	function loaded() {
+		window.scrollTo(0, 1);
+	}
+	</script>
+</head>
+<div id="wrap">
+<header>
+	<h1><a href="./" title="" tabindex="-1"><span>Time-Space.biz</span></a></h1>
+	<div id="login">
+		<form name="form_login" id="form_login" action="" autocomplete="on" method="post">
+		<span id="icon-id"><label data-icon="u" for="id">ID </label></span>
+		<input id="id" name="id" placeholder="User Id" required="required" type="text" class="type-text" tabindex="1" />
+		<button type="submit" class="type-submit">Login</button>
+		<div class="clear5"></div>
+		<span id="icon-pass"><label data-icon="p" for="password">Password </label></span>
+		<input id="pw" name="pw" placeholder="User Password" required="required" type="password" class="type-text" tabindex="2" />
+		<a href="#"><span class="button">New Id</span></a>
+	</div>
+</header>
+<div class="clear5"></div>
+<article id="container">
+	<h2><a href="./" title=""><span>Latest Posts</span></a></h2>
+	<section class="main">
+	<ul>
+	<li>
+    		<a href="#">
+		<span>●</span> 최근 게시물 게시판 입니다.
+		</a>
+   	</li>
+	</ul>
+	</section>
+	<h2><a href="./" title=""><span>Latest Work Request</span></a></h2>
+	<section class="main">
+	<ul>
+	<li>
+    		<a href="#">
+		<span>●</span> 작업요청 게시판 입니다.
+		<img src="img/icon-pass.png" style="margin-bottom:1px;">
+		</a>
+   	</li>
+	</ul>
+	</section>
+</article>
+</div>
+</body>
+</html>

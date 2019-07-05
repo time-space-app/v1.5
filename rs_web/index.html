@@ -1,0 +1,64 @@
+<?php include "header.php";?>
+	<article id="main" class="row clearfix">
+		<h2>타임스페이스는 사용자 중심의 웹페이지를 제작하는 회사 입니다. 
+		그리고, 부가 사업으로 노트북/LCD모니터 리페어(재생) 부분을 운영하고 있습니다.</h2>
+		<ul>
+			<li class="clearfix"><!--반응형CSS-클래스만추가-->
+			   <img class="col-4" src="/rs_web/include/images/main-img-1-origin.jpg" alt="" />
+			   <div class="col-8 last"><!--반응형CSS-DIV감싸주기추가-->
+				<h4>워드프레스 홈페이지 전문제작</h4>
+				<p>대부분의 언어가 지원되는 세계적인 홈페이지 제작 기반인 워드프레스를 자체 제작하는 디자인으로
+				사용자 위주의 사이트를 제작 해 드립니다.</p>
+			   </div>
+			</li>
+			<li class="clearfix"><!--반응형CSS-클래스만추가-->
+			   <img class="col-8 fr last" src="/rs_web/include/images/main-img-2-origin.jpg" alt="" />
+			   <div class="col-4"><!--반응형CSS-DIV감싸주기추가-->
+				<h4>사각 그리드형 홈페이지에는 반응형 웹을 사용합니다.</h4>
+				<p>요즘은 홈페이지 접속하는 다양한 방법이 있습니다. 
+				모바일로 대표되는 휴대폰이나, 태블릿 그리고, PC 등 다양한 사용자 환경에 여러분의 홈페이지가 노출되게 됩니다.
+				공통된 디자인과, 내용을 다양한 접속환경에서 사용하실 수 있게 제작해 드립니다.</p>
+			   </div>
+			</li>
+		</ul>
+	</article><!-- e:#main -->
+	<article id="sub" class="row clearfix"><!--반응형CSS-클래스만추가-->
+		<h3><a href="/rs_web/board/list.html/BOARD_ID/notice/MENU_CODE/003001000">최근 공지사항</a><br />
+		타임스페이스에서 현재 작업중인 홈페이지와 제작완료된 홈페이지를 보실 수 있습니다.
+		재미있는 사이트 구성이 많습니다. 관심있게 살펴봐 주시기 바랍니다.
+		</h3>
+		<ul>
+			<?php
+			 //셀렉트 
+				$SQL = "SELECT";
+				$SQL .= " SEQ,BOARD_ID,TITLE,CONTENT";
+				$SQL .= " FROM T_BOARD";
+				$SQL .= " WHERE BOARD_ID = 'notice'";
+				$SQL .= " ORDER BY IFNULL(TOP_NEWS,'OFF') DESC, SEQ DESC LIMIT 0 , 3";
+				$result = $GPLdb5->GPLexcute_query($SQL);
+		        if($result){
+		        	while($row = mysql_fetch_array($result)) { $i1++;
+		        	if($i1==3) $class="col-6 last"; else $class="col-3";
+			?>
+			<li class="<?=$class?>"><!--반응형CSS-클래스만추가-->
+			<a href="/rs_web/board/view.html/MENU_CODE/<?=$MENU_CODE?>/BOARD_ID/notice/SEQ/<?=$row[SEQ]?>">
+				<img src="<?=get_image_file_from_html($row[CONTENT],1)?>" alt="" />
+				<h5><?=cut_str($row[TITLE],64,'...')?></h5>
+				<p><?=cut_str($row[CONTENT],328,'...')?></p>
+			</a>
+			</li>
+			<?php
+		          	}
+			      }
+			?>
+		</ul>
+	</article><!-- e:#sub -->
+</section><!-- e:#contents -->
+
+<!-- IE 최신버전 체크 처리 -->
+<!--[if lt IE 9]>
+<script src="/rs_web/include/js/libs/CFInstall.js"></script>
+<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})});</script>
+<![endif]--><!-- ie9 보다 작을때 크롬프레임웍 설치 표시-->
+
+<?php include "footer.php";?>

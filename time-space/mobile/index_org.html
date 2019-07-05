@@ -1,0 +1,127 @@
+<?php
+session_start();
+define('DS', DIRECTORY_SEPARATOR);
+define('GPLDIR', $_SERVER['DOCUMENT_ROOT'].DS.'time-space/manage');
+include_once GPLDIR . '/core/config/default.php';
+include_once GPLDIR_CLASS . '/GPLbase.class.php';
+$GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);//상속받은 개체 멤버클래스 사용
+$GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no;" />
+
+	<title>Time-Space Web Service</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript">
+	window.addEventListener("load", function() {
+		setTimeout(loaded, 100);
+	}, false);
+	window.addEventListener("orientationchange", function() {
+		setTimeout(loaded, 100);
+	}, false);
+	function loaded() {
+		window.scrollTo(0, 1);
+	}
+	</script>
+</head>
+<div id="wrap">
+<header>
+	<h1><a href="./" title="" tabindex="-1"><span>Time-Space.biz</span></a></h1>
+	<!--로그인영역시작-->
+	<?php include $_SERVER['DOCUMENT_ROOT']."/time-space/board/auth.php"; ?>
+	<div id="login">
+	<?php if($_SESSION['valid_user'] != "") { ?>
+		<form name="form_logout" id="form_logout" action="" autocomplete="on" method="post">
+		<span id="icon-id"><label data-icon="u" for="id">ID </label></span>
+		<span class="type-text">WELCOME<br><?php echo $_SESSION['valid_user'];?></span>
+		<a href="./board/logout.php"><span class="button">Log Out</span></a>
+		<a href="./board/join.html"><span class="button">Mypage</span></a>
+		</form>
+	<?php }else{ ?>
+		<form name="form_login" id="form_login" action="" autocomplete="on" method="post">
+		<span id="icon-id"><label data-icon="u" for="id">ID </label></span>
+		<input id="id" name="id" placeholder="User Id" required="required" type="text" class="type-text" tabindex="1" />
+		<button type="submit" class="type-submit">Login</button>
+		<div class="clear5"></div>
+		<span id="icon-pass"><label data-icon="p" for="password">Password </label></span>
+		<input id="pw" name="pw" placeholder="User Password" required="required" type="password" class="type-text" tabindex="2" />
+		<a href="#"><span class="button">New Id</span></a>
+	<?php } ?>
+	</div>
+</header>
+<div class="clear5"></div>
+<article id="container">
+	<h2><a href="./" title=""><span>Latest Posts</span></a></h2>
+	<section class="main">
+	<ul>
+	<?php
+	 //셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = 'notice'";
+		$SQL .= " ORDER BY TOP_NEWS DESC, SEQ DESC LIMIT 0 , 3";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+        if($result){
+        	while($row = mysql_fetch_array($result)) { $i1++;
+	?>
+	<li>
+    		<a href="/time-space/board/view.html?BOARD_ID=notice&SEQ=<?=$row['SEQ']?>">
+		<span>●</span> <?=cut_str($row[TITLE],58,'...')?><!--<span><?=$row[CREATE_DT]?></span>-->
+		</a>
+   	</li>
+	<?php
+	          	}
+	      }
+	?>
+	</ul>
+	</section>
+	<h2><a href="./" title=""><span>Latest Work Request</span></a></h2>
+	<section class="main">
+	<ul>
+	<?php
+	 //셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = 'repair'";
+		$SQL .= " ORDER BY SEQ DESC LIMIT 0 , 3";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+        if($result){
+        	while($row = mysql_fetch_array($result)) { $i2++;
+        	//댓글셀렉트
+				$SQL = "SELECT";
+				$SQL .= " COUNT(SEQ) AS COMMENT_CNT";
+				$SQL .= " FROM T_BOARD_COMMENT";
+				$SQL .= " WHERE BOARD_SEQ = '".$row['SEQ']."'";
+				$SQL .= " AND BOARD_ID = 'repair'";
+				$COMMENT_ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+				$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
+
+	?>
+	<li>
+    		<a href="/time-space/board/view.html?BOARD_ID=repair&SEQ=<?=$row['SEQ']?>">
+		<span>●</span> <?=cut_str($row[TITLE],58,'...')?><?=($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?>
+		<?php if($_SESSION['valid_user']!=$row[USER_ID]){ //본인이 쓴 글 수정삭제기능?>
+		<img src="img/icon-pass.png" style="margin-bottom:1px;">
+		<?php } ?>
+		</a>
+   	</li>
+	<?php
+	          	}
+	      }
+	?>
+	</ul>
+	</section>
+</article>
+</div>
+</body>
+</html>

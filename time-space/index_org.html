@@ -1,0 +1,203 @@
+<?php
+session_start();
+define('DS', DIRECTORY_SEPARATOR);
+define('GPLDIR', $_SERVER['DOCUMENT_ROOT'].DS.'time-space/manage');
+include_once GPLDIR . '/core/config/default.php';
+include_once GPLDIR_CLASS . '/GPLbase.class.php';
+$GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);//상속받은 개체 멤버클래스 사용
+$GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
+?>
+<!--DOCTYPE html-->
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/htmlcharset=utf-8" />
+<link rel="stylesheet" href="/time-space/reset.css" type="text/css">
+<link rel="stylesheet" href="/time-space/css/common.css" type="text/css">
+<link href="/time-space/skin/one/design/favicon.ico" rel="shortcut icon" type="image/ico" />
+<script type="text/javascript" charset="utf-8" src="/time-space/mobile/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript"><?php include $_SERVER['DOCUMENT_ROOT']."/time-space/js/common.js"; ?></script>
+<!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<meta name="google-site-verification" content="kCg4vZuEI__7Ip_pdTULTscQ2dRi2quzcuSWGDcj14Q">
+<title>Time-Space HTML5</title>
+</head>
+<body>
+<div id="wrap">
+<header id="page_header">
+	<a href="/"><h2>Time-Space is Html5 Makeup Web and Computer Repair</h2></a>
+	<nav>
+	<ul>
+	<li><a href="/time-space/index.html?go=pc&BOARD_ID=">[Home]</a></li>
+	<li><a href="/time-space/board/list.html?go=pc&BOARD_ID=notice">[Posts]</a></li>
+	<li><a href="/time-space/board/list.html?go=pc&BOARD_ID=repair">[Work Request]</a></li>
+	<li><a href="/wordpress/">[WordPress]</a></li>
+	<li>
+	<span>
+	To use new technology,
+	<a href="https://www.google.com/chrome/" target="_new">[Chrome]</a>, 
+	<a href="http://support.apple.com/downloads/#internet/" target="_new">[Safari]</a>,
+	<a href="http://www.mozilla.org/" target="_new">[Firefox]</a>,
+	<a href="http://www.opera.com/" target="_new">[Opera]</a>,
+	<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="_new">[IE]</a>
+	, install the latest version for free
+	</span>
+	</li>
+	</ul>
+	</nav>
+</header>
+<div id="contents">
+<!--로그인영역시작-->
+<?php include $_SERVER['DOCUMENT_ROOT']."/time-space/board/auth.php"; ?>
+<span class="br10"></span>
+<div id="login">
+<?php if($_SESSION['valid_user'] != "") { ?>
+	<a href="/time-space/board/logout.php"><span class="button">Log Out</span></a>
+	<a href="/time-space/board/join.html"><span class="button">Mypage</span></a>
+<?php }else{ ?>
+	<form name="form_login" id="form_login" action="" autocomplete="on" method="post">
+		<label data-icon="u" for="id">ID </label> 
+		<input id="id" name="id" placeholder="yser Id" required="required" type="text" class="type-text" />
+		<label data-icon="p" for="password">Password </label> 
+		<input id="pw" name="pw" placeholder="your Password" required="required" type="password" class="type-text" />
+		<input type="submit" value="Login" class="type-submit">
+		<!--[if lte IE 8]>
+		<a href="/time-space/board/join.html"><span class="button_ie">Join</span></a>
+		<![endif]-->
+		<![if (gte IE 9)|(!IE)]>
+		   <a href="/time-space/board/join.html"><span class="button">Join</span></a>
+		<![endif]>
+	</form>
+<?php } ?>
+</div>
+<!--로그인영역끝-->
+<section id="posts">
+	<?php
+	 //셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = 'notice'";
+		$SQL .= " ORDER BY TOP_NEWS DESC, SEQ DESC LIMIT 0 , 5";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+        if($result){
+        	while($row = mysql_fetch_array($result)) {
+	?>
+	<article class="post">
+		<header>
+		<a href="/time-space/board/view.html?BOARD_ID=notice&SEQ=<?=$row['SEQ']?>"><h2>Title: [<?=$row[TITLE]?>]</h2></a>
+		<p>
+		Posted by <?=$row[USER_NM]?> on
+		<time datetime="2013-06-25"><?=$row[CREATE_DT]?></time>
+		</p>
+		</header>
+		<p>
+		<?=cut_str($row[CONTENT],300,'...')?>
+		</p>
+		<footer>
+		<p></p>
+		</footer>
+	</article>
+	<?php
+	          	}
+	      }
+	?>
+</section>
+<section id="sidebar">
+	<nav>
+	<h3><a href="/time-space/board/list.html?BOARD_ID=notice">[Latest Posts]</a></h3>
+	<ul>
+	<?php
+	 //셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = 'notice'";
+		$SQL .= " ORDER BY TOP_NEWS DESC, SEQ DESC LIMIT 0 , 10";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+        if($result){
+        	while($row = mysql_fetch_array($result)) { $i1++;
+	?>
+	<li>
+    		<a href="/time-space/board/view.html?BOARD_ID=notice&SEQ=<?=$row['SEQ']?>">
+		<?=$i1?>.<?=cut_str($row[TITLE],58,'...')?><!--<span><?=$row[CREATE_DT]?></span>-->
+		</a>
+   	</li>
+	<?php
+	          	}
+	      }
+	?>
+	</ul>
+	</nav>
+	<nav>
+	<h3><a href="/time-space/board/list.html?BOARD_ID=repair">[Work Request]</a></h3>
+	<ul>
+	<?php
+	 //셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = 'repair'";
+		$SQL .= " ORDER BY SEQ DESC LIMIT 0 , 10";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+        if($result){
+        	while($row = mysql_fetch_array($result)) { $i2++;
+        	//댓글셀렉트
+				$SQL = "SELECT";
+				$SQL .= " COUNT(SEQ) AS COMMENT_CNT";
+				$SQL .= " FROM T_BOARD_COMMENT";
+				$SQL .= " WHERE BOARD_SEQ = '".$row['SEQ']."'";
+				$SQL .= " AND BOARD_ID = 'repair'";
+				$COMMENT_ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+				$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
+
+	?>
+	<li>
+    		<a href="/time-space/board/view.html?BOARD_ID=repair&SEQ=<?=$row['SEQ']?>">
+		<?=$i2?>.<?=cut_str($row[TITLE],58,'...')?><?=($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?>
+		<?php if($_SESSION['valid_user']!=$row[USER_ID]){ //본인이 쓴 글 수정삭제기능?>
+		<img src="/time-space/image/iconSecret.gif">
+		<?php } ?>
+		</a>
+   	</li>
+	<?php
+	          	}
+	      }
+	?>
+	</ul>
+	</nav>
+</section>
+</div>
+<div id="back-to-top">Top ▲</div>
+<footer id="page_footer">
+	<p>&copy;Time-Space.biz since 2013-06-07</p>
+	<nav>
+	<ul>
+	<li><a href="http://time-space.biz">Homepage</a></li>
+	<li><a href="Preparation" class="disabled">Company Info</a></li>
+	<li><a href="Preparation" class="disabled">Service</a></li>
+	<li><a href="/time-space/index.php">Intranet</a></li>
+	</ul>
+</footer>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43719218-1', 'time-space.biz');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

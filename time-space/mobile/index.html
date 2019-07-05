@@ -1,0 +1,70 @@
+<?php include $_SERVER['DOCUMENT_ROOT']."/time-space/mobile/header.php"; ?>
+<article id="container">
+	<h2><a href="/time-space/mobile/board/list.html?BOARD_ID=notice" title=""><span>Latest Posts</span></a></h2>
+	<section class="main">
+	<ul>
+	<?php
+	 //셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = 'notice'";
+		$SQL .= " ORDER BY TOP_NEWS DESC, SEQ DESC LIMIT 0 , 4";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+        if($result){
+        	while($row = mysql_fetch_array($result)) { $i1++;
+	?>
+	<li>
+    		<a href="/time-space/mobile/board/view.html?BOARD_ID=notice&SEQ=<?=$row['SEQ']?>">
+		<span>●</span> <?=cut_str($row[TITLE],58,'...')?><!--<span><?=$row[CREATE_DT]?></span>-->
+		</a>
+   	</li>
+	<?php
+	          	}
+	      }
+	?>
+	</ul>
+	</section>
+	<h2><a href="/time-space/mobile/board/list.html?BOARD_ID=qa" title=""><span>Latest Q/A</span></a></h2>
+	<section class="main">
+	<ul>
+	<?php
+	 //셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = 'qa'";
+		$SQL .= " ORDER BY SEQ DESC LIMIT 0 , 4";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+        if($result){
+        	while($row = mysql_fetch_array($result)) { $i2++;
+        	//댓글셀렉트
+				$SQL = "SELECT";
+				$SQL .= " COUNT(SEQ) AS COMMENT_CNT";
+				$SQL .= " FROM T_BOARD_COMMENT";
+				$SQL .= " WHERE BOARD_SEQ = '".$row['SEQ']."'";
+				$SQL .= " AND BOARD_ID = 'qa'";
+				$COMMENT_ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+				$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
+
+	?>
+	<li>
+    		<a href="/time-space/mobile/board/view.html?BOARD_ID=qa&SEQ=<?=$row['SEQ']?>">
+		<span>●</span> <?=cut_str($row[TITLE],58,'...')?><?=($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?>
+		<?php if($_SESSION['valid_user']!=$row[USER_ID]){ //본인이 쓴 글 수정삭제기능?>
+		<img src="/time-space/mobile/img/icon-pass.png" style="margin-bottom:1px;">
+		<?php } ?>
+		</a>
+   	</li>
+	<?php
+	          	}
+	      }
+	?>
+	</ul>
+	</section>
+</article>
+<?php include $_SERVER['DOCUMENT_ROOT']."/time-space/mobile/footer.php"; ?>

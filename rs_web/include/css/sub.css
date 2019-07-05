@@ -1,0 +1,1091 @@
+#contents table {
+  max-width: 100%;
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+#contents .table {
+  width: 100%;
+  margin-bottom: 14pt;
+}
+#contents .table th,
+#contents .table td {
+  padding: 8px;
+  font-size: 14px;
+  line-height: 14pt;
+  vertical-align: top;
+  border-bottom: 1px #eaeaea solid;
+}
+#contents .table th[class*="span"],
+#contents .table td[class*="span"] {
+  display: table-cell !important;
+  float: none !important;
+  margin: 0;
+}
+#contents .table thead th {
+  vertical-align: bottom;
+}
+#contents .table tbody tr:last-child td {
+  border-bottom: 0;
+}
+#contents .table tbody + tbody {
+  border-top: 2px solid #eaeaea;
+}
+#contents .table .table {
+  background-color: #bfbfbf;
+}
+#contents .table.condensed th,
+#contents .table.condensed td {
+  padding: 4px 5px;
+}
+#contents .table.striped tbody tr:nth-child(odd) {
+  background: #eeeeee;
+}
+#contents .table.bordered {
+  border: 1px #eaeaea solid;
+  border-left: 0;
+}
+#contents .table.bordered td,
+#contents .table.bordered th {
+  border-left: 1px #eaeaea solid;
+  border-bottom: 1px #eaeaea solid;
+}
+#contents .table.no-border td,
+#contents .table.no-border th {
+  border: 0;
+}
+#contents .table.border {
+  border: 1px #eaeaea solid !important;
+}
+#contents .table.hovered tbody tr:hover {
+  background-color: rgba(28, 183, 236, 0.1);
+}
+#contents .table tr.success {
+  background-color: #60a917;
+}
+#contents .table tr.error {
+  background-color: #e51400;
+}
+#contents .table tr.warning {
+  background-color: #fa6800;
+}
+#contents .table tr.info {
+  background-color: #4390df;
+}
+#contents .table tr.info td,
+#contents .table tr.warning td,
+#contents .table tr.error td,
+#contents .table tr.success td,
+#contents .table tr.info td *,
+#contents .table tr.warning td *,
+#contents .table tr.error td *,
+#contents .table tr.success td * {
+  color: #ffffff !important;
+}
+#contents .table tr.selected {
+  background-color: rgba(28, 183, 236, 0.1);
+}
+#contents .input-control.checkbox,
+#contents .input-control.radio,
+#contents .input-control.switch,
+#contents .input-control.text,
+#contents .input-control.password,
+#contents .input-control.select,
+#contents .input-control.textarea {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 7pt;
+}
+#contents .input-control.checkbox input[type="checkbox"],
+#contents .input-control.radio input[type="checkbox"],
+#contents .input-control.checkbox input[type="radio"],
+#contents .input-control.radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+#contents .input-control.checkbox input[type="checkbox"]:focus ~ .check,
+#contents .input-control.radio input[type="checkbox"]:focus ~ .check,
+#contents .input-control.checkbox input[type="radio"]:focus ~ .check,
+#contents .input-control.radio input[type="radio"]:focus ~ .check {
+  outline: 1px #999999 dotted !important;
+}
+#contents .input-control.checkbox .caption,
+#contents .input-control.radio .caption {
+  margin: 0 5px;
+}
+#contents .input-control.checkbox .check,
+#contents .input-control.radio .check {
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border: 2px #d9d9d9 solid;
+  padding: 0;
+  margin: 0 5px 0 0;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+#contents .input-control.checkbox.text-left .check,
+#contents .input-control.radio.text-left .check {
+  margin: 0 0 0 5px;
+}
+#contents .input-control.checkbox:hover .check,
+#contents .input-control.radio:hover .check {
+  border-color: #919191;
+}
+#contents .input-control.checkbox .check:active,
+#contents .input-control.radio .check:active {
+  border-color: #1e1e1e;
+}
+#contents .input-control.checkbox .check:focus,
+#contents .input-control.radio .check:focus {
+  border-color: #919191;
+}
+#contents .input-control.checkbox .check:after,
+#contents .input-control.radio .check:after {
+  position: absolute;
+  font-family: iconFont;
+  font-size: 9pt;
+  line-height: 9pt;
+}
+#contents .input-control.checkbox input[type="checkbox"]:checked ~ .check:after,
+#contents .input-control.radio input[type="checkbox"]:checked ~ .check:after,
+#contents .input-control.checkbox input[type="radio"]:checked ~ .check:after,
+#contents .input-control.radio input[type="radio"]:checked ~ .check:after {
+  content: "\e08a";
+  margin: 2px;
+  top: 0;
+  color: #1d1d1d;
+}
+#contents .input-control.checkbox input[type="checkbox"]:disabled ~ .check,
+#contents .input-control.radio input[type="checkbox"]:disabled ~ .check,
+#contents .input-control.checkbox input[type="radio"]:disabled ~ .check,
+#contents .input-control.radio input[type="radio"]:disabled ~ .check {
+  border-color: #d9d9d9;
+  background-color: #e6e6e6;
+}
+#contents .input-control.checkbox input[type="checkbox"]:disabled ~ .check:after,
+#contents .input-control.radio input[type="checkbox"]:disabled ~ .check:after,
+#contents .input-control.checkbox input[type="radio"]:disabled ~ .check:after,
+#contents .input-control.radio input[type="radio"]:disabled ~ .check:after {
+  color: #8a8a8a;
+}
+#contents .input-control.checkbox input[data-show="intermediate"] ~ .check:after,
+#contents .input-control.radio input[data-show="intermediate"] ~ .check:after,
+#contents .input-control.checkbox input[data-show="intermediate"]:checked ~ .check:after,
+#contents .input-control.radio input[data-show="intermediate"]:checked ~ .check:after {
+  display: block;
+  content: "" !important;
+  width: 10px;
+  height: 10px;
+  background-color: #1d1d1d;
+  margin: 3px;
+}
+#contents .input-control.checkbox input[data-show="intermediate"]:disabled ~ .check:after,
+#contents .input-control.radio input[data-show="intermediate"]:disabled ~ .check:after {
+  background-color: #8a8a8a;
+}
+#contents .input-control.radio .check {
+  border-radius: 50%;
+}
+#contents .input-control.radio.default-style input[type="radio"]:checked ~ .check:after {
+  display: block;
+  content: "" !important;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #1d1d1d;
+  margin: 3px;
+}
+#contents .input-control.radio.default-style input[type="radio"]:checked:disabled ~ .check:after {
+  background-color: #8a8a8a;
+}
+#contents .input-control.switch input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+#contents .input-control.switch .caption {
+  margin: 0 5px;
+}
+#contents .input-control.switch .check {
+  background-color: transparent;
+  position: relative;
+  width: 45px;
+  height: 18px;
+  outline: 2px #a6a6a6 solid;
+  border: 1px #fff solid;
+  cursor: pointer;
+  background: #A6A6A6;
+  z-index: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+#contents .input-control.switch .check:after {
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  display: block;
+  content: "";
+  width: 9px;
+  height: 16px;
+  outline: 2px #333 solid;
+  border: 1px #333 solid;
+  cursor: pointer;
+  background: #333;
+  z-index: 2;
+}
+#contents .input-control.switch input[type="checkbox"]:focus ~ .check,
+#contents .input-control.switch input[type="radio"]:focus ~ .check {
+  outline: 1px #999999 dotted !important;
+}
+#contents .input-control.switch input[type="checkbox"]:checked ~ .check {
+  background: #008287;
+}
+#contents .input-control.switch input[type="checkbox"]:checked ~ .check:after {
+  left: auto;
+  right: -1px;
+}
+#contents .input-control.switch input[type="checkbox"]:disabled ~ .check {
+  background-color: #e6e6e6;
+  border-color: #ffffff;
+}
+#contents .input-control.switch input[type="checkbox"]:disabled ~ .check:after {
+  background-color: #8a8a8a;
+  outline-color: #8a8a8a;
+  border-color: #8a8a8a;
+}
+#contents .input-control.text,
+#contents .input-control.password,
+#contents .input-control.file {
+  display: inline-block;
+  cursor: pointer;
+  background-color: #fff;
+  outline: 0;
+  height: 34px;
+  position: relative;
+  width: 100%;
+}
+#contents .input-control.text .btn-clear,
+#contents .input-control.password .btn-clear,
+#contents .input-control.file .btn-clear,
+#contents .input-control.text .btn-reveal,
+#contents .input-control.password .btn-reveal,
+#contents .input-control.file .btn-reveal,
+#contents .input-control.text .btn-date,
+#contents .input-control.password .btn-date,
+#contents .input-control.file .btn-date,
+#contents .input-control.text .btn-file,
+#contents .input-control.password .btn-file,
+#contents .input-control.file .btn-file,
+#contents .input-control.text .btn-search,
+#contents .input-control.password .btn-search,
+#contents .input-control.file .btn-search {
+  background-color: #F0F0F0;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 2;
+  border: 0;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  min-height: 1px;
+  min-width: 1px;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+#contents .input-control.text .btn-clear:after,
+#contents .input-control.password .btn-clear:after,
+#contents .input-control.file .btn-clear:after,
+#contents .input-control.text .btn-reveal:after,
+#contents .input-control.password .btn-reveal:after,
+#contents .input-control.file .btn-reveal:after,
+#contents .input-control.text .btn-date:after,
+#contents .input-control.password .btn-date:after,
+#contents .input-control.file .btn-date:after,
+#contents .input-control.text .btn-file:after,
+#contents .input-control.password .btn-file:after,
+#contents .input-control.file .btn-file:after,
+#contents .input-control.text .btn-search:after,
+#contents .input-control.password .btn-search:after,
+#contents .input-control.file .btn-search:after {
+  font-family: iconFont;
+  font-size: 10pt;
+}
+#contents .input-control.text .btn-clear:not(:disabled):active,
+#contents .input-control.password .btn-clear:not(:disabled):active,
+#contents .input-control.file .btn-clear:not(:disabled):active,
+#contents .input-control.text .btn-reveal:not(:disabled):active,
+#contents .input-control.password .btn-reveal:not(:disabled):active,
+#contents .input-control.file .btn-reveal:not(:disabled):active,
+#contents .input-control.text .btn-date:not(:disabled):active,
+#contents .input-control.password .btn-date:not(:disabled):active,
+#contents .input-control.file .btn-date:not(:disabled):active,
+#contents .input-control.text .btn-file:not(:disabled):active,
+#contents .input-control.password .btn-file:not(:disabled):active,
+#contents .input-control.file .btn-file:not(:disabled):active,
+#contents .input-control.text .btn-search:not(:disabled):active,
+#contents .input-control.password .btn-search:not(:disabled):active,
+#contents .input-control.file .btn-search:not(:disabled):active {
+  background-color: #1d1d1d;
+  color: #ffffff;
+}
+#contents .input-control.text .btn-clear:active,
+#contents .input-control.password .btn-clear:active,
+#contents .input-control.file .btn-clear:active,
+#contents .input-control.text .btn-reveal:active,
+#contents .input-control.password .btn-reveal:active,
+#contents .input-control.file .btn-reveal:active,
+#contents .input-control.text .btn-date:active,
+#contents .input-control.password .btn-date:active,
+#contents .input-control.file .btn-date:active,
+#contents .input-control.text .btn-file:active,
+#contents .input-control.password .btn-file:active,
+#contents .input-control.file .btn-file:active,
+#contents .input-control.text .btn-search:active,
+#contents .input-control.password .btn-search:active,
+#contents .input-control.file .btn-search:active {
+  left: auto;
+}
+#contents .input-control.text .btn-clear:focus,
+#contents .input-control.password .btn-clear:focus,
+#contents .input-control.file .btn-clear:focus,
+#contents .input-control.text .btn-reveal:focus,
+#contents .input-control.password .btn-reveal:focus,
+#contents .input-control.file .btn-reveal:focus,
+#contents .input-control.text .btn-date:focus,
+#contents .input-control.password .btn-date:focus,
+#contents .input-control.file .btn-date:focus,
+#contents .input-control.text .btn-file:focus,
+#contents .input-control.password .btn-file:focus,
+#contents .input-control.file .btn-file:focus,
+#contents .input-control.text .btn-search:focus,
+#contents .input-control.password .btn-search:focus,
+#contents .input-control.file .btn-search:focus {
+  outline: 1px #ccc dotted ;
+}
+#contents .input-control.text input:focus ~ .btn-clear,
+#contents .input-control.password input:focus ~ .btn-clear,
+#contents .input-control.file input:focus ~ .btn-clear,
+#contents .input-control.text input:focus ~ .btn-reveal,
+#contents .input-control.password input:focus ~ .btn-reveal,
+#contents .input-control.file input:focus ~ .btn-reveal {
+  display: block;
+}
+#contents .input-control.text input:not(:focus) ~ .btn-clear:active,
+#contents .input-control.password input:not(:focus) ~ .btn-clear:active,
+#contents .input-control.file input:not(:focus) ~ .btn-clear:active,
+#contents .input-control.text input:not(:focus) ~ .btn-reveal:active,
+#contents .input-control.password input:not(:focus) ~ .btn-reveal:active,
+#contents .input-control.file input:not(:focus) ~ .btn-reveal:active {
+  display: block;
+}
+#contents .input-control.text .btn-clear:after,
+#contents .input-control.password .btn-clear:after,
+#contents .input-control.file .btn-clear:after {
+  content: "\e089";
+}
+#contents .input-control.text .btn-reveal:after,
+#contents .input-control.password .btn-reveal:after,
+#contents .input-control.file .btn-reveal:after {
+  content: "\e000";
+}
+#contents .input-control.text .btn-search:after,
+#contents .input-control.password .btn-search:after,
+#contents .input-control.file .btn-search:after {
+  content: "\e041";
+}
+#contents .input-control.text .btn-date:after,
+#contents .input-control.password .btn-date:after,
+#contents .input-control.file .btn-date:after {
+  content: "\e020";
+}
+#contents .input-control.text .btn-file:after,
+#contents .input-control.password .btn-file:after,
+#contents .input-control.file .btn-file:after {
+  content: "\e012";
+}
+#contents .input-control.text .btn-search,
+#contents .input-control.password .btn-search,
+#contents .input-control.file .btn-search {
+  display: block;
+}
+#contents .input-control.text .btn-date,
+#contents .input-control.password .btn-date,
+#contents .input-control.file .btn-date {
+  display: block;
+}
+#contents .input-control.text .btn-file,
+#contents .input-control.password .btn-file,
+#contents .input-control.file .btn-file {
+  display: block;
+}
+#contents .input-control.text [class*="btn-"],
+#contents .input-control.password [class*="btn-"],
+#contents .input-control.file [class*="btn-"] {
+  background-color: transparent;
+}
+#contents .input-control.text input::-ms-reveal,
+#contents .input-control.password input::-ms-reveal,
+#contents .input-control.file input::-ms-reveal,
+#contents .input-control.text input::-ms-clear,
+#contents .input-control.password input::-ms-clear,
+#contents .input-control.file input::-ms-clear {
+  display: none;
+}
+#contents .input-control.text input,
+#contents .input-control.password input,
+#contents .input-control.file input {
+  border: 1px #d9d9d9 solid;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  z-index: 1;
+}
+#contents .input-control.text input:focus,
+#contents .input-control.password input:focus,
+#contents .input-control.file input:focus {
+  outline: 0;
+  border-color: #919191;
+}
+#contents .input-control.text input:disabled,
+#contents .input-control.password input:disabled,
+#contents .input-control.file input:disabled {
+  padding-right: 5px;
+}
+#contents .input-control.text input:disabled ~ .btn-clear,
+#contents .input-control.password input:disabled ~ .btn-clear,
+#contents .input-control.file input:disabled ~ .btn-clear,
+#contents .input-control.text input:disabled ~ .btn-reveal,
+#contents .input-control.password input:disabled ~ .btn-reveal,
+#contents .input-control.file input:disabled ~ .btn-reveal {
+  display: none;
+}
+#contents .input-control.text input::-moz-placeholder,
+#contents .input-control.password input::-moz-placeholder,
+#contents .input-control.file input::-moz-placeholder {
+  color: #999999;
+}
+#contents .input-control.text input::-webkit-input-placeholder,
+#contents .input-control.password input::-webkit-input-placeholder,
+#contents .input-control.file input::-webkit-input-placeholder {
+  color: #999999;
+}
+#contents .input-control.select,
+#contents .input-control.textarea {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+}
+#contents .input-control.select select,
+#contents .input-control.textarea select,
+#contents .input-control.select textarea,
+#contents .input-control.textarea textarea {
+  border: 1px #d9d9d9 solid;
+  width: 100%;
+  padding: 5px;
+}
+#contents .input-control.select select:focus,
+#contents .input-control.textarea select:focus,
+#contents .input-control.select textarea:focus,
+#contents .input-control.textarea textarea:focus {
+  outline: 0;
+  border-color: #919191;
+}
+#contents .input-control.select select:disabled,
+#contents .input-control.textarea select:disabled,
+#contents .input-control.select textarea:disabled,
+#contents .input-control.textarea textarea:disabled {
+  padding-right: 5px;
+}
+#contents .input-control.select textarea,
+#contents .input-control.textarea textarea {
+  min-height: 100px;
+}
+#contents .input-control.text.warning-state input,
+#contents .input-control.password.warning-state input,
+#contents .input-control.select.warning-state input,
+#contents .input-control.textarea.warning-state input,
+#contents .input-control.file.warning-state input,
+#contents .input-control.text.warning-state select,
+#contents .input-control.password.warning-state select,
+#contents .input-control.select.warning-state select,
+#contents .input-control.textarea.warning-state select,
+#contents .input-control.file.warning-state select,
+#contents .input-control.text.warning-state textarea,
+#contents .input-control.password.warning-state textarea,
+#contents .input-control.select.warning-state textarea,
+#contents .input-control.textarea.warning-state textarea,
+#contents .input-control.file.warning-state textarea {
+  border-color: #fa6800;
+}
+#contents .input-control.text.error-state input,
+#contents .input-control.password.error-state input,
+#contents .input-control.select.error-state input,
+#contents .input-control.textarea.error-state input,
+#contents .input-control.file.error-state input,
+#contents .input-control.text.error-state select,
+#contents .input-control.password.error-state select,
+#contents .input-control.select.error-state select,
+#contents .input-control.textarea.error-state select,
+#contents .input-control.file.error-state select,
+#contents .input-control.text.error-state textarea,
+#contents .input-control.password.error-state textarea,
+#contents .input-control.select.error-state textarea,
+#contents .input-control.textarea.error-state textarea,
+#contents .input-control.file.error-state textarea {
+  border-color: #e51400;
+}
+#contents .input-control.text.info-state input,
+#contents .input-control.password.info-state input,
+#contents .input-control.select.info-state input,
+#contents .input-control.textarea.info-state input,
+#contents .input-control.file.info-state input,
+#contents .input-control.text.info-state select,
+#contents .input-control.password.info-state select,
+#contents .input-control.select.info-state select,
+#contents .input-control.textarea.info-state select,
+#contents .input-control.file.info-state select,
+#contents .input-control.text.info-state textarea,
+#contents .input-control.password.info-state textarea,
+#contents .input-control.select.info-state textarea,
+#contents .input-control.textarea.info-state textarea,
+#contents .input-control.file.info-state textarea {
+  border-color: #4390df;
+}
+#contents .input-control.text.success-state input,
+#contents .input-control.password.success-state input,
+#contents .input-control.select.success-state input,
+#contents .input-control.textarea.success-state input,
+#contents .input-control.file.success-state input,
+#contents .input-control.text.success-state select,
+#contents .input-control.password.success-state select,
+#contents .input-control.select.success-state select,
+#contents .input-control.textarea.success-state select,
+#contents .input-control.file.success-state select,
+#contents .input-control.text.success-state textarea,
+#contents .input-control.password.success-state textarea,
+#contents .input-control.select.success-state textarea,
+#contents .input-control.textarea.success-state textarea,
+#contents .input-control.file.success-state textarea {
+  border-color: #60a917;
+}
+#contents .input-control.text input[data-state="warning"],
+#contents .input-control.password input[data-state="warning"],
+#contents .input-control.select input[data-state="warning"],
+#contents .input-control.textarea input[data-state="warning"],
+#contents .input-control.file input[data-state="warning"] {
+  border-color: #fa6800;
+}
+#contents .input-control.text input[data-state="error"],
+#contents .input-control.password input[data-state="error"],
+#contents .input-control.select input[data-state="error"],
+#contents .input-control.textarea input[data-state="error"],
+#contents .input-control.file input[data-state="error"] {
+  border-color: #e51400;
+}
+#contents .input-control.text input[data-state="info"],
+#contents .input-control.password input[data-state="info"],
+#contents .input-control.select input[data-state="info"],
+#contents .input-control.textarea input[data-state="info"],
+#contents .input-control.file input[data-state="info"] {
+  border-color: #4390df;
+}
+#contents .input-control.text input[data-state="success"],
+#contents .input-control.password input[data-state="success"],
+#contents .input-control.select input[data-state="success"],
+#contents .input-control.textarea input[data-state="success"],
+#contents .input-control.file input[data-state="success"] {
+  border-color: #60a917;
+}
+#contents .input-control.text[class*="span"],
+#contents .input-control.password[class*="span"],
+#contents .input-control.select[class*="span"],
+#contents .input-control.textarea[class*="span"],
+#contents .input-control.file[class*="span"] {
+  margin-left: 0;
+}
+#contents .input-control.file {
+  overflow: hidden;
+}
+#contents .input-control.file input[type="file"] {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  bottom: 0;
+  right: 0;
+}
+#contents input[type="button"],
+#contents input[type="submit"],
+#contents input[type="reset"] {
+  padding: 4px 12px;
+  text-align: center;
+  vertical-align: middle !important;
+  background-color: #d9d9d9;
+  border: 1px transparent solid;
+  color: #222222;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+}
+#contents input[type="button"].default,
+#contents input[type="submit"].default,
+#contents input[type="reset"].default {
+  background-color: #008287;
+  color: #fff;
+}
+#contents input[type="button"]:focus,
+#contents input[type="submit"]:focus,
+#contents input[type="reset"]:focus {
+  outline: 0;
+  border: 1px #353535 dotted;
+}
+#contents input[type="button"]:disabled,
+#contents input[type="submit"]:disabled,
+#contents input[type="reset"]:disabled,
+#contents input[type="button"].disabled,
+#contents input[type="submit"].disabled,
+#contents input[type="reset"].disabled {
+  background-color: #eaeaea !important;
+  color: #bebebe !important;
+  cursor: not-allowed !important;
+}
+#contents input[type="button"] *,
+#contents input[type="submit"] *,
+#contents input[type="reset"] * {
+  color: inherit;
+}
+#contents input[type="button"] *:hover,
+#contents input[type="submit"] *:hover,
+#contents input[type="reset"] *:hover {
+  color: inherit;
+}
+#contents input[type="button"].primary,
+#contents input[type="submit"].primary,
+#contents input[type="reset"].primary {
+  background-color: #16499a !important;
+  color: #ffffff !important;
+}
+#contents input[type="button"].info,
+#contents input[type="submit"].info,
+#contents input[type="reset"].info {
+  background-color: #4390df !important;
+  color: #ffffff !important;
+}
+#contents input[type="button"].success,
+#contents input[type="submit"].success,
+#contents input[type="reset"].success {
+  background-color: #60a917 !important;
+  color: #ffffff !important;
+}
+#contents input[type="button"].warning,
+#contents input[type="submit"].warning,
+#contents input[type="reset"].warning {
+  background-color: #fa6800 !important;
+  color: #ffffff !important;
+}
+#contents input[type="button"].danger,
+#contents input[type="submit"].danger,
+#contents input[type="reset"].danger {
+  background-color: #9a1616 !important;
+  color: #ffffff !important;
+}
+#contents input[type="button"].inverse,
+#contents input[type="submit"].inverse,
+#contents input[type="reset"].inverse {
+  background-color: #1d1d1d !important;
+  color: #ffffff !important;
+}
+#contents input[type="button"].link,
+#contents input[type="submit"].link,
+#contents input[type="reset"].link {
+  background-color: transparent !important;
+  color: #2e92cf !important;
+}
+#contents input[type="button"].link:hover,
+#contents input[type="submit"].link:hover,
+#contents input[type="reset"].link:hover {
+  text-decoration: underline;
+}
+#contents input[type="button"].link:disabled,
+#contents input[type="submit"].link:disabled,
+#contents input[type="reset"].link:disabled,
+#contents input[type="button"].link.disabled,
+#contents input[type="submit"].link.disabled,
+#contents input[type="reset"].link.disabled {
+  background-color: transparent !important;
+  color: #bebebe !important;
+  cursor: not-allowed !important;
+}
+#contents input[type="button"].link [class*="icon-"],
+#contents input[type="submit"].link [class*="icon-"],
+#contents input[type="reset"].link [class*="icon-"] {
+  text-decoration: none !important;
+}
+#contents input[type="button"]:active,
+#contents input[type="submit"]:active,
+#contents input[type="reset"]:active {
+  background-color: #1d1d1d !important;
+  color: #ffffff !important;
+  border-color: transparent;
+}
+#contents input[type="button"].large,
+#contents input[type="submit"].large,
+#contents input[type="reset"].large {
+  padding: 11px 19px;
+  font-size: 17.5px;
+}
+#contents input[type="button"].small,
+#contents input[type="submit"].small,
+#contents input[type="reset"].small {
+  padding: 2px 10px;
+  font-size: 11.9px;
+}
+#contents input[type="button"].mini,
+#contents input[type="submit"].mini,
+#contents input[type="reset"].mini {
+  padding: 0px 6px;
+  font-size: 10.5px;
+}
+#contents .pagination {
+  width: auto;
+  margin-bottom: 10px;
+}
+#contents .pagination > ul {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+}
+#contents .pagination > ul li ul,
+#contents .pagination > ul li ol {
+  list-style: none;
+  padding-left: 25px;
+}
+#contents .pagination > ul:before,
+#contents .pagination > ul:after {
+  display: table;
+  content: "";
+}
+#contents .pagination > ul:after {
+  clear: both;
+}
+#contents .pagination > ul li {
+  display: block;
+  float: left;
+  margin-right: 1px;
+  position: relative;
+}
+#contents .pagination > ul li a {
+  padding: 4px 12px;
+  text-align: center;
+  vertical-align: middle !important;
+  background-color: #d9d9d9;
+  border: 1px transparent solid;
+  color: #222222;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: inherit;
+  display: block;
+  float: left;
+  margin-right: 1px;
+}
+#contents .pagination > ul li a.default {
+  background-color: #008287;
+  color: #fff;
+}
+#contents .pagination > ul li a:focus {
+  outline: 0;
+  border: 1px #353535 dotted;
+}
+#contents .pagination > ul li a:disabled,
+#contents .pagination > ul li a.disabled {
+  background-color: #eaeaea !important;
+  color: #bebebe !important;
+  cursor: not-allowed !important;
+}
+#contents .pagination > ul li a * {
+  color: inherit;
+}
+#contents .pagination > ul li a *:hover {
+  color: inherit;
+}
+#contents .pagination > ul li a.primary {
+  background-color: #16499a !important;
+  color: #ffffff !important;
+}
+#contents .pagination > ul li a.info {
+  background-color: #4390df !important;
+  color: #ffffff !important;
+}
+#contents .pagination > ul li a.success {
+  background-color: #60a917 !important;
+  color: #ffffff !important;
+}
+#contents .pagination > ul li a.warning {
+  background-color: #fa6800 !important;
+  color: #ffffff !important;
+}
+#contents .pagination > ul li a.danger {
+  background-color: #9a1616 !important;
+  color: #ffffff !important;
+}
+#contents .pagination > ul li a.inverse {
+  background-color: #1d1d1d !important;
+  color: #ffffff !important;
+}
+#contents .pagination > ul li a.link {
+  background-color: transparent !important;
+  color: #2e92cf !important;
+}
+#contents .pagination > ul li a.link:hover {
+  text-decoration: underline;
+}
+#contents .pagination > ul li a.link:disabled,
+#contents .pagination > ul li a.link.disabled {
+  background-color: transparent !important;
+  color: #bebebe !important;
+  cursor: not-allowed !important;
+}
+#contents .pagination > ul li a.link [class*="icon-"] {
+  text-decoration: none !important;
+}
+#contents .pagination > ul li a:active {
+  background-color: #1d1d1d !important;
+  color: #ffffff !important;
+  border-color: transparent;
+}
+#contents .pagination > ul li a.large {
+  padding: 11px 19px;
+  font-size: 17.5px;
+}
+#contents .pagination > ul li a.small {
+  padding: 2px 10px;
+  font-size: 11.9px;
+}
+#contents .pagination > ul li a.mini {
+  padding: 0px 6px;
+  font-size: 10.5px;
+}
+#contents .pagination > ul li.active a {
+  background-color: #4390df;
+  color: #ffffff;
+}
+#contents .pagination > ul li.disabled a,
+#contents .pagination > ul li.spaces a {
+  background-color: #f2f2f2;
+  color: #1e1e1e;
+  cursor: not-allowed;
+}
+#contents .pagination > ul li.disabled a:active,
+#contents .pagination > ul li.spaces a:active {
+  top: 0;
+  left: 0;
+}
+#contents .pagination > ul li.disabled a {
+  color: #1e1e1e;
+}
+#contents .pagination > ul li.spaces a {
+  background-color: #ffffff;
+  cursor: default;
+}
+#contents .pagination.small ul li a {
+  padding: 2px 10px;
+  font-size: 11.9px;
+}
+#contents .pagination.mini ul li a {
+  padding: 0px 6px;
+  font-size: 10.5px;
+}
+#contents .button {
+  padding: 4px 12px;
+  text-align: center;
+  vertical-align: middle !important;
+  background-color: #d9d9d9;
+  border: 1px transparent solid;
+  color: #222222;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+}
+#contents .button.default {
+  background-color: #008287;
+  color: #fff;
+}
+#contents .button:focus {
+  outline: 0;
+  border: 1px #353535 dotted;
+}
+#contents .button:disabled,
+#contents .button.disabled {
+  background-color: #eaeaea !important;
+  color: #bebebe !important;
+  cursor: not-allowed !important;
+}
+#contents .button * {
+  color: inherit;
+}
+#contents .button *:hover {
+  color: inherit;
+}
+#contents a.button:hover {
+  color: inherit;
+}
+#contents a.button * {
+  color: inherit;
+}
+#contents a.button *:hover {
+  color: inherit;
+}
+#contents .button.primary {
+  background-color: #16499a !important;
+  color: #ffffff !important;
+}
+#contents .button.info {
+  background-color: #4390df !important;
+  color: #ffffff !important;
+}
+#contents .button.success {
+  background-color: #60a917 !important;
+  color: #ffffff !important;
+}
+#contents .button.warning {
+  background-color: #fa6800 !important;
+  color: #ffffff !important;
+}
+#contents .button.danger {
+  background-color: #9a1616 !important;
+  color: #ffffff !important;
+}
+#contents .button.inverse {
+  background-color: #1d1d1d !important;
+  color: #ffffff !important;
+}
+#contents .button.link {
+  background-color: transparent !important;
+  color: #2e92cf !important;
+}
+#contents .button.link:hover {
+  text-decoration: underline;
+}
+#contents .button.link:disabled,
+#contents .button.link.disabled {
+  background-color: transparent !important;
+  color: #bebebe !important;
+  cursor: not-allowed !important;
+}
+#contents .button.link [class*="icon-"] {
+  text-decoration: none !important;
+}
+#contents button {
+  padding: 4px 12px;
+  text-align: center;
+  vertical-align: middle !important;
+  background-color: #d9d9d9;
+  border: 1px transparent solid;
+  color: #222222;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  font-family: 'Segoe UI Light_', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+}
+#contents button.default {
+  background-color: #008287;
+  color: #fff;
+}
+#contents button:focus {
+  outline: 0;
+  border: 1px #353535 dotted;
+}
+#contents button:disabled,
+#contents button.disabled {
+  background-color: #eaeaea !important;
+  color: #bebebe !important;
+  cursor: not-allowed !important;
+}
+#contents button * {
+  color: inherit;
+}
+#contents button *:hover {
+  color: inherit;
+}
+#contents button.primary {
+  background-color: #16499a !important;
+  color: #ffffff !important;
+}
+#contents button.info {
+  background-color: #4390df !important;
+  color: #ffffff !important;
+}
+#contents button.success {
+  background-color: #60a917 !important;
+  color: #ffffff !important;
+}
+#contents button.warning {
+  background-color: #fa6800 !important;
+  color: #ffffff !important;
+}
+#contents button.danger {
+  background-color: #9a1616 !important;
+  color: #ffffff !important;
+}
+#contents button.inverse {
+  background-color: #1d1d1d !important;
+  color: #ffffff !important;
+}
+#contents button.link {
+  background-color: transparent !important;
+  color: #2e92cf !important;
+}
+#contents button.link:hover {
+  text-decoration: underline;
+}
+#contents button.link:disabled,
+#contents button.link.disabled {
+  background-color: transparent !important;
+  color: #bebebe !important;
+  cursor: not-allowed !important;
+}
+#contents button.link [class*="icon-"] {
+  text-decoration: none !important;
+}
+#contents button:active {
+  background-color: #1d1d1d !important;
+  color: #ffffff !important;
+  border-color: transparent;
+}
+#contents button.large {
+  padding: 11px 19px;
+  font-size: 17.5px;
+}
+#contents button.small {
+  padding: 2px 10px;
+  font-size: 11.9px;
+}
+#contents button.mini {
+  padding: 0px 6px;
+  font-size: 10.5px;
+}

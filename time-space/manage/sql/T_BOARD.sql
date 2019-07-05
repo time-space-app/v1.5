@@ -1,0 +1,18 @@
+CREATE TABLE T_BOARD (
+  SEQ          INT(10)            NOT NULL,
+  BOARD_ID      VARCHAR(20)      NOT NULL,
+  USER_ID       VARCHAR(20)          DEFAULT NULL,
+  USER_NM       VARCHAR(20)          DEFAULT NULL,
+  EMAIL        VARCHAR(200)         DEFAULT NULL,
+  TITLE        VARCHAR(200)         DEFAULT NULL,
+  CONTENT      TEXT                  DEFAULT NULL,
+  REGDATE      DATETIME              DEFAULT NULL,
+  READCOUNT    INT(10)                UNSIGNED DEFAULT NULL,
+  FILECNT      INT(10)                UNSIGNED DEFAULT NULL,
+  STATE        VARCHAR(20)     DEFAULT 'Ã³¸®Áß'          NULL,
+  POPUP        VARCHAR(4)               DEFAULT NULL,
+  POPUP_W      VARCHAR(4)           DEFAULT NULL,
+  POPUP_H      VARCHAR(4)           DEFAULT NULL,
+  TOP_NEWS       VARCHAR(4)           DEFAULT NULL,
+  PRIMARY KEY(SEQ,BOARD_ID)
+) ENGINE=MYISAM DEFAULT CHARSET=UTF8;

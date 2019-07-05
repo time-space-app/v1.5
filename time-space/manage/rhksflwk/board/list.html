@@ -1,0 +1,80 @@
+﻿<!--DOCTYPE html-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/htmlcharset=utf-8" />
+<link rel="stylesheet" href="/time-space/reset.css" type="text/css">
+<link rel="stylesheet" href="/time-space/manage/rhksflwk/board/board.css" type="text/css">
+<link href="/time-space/skin/one/design/favicon.ico" rel="shortcut icon" type="image/ico" />
+<script type="text/javascript" charset="utf-8" src="/time-space/mobile/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/time-space/js/common.js"></script>
+<!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<title>Time-Space HTML5</title>
+</head>
+<body>
+<div id="wrap">
+<header id="board_list_header">
+	<h2>Time-Space is Html5 Makeup Web and Computer Repair</h2>
+</header>
+<!-- 검색 폼 시작 -->
+<div id="board_list_search">
+<form method="get" name="form_search" id="form_search" action="">
+	<select name="GUBN" id="GUBN" class="type-select">
+		<option selected="selected" value="1">ALL</option>
+		<option value="2">SUBJECT</option>
+		<option value="3">CONTENT</option>
+	</select>
+	<input type="text" name="SEARCH" id="SEARCH" size=15 class="type-text" value="">
+	<input type="hidden" name="BOARD_ID" id="BOARD_ID" size=15 class="type-text" value="<?=$BOARD_ID?>">
+	<input type=submit value="Search" class="type-submit">
+</form>
+</div>
+<!-- 검색 폼 종료 -->
+<span class="br10"></span>
+<!-- 테이블 시작 -->
+<div class="board_list_table">
+    <table class="list_table">
+        <caption>타임-스페이스 게시판 디자인</caption>
+        <colgroup>
+	   <col width="15%" />
+	   <col width="45%" />
+	   <col width="20%" />
+	   <col width="20%" />
+	  </colgroup>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>이름</th>
+                <th>등록일자</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><a href="view.html">타임-스페이스 게시판 디자인 샘플</a></td>
+                <td>관리자</td>
+                <td>2013-10-13</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- 테이블 종료 -->
+<!--paging시작-->
+<div id="board_list_paging">
+	<span>Prev</span>
+	<span class="selected_page">1</span>&nbsp;<span>2</span>
+	<span>Next</span>
+</div>
+<!--paging끝-->
+<!-- 등록버튼 시작 -->
+<div id="board_list_button_table">
+<a href="write.html"><span class="button">WRITE</span></a>
+</div>
+</div>
+</body>
+</html>

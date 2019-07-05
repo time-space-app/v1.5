@@ -1,0 +1,231 @@
+<?php
+session_start();
+define('DS', DIRECTORY_SEPARATOR);
+define('GPLDIR', $_SERVER['DOCUMENT_ROOT'].DS.'time-space/manage');
+include_once GPLDIR . '/core/config/default.php';
+include_once GPLDIR_CLASS . '/GPLbase.class.php';
+$GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);//상속받은 개체 멤버클래스 사용
+$GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
+?>
+<?php
+$userid = $_SESSION['valid_user'];
+//===========================
+	$proc_file = "SELECT LOGIN_ID,LOGIN_PWD,USER_NM,USER_LEVEL,USE_YN,USER_EMAIL";
+	$proc_file .= " FROM T_MEMBER";
+	$proc_file .= " WHERE LOGIN_ID = '$userid'";
+	$ROW = $GPLdb5->GPLquery_fetch_assoc_one($proc_file);
+	$EMAIL=$ROW['USER_EMAIL'];
+	$arremail = split("@",$EMAIL);
+?>
+<?php /*자동등록방지코드*/
+$se_num1 = mt_rand(1, 9);
+$se_num2 = mt_rand(1, 9);
+?>
+<!--DOCTYPE html-->
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/htmlcharset=utf-8" />
+<link rel="stylesheet" href="/time-space/reset.css" type="text/css">
+<link rel="stylesheet" href="/time-space/css/common.css" type="text/css">
+<link rel="stylesheet" href="/time-space/board/board.css" type="text/css">
+<link href="/time-space/skin/one/design/favicon.ico" rel="shortcut icon" type="image/ico" />
+<script type="text/javascript" charset="utf-8" src="/time-space/mobile/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript"><?php include $_SERVER['DOCUMENT_ROOT']."/time-space/js/common.js"; ?></script>
+<!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<script type="text/javascript">
+function submitForm(frm)
+{
+	var errorMessage = null;
+	var objFocus = null;
+	if (frm.LOGIN_ID.value.length == 0) {
+	    errorMessage = "Please input the ID.";
+	    objFocus = frm.LOGIN_ID;
+	   }
+	<?php if($MODE == "write"){?>
+	else if (frm.LOGIN_PWD.value.length == 0) {
+	    errorMessage = "Please input the PASSWORD.";
+	    objFocus = frm.LOGIN_PWD;
+	   }
+	<?php }?>
+	else if (frm.USER_LEVEL.value.length == 0) {
+	    errorMessage = "Please input the LEVEL.";
+	    objFocus = frm.USER_LEVEL;
+	   }
+	else if (frm.USER_NM.value.length == 0) {
+	    errorMessage = "Please input the NAME.";
+	    objFocus = frm.USER_NM;
+	   }
+	if(errorMessage != null) {
+	    alert(errorMessage);
+	    objFocus.focus();
+	    return false;
+	   }
+}
+function selectmail() {
+	var mail = document.getElementById('DDLEMAIL');
+	var txt = document.getElementById('EMAIL1');
+	if (mail == "") {
+	txt.focus();
+	txt.value = "";
+	} else {
+	txt.value= mail.value;
+	}
+}
+</script>
+<title>Time-Space HTML5</title>
+</head>
+<body>
+<div id="wrap">
+<header id="page_header">
+	<a href="/"><h2>Time-Space is Html5 Makeup Web and Computer Repair</h2></a>
+	<nav>
+	<ul>
+	<li><a href="/time-space/index.html?go=pc&BOARD_ID=&SEQ=">[Home]</a></li>
+	<li><a href="/time-space/board/list.html?go=pc&BOARD_ID=notice">[Posts]</a></li>
+	<li><a href="/time-space/board/list.html?go=pc&BOARD_ID=repair">[Work Request]</a></li>
+	<li><a href="/wordpress/">[WordPress]</a></li>
+	<li>
+	<span>
+	To use new technology,
+	<a href="https://www.google.com/chrome/" target="_new">[Chrome]</a>, 
+	<a href="http://support.apple.com/downloads/#internet/" target="_new">[Safari]</a>,
+	<a href="http://www.mozilla.org/" target="_new">[Firefox]</a>,
+	<a href="http://www.opera.com/" target="_new">[Opera]</a>,
+	<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="_new">[IE]</a>
+	, install the latest version for free
+	</span>
+	</li>
+	</ul>
+	</nav>
+</header>
+<div id="contents">
+<!--로그인영역시작-->
+<?php include $_SERVER['DOCUMENT_ROOT']."/time-space/board/auth.php"; ?>
+<span class="br10"></span>
+<div id="login">
+<?php if($_SESSION['valid_user'] != "") { ?>
+	<a href="/time-space/board/logout.php"><span class="button">Log Out</span></a>
+<?php }else{ ?>
+	<form name="form_login" id="form_login" action="" autocomplete="on" method="post">
+		<label data-icon="u" for="id">ID </label> 
+		<input id="id" name="id" placeholder="yser Id" required="required" type="text" class="type-text" />
+		<label data-icon="p" for="password">Password </label> 
+		<input id="pw" name="pw" placeholder="your Password" required="required" type="password" class="type-text" />
+		<input type="submit" value="Login" class="type-submit">
+	</form>
+<?php } ?>
+</div>
+<!--로그인영역끝-->
+<section id="subposts">
+<header id="board_list_header">
+	<h2>Member Join</h2>
+</header>
+<span class="br10"></span>
+<!--게시판 시작-->
+<div id="comment_wrap" class="post">
+<form method="post" name="frm" id="frm" action="join_ok.php" onsubmit="return submitForm(this)" enctype="multipart/form-data" >
+<!-- 테이블 시작 -->
+	<div class="board_write_table">
+	     <table summary="" class="write_table">
+	      <caption></caption>
+	       <colgroup>
+	        <col style="width:100px;" />
+	        <col />
+	       </colgroup>
+	       <tbody>
+			<tr>
+				<th>LOGIN_ID</th>
+				<td>
+				<?php if($_SESSION['valid_user'] != "") { ?>
+				<input type="hidden" size="30"  name="LOGIN_ID" id="LOGIN_ID" value="<?=$ROW['LOGIN_ID']?>" />
+				<?=$ROW['LOGIN_ID']?>
+				<?php }else{ ?>
+				<input type="text" size="30"  name="LOGIN_ID" id="LOGIN_ID" value="<?=$ROW['LOGIN_ID']?>" />
+				<?php } ?>
+				</td>
+			</tr>
+			<tr>
+				<th width="18%">LOGIN_PWD</th>
+				<td><input type="password" size="31"  name="LOGIN_PWD" id="LOGIN_PWD" value="" />
+				<input type="hidden" size="30"  name="HIDDEN_PWD" id="HIDDEN_PWD" value="<?=$ROW['LOGIN_PWD']?>" /></td>
+			</tr>
+			<tr>
+				<th>NAME</th>
+				<td><input type="text" size="30"  name="USER_NM" id="USER_NM" value="<?=$ROW['USER_NM']?>" /></td>
+			</tr>
+			<tr style="display:none">
+				<th>LEVEL</th> 
+				<td>
+				<SELECT ID="USER_LEVEL" name='USER_LEVEL' size='1' style="width:100px">
+					<option value="9" <?=($ROW['USER_LEVEL']=="9")?"SELECTED":"";?>>member</option>
+					<option value="2" <?=($ROW['USER_LEVEL']=="2")?"SELECTED":"";?>>staff</option>
+				        <option value="1" <?=($ROW['USER_LEVEL']=="1")?"SELECTED":"";?>>admin</option>
+				</SELECT>
+				</td>
+			</tr>
+			<tr>
+				<th>E-MAIL</th> 
+				<td>
+				<input type="text" ID="EMAIL0" NAME="EMAIL0" VALUE="<?=$arremail[0]?>" />@
+				<input type="text" ID="EMAIL1" NAME="EMAIL1" VALUE="<?=$arremail[1]?>" />
+				<SELECT ID="DDLEMAIL" name='DDLEMAIL' size='1' style="width:100px" onchange="selectmail()">
+				        <option value=''>-SELECT-</option>
+				        <option value="naver.com">naver.com</option>
+				        <option value="nate.com">nate.com</option>
+				        <option value="gmail.com">gmail.com</option>
+				        <option value="hanmail.net">hanmail.net</option>
+				        <option value="yahoo.co.kr">yahoo.co.kr</option>
+				</SELECT>
+				</td> 
+			</tr>
+			<?php if($_SESSION['valid_user'] == "") { ?>
+			<tr>
+				<th>자동등록방지</th>
+				<td><span style="color:#fff"><?php echo $se_num1." + ".$se_num2." = "?></span>
+				<input type="text" size="10"  name="SE_NUM" id="SE_NUM" value="" />
+				<input type="hidden" size="10"  name="SE_NUM1" id="SE_NUM1" value="<?=$se_num1?>" />
+				<input type="hidden" size="10"  name="SE_NUM2" id="SE_NUM2" value="<?=$se_num2?>" />
+				</td>
+			</tr>
+			<?php } ?>
+			<tr style="display:none">
+				<th>USER_YN</th> 
+				<td>
+				<SELECT ID="USE_YN" name='USE_YN' size='1' style="width:100px">
+				        <option value="Y" <?=($ROW['USE_YN']=="Y")?"SELECTED":"";?>>USE</option>
+				        <option value="N" <?=($ROW['USE_YN']=="N")?"SELECTED":"";?>>STOP</option>
+				</SELECT>
+				</td> 
+			</tr>
+		</tbody>
+		</table>
+	</div>
+</div>
+	<span class="br10"></span>
+	<!-- 등록버튼 시작 -->
+	<div id="board_list_button_table">
+	<input type="reset" value="RESET" name="RESET" class="type-btn">
+	<input type="submit" value="COMMIT" name="COMMIT" class="type-btn">
+	</div>
+</form>
+<!--게시판 끝-->
+</section>
+</div>
+<footer id="page_footer">
+	<p>&copy;Time-Space.biz since 2013-06-07</p>
+	<nav>
+	<ul>
+	<li><a href="http://time-space.biz">Homepage</a></li>
+	<li><a href="Preparation" class="disabled">Company Info</a></li>
+	<li><a href="Preparation" class="disabled">Service</a></li>
+	<li><a href="/time-space/index.php">Intranet</a></li>
+	</ul>
+</footer>
+</div>
+</body>
+</html>

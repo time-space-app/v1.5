@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script> 
+</head>
+<body>
+<div style="width:300px;">
+	<!-- 실제 검색 부분 -->  
+	<input type="text" value="" id="searchText"/><input type="button" id="searchBtn" value="검색"/> 
+	    <ul id="searchContents">  
+	        <li class='bestof'>Best 상품</li>  
+	        <li class='jquery php'>14 jQuery and non-jQuery Rich Text Editors</li>  
+	        <li class='php'>How to know where your visitors are coming from</li>  
+	        <li class='php'>How speed improving using single quotes instead of double quotes really is</li>  
+	        <li class='jquery html'>Automatic input field focus on page load</li>  
+	        <li class='jquery php'>Checking username availability with ajax using jQuery</li>  
+	        <li class='jquery css html'>Hover effect with jQuery and CSS</li>  
+	        <li class='jquery css html'>Zebra stripes with jQuery and CSS</li>  
+	        <li class='jquery html'>Maxlength for textarea using jQuery</li>  
+	    </ul>  
+</div>
+</body>
+<script>
+$(document).ready(function(){    
+    $('#searchBtn').click(function(e){    
+        e.preventDefault();    
+        var filter = $("#searchText").val();  
+        $('#searchContents li').show();  
+        $('#searchContents > li').each(function(index) {
+	    //alert(index + ': ' + $(this).text());//디버그
+	    if($(this).text().indexOf(filter) < 0) $(this).hide();
+	 });
+    });  
+});  
+
+</script>
+</html>

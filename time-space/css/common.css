@@ -1,0 +1,174 @@
+body{
+font-family:Verdana, Arial, sans-serif;
+font-size:0.9em;
+margin-top:0px;
+background-image:url(/time-space/testingdata/main.jpg);
+background-repeat:repeat-y;
+background-position:center top;
+}
+p{
+line-height:1.8em;
+}
+
+div#wrap{width:100%; text-align:center;}
+header#page_header{
+width:1200px; height:70px; margin:auto;text-align:center;
+display: table;
+margin-top:10px;
+}
+header#page_header h2{
+font-size:1.8em;
+height:122px;
+cursor:pointer;
+}
+header#page_header nav{
+width:100%;
+float:left;
+font-size:1.1em;
+}
+header#page_header span{
+padding-left:30px;
+}
+header#page_header nav ul, #page_footer nav ul{
+list-style:none;
+}
+#page_header nav ul li, footer#page_footer nav ul li{
+padding:0;
+margin-right:20px;
+display:inline;
+}
+#page_header>nav>ul>li>a.show{
+font-weight:bold;
+}
+
+div#contents{width:1200px; margin:auto;font-size:1.3em;min-height:975px;height:100%;}
+section#posts{
+clear: both;
+float:left;
+width:63%;
+text-align:left;
+}
+section article a:link { text-decoration: none; color: #fff;}
+section article a:visited { text-decoration: none; color: #fff;}
+section article a:hover { text-decoration: none; color: #00f;}
+section article a:active { text-decoration: none; color: #fff;}
+section#posts .post{
+margin-top:10px;
+padding:0px 10px 10px 10px;
+color:#fff;
+font-weight:bold;
+/* works for IE 8. */
+background-color:#FFF;
+/* 기본 배경색 지정-투명도가 모두 적용되지 않았을 때 색상 */
+background: #FFF; 
+/* RGBa 적용 - IE10,Firefox, Chrome, Safari, Opera ... */
+background: rgba(0,0,0,0.3); 
+/* IE에서 Filter적용을 위해 배경을 지움 */
+background: transparent !ie; 
+/* 정상적인 Filter적용을 위해 zoom:1을 적용 */
+zoom:1; 
+/* IE5.5-7 */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2999999, endColorstr=#b2999999); 
+/* IE8,9 */
+-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2999999, endColorstr=#b2999999)";
+}
+section#sidebar{
+padding-left:60px;
+float:left;
+width:30%;
+text-align:left;
+line-height:1.2em;
+}
+section#sidebar nav{
+height:335px;
+}
+section#sidebar nav h3{
+margin-top:10px;
+margin-bottom:20px;
+}
+section#sidebar nav li{
+font-size:0.8em;
+}
+footer#page_footer{
+clear:both;
+width:1200px; height:68px; margin:auto;
+text-align:center;
+}
+section#subposts{
+clear: both;
+float:left;
+width:100%;
+text-align:left;
+}
+section#subposts .post{
+margin-top:10px;
+padding:0px 10px 10px 10px;
+color:#fff;
+font-weight:bold;
+/* works for IE 8. */
+background-color:#FFF;
+/* 기본 배경색 지정-투명도가 모두 적용되지 않았을 때 색상 */
+background: #FFF; 
+/* RGBa 적용 - IE10,Firefox, Chrome, Safari, Opera ... */
+background: rgba(0,0,0,0.3); 
+/* IE에서 Filter적용을 위해 배경을 지움 */
+background: transparent !ie; 
+/* 정상적인 Filter적용을 위해 zoom:1을 적용 */
+zoom:1; 
+/* IE5.5-7 */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2999999, endColorstr=#b2999999); 
+/* IE8,9 */
+-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2999999, endColorstr=#b2999999)";
+}
+/* 로그인 폼 크기 */
+#login{ width: 100%; text-align:right;}
+#login #form_login{width:100%; margin-right:10px}
+#login #form_login .type-select{padding:3px; width:150px; border:1px solid #f90;background-color:#fff;}
+#login #form_login .type-text{padding:3px; width:150px; border:1px solid #f90;background-color:#fff;}
+#login #form_login .type-submit{padding:3px; width:62px; border:1px solid #f90; color:#000;background-color:#fff;cursor:pointer}
+/* 줄바꿈 너비 지정 */
+.br10 {clear:both;display:block;margin:10px 0;}
+/* 화면에 보여지는 글 등록 a 버튼 */
+#login .button {
+width:80px; 
+height:20px;
+cursor:pointer;
+border: 1px solid #bebebe;
+padding: 3px 3px;
+text-align:center;
+margin: 0 10px;
+background-color:#fff;
+float:right;
+font-family:Verdana, Arial, sans-serif;
+}
+#login .button_ie {
+width:72px; 
+height:20px;
+cursor:pointer;
+border: 1px solid #bebebe;
+padding: 3px 7px;
+text-align:center;
+margin: 0 10px;
+background-color:#fff;
+font-family:Verdana, Arial, sans-serif;
+}
+#login a:hover { text-decoration: none; color: #000;}
+#back-to-top {
+   width: 50px;
+   height: 20px;
+   padding: 10px;
+   border-radius: 10px;
+   position: fixed;
+   right: 10%;
+   bottom: 20px;
+   background-color: #CCC;
+   font-size: 12px; font-weight:bold;
+   color: #fff;
+   text-align: center;
+   text-decoration: none;
+   cursor:pointer;
+   background-image: url(top.png);
+   background-position-x:center;
+   background-position-y:40px;
+   background-repeat:no-repeat;
+}

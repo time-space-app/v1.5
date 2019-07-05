@@ -1,0 +1,301 @@
+<?php
+session_start();
+define('DS', DIRECTORY_SEPARATOR);
+define('GPLDIR', $_SERVER['DOCUMENT_ROOT'].DS.'time-space/manage');
+include_once GPLDIR . '/core/config/default.php';
+include_once GPLDIR_CLASS . '/GPLbase.class.php';
+$GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);//상속받은 개체 멤버클래스 사용
+$GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
+?>
+<?php
+//게시판 공통변수 항상 페이지 상단에 위치
+$GUBN = $_REQUEST['GUBN'];
+$SEARCH = $_REQUEST['SEARCH'];
+$BOARD_ID = $_REQUEST['BOARD_ID'];
+$MODE = $_REQUEST['MODE'];
+$BOARD_SEQ = $_REQUEST['SEQ'];
+if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, repair, pds, faq
+?>
+<?php
+	//페이징설정 넘버링 시작
+	$now_page = $_GET['now_page'];
+	//================ pageing 계산 code ======================================
+	// 1 - 현재 페이지 설정
+	if($now_page == ""){
+		$now_page = 1;
+	}
+	// 2 - 블럭크기 설정
+	if($block_size == ""){
+		$block_size = 10;
+	}
+	// 3 - 각 블럭의 start 페이지 값을 설정한다
+	if($now_page % $block_size == 0){
+		$start_num = abs($now_page - $block_size + 1);    // 현재 페이지가 블럭의 마지막 페이지 일 경우 해당 블럭의 시작 페이지 번호를 정한다
+	}else{
+		$start_num = floor($now_page/$block_size)*$block_size + 1; // 현재페이지가 블럭의 마지막 페이지가 아닐경우 시작 페이지를 지정한다
+	}
+	// 4 - 각 블럭의 end 페이지 값을 설정한다
+	$end_num = $start_num + $block_size - 1;
+	// 5 - 카운터 쿼리호출 (마지막 페이지에서 존재하지 않는 페이지 숫자를 없애주기 위해 토탈레코드 숫자를 구한다 )
+		$SQL = "SELECT";
+		$SQL .= " COUNT(SEQ) AS COUNT";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = '".$BOARD_ID."'";
+		$SQL .= " AND (TITLE LIKE '%".$SEARCH."%'";
+		$SQL .= " OR CONTENT LIKE '%".$SEARCH."%')";
+		$result = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+		if($result){
+			$total_rec = $result['COUNT'];
+		}
+	// 6 - 한페이지당 보여줄 레코드 수 설정
+	$recnum_per_page = 10;
+	// 7 - 불러오기 쿼리문에서 시작레코드 숫자 지정
+	if($now_page == 1){
+		$st_limit = 0;
+	}else{
+		$st_limit = $now_page * $recnum_per_page - $recnum_per_page;
+	}
+	// 8 - 이전 블럭 설정
+	$before_block = abs($start - 1);
+	// 9 - 다음 블럭 설정
+	$next_block = $end_num + 1;
+?>
+<?php
+	//메뉴 변수
+	switch ($BOARD_ID) { //notice, qa, repair, pds, faq
+		case 'notice'  : $body='1'; $title='NOTICE';break;
+		case 'repair' : $body='2'; $title='REPAIR';break;
+		case 'qa'  : $body='3'; $title='Q/A';break;
+		case 'faq'  : $body='4'; $title='FAQ';break;
+		case 'pds'  : $body='5'; $title='PDS';break;
+		default   : $body='1'; $title='NOTICE';break;
+	}
+?>
+<!--DOCTYPE html-->
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/htmlcharset=utf-8" />
+<link rel="stylesheet" href="/time-space/reset.css" type="text/css">
+<link rel="stylesheet" href="/time-space/css/common.css" type="text/css">
+<link rel="stylesheet" href="/time-space/board/board.css" type="text/css">
+<link href="/time-space/skin/one/design/favicon.ico" rel="shortcut icon" type="image/ico" />
+<script type="text/javascript" charset="utf-8" src="/time-space/mobile/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript"><?php include $_SERVER['DOCUMENT_ROOT']."/time-space/js/common.js"; ?></script>
+<!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<title>Time-Space HTML5</title>
+</head>
+<body>
+<div id="wrap">
+<header id="page_header">
+	<a href="/"><h2>Time-Space is Html5 Makeup Web and Computer Repair</h2></a>
+	<nav>
+	<ul>
+	<li><a href="/time-space/index.html?go=pc&BOARD_ID=">[Home]</a></li>
+	<li><a href="/time-space/board/list.html?go=pc&BOARD_ID=notice">[Posts]</a></li>
+	<li><a href="/time-space/board/list.html?go=pc&BOARD_ID=repair">[Work Request]</a></li>
+	<li><a href="/wordpress/">[WordPress]</a></li>
+	<li>
+	<span>
+	To use new technology,
+	<a href="https://www.google.com/chrome/" target="_new">[Chrome]</a>, 
+	<a href="http://support.apple.com/downloads/#internet/" target="_new">[Safari]</a>,
+	<a href="http://www.mozilla.org/" target="_new">[Firefox]</a>,
+	<a href="http://www.opera.com/" target="_new">[Opera]</a>,
+	<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="_new">[IE]</a>
+	, install the latest version for free
+	</span>
+	</li>
+	</ul>
+	</nav>
+</header>
+<div id="contents">
+<!--로그인영역시작-->
+<?php include $_SERVER['DOCUMENT_ROOT']."/time-space/board/auth.php"; ?>
+<span class="br10"></span>
+<div id="login">
+<?php if($_SESSION['valid_user'] != "") { ?>
+	<a href="/time-space/board/logout.php"><span class="button">Log Out</span></a>
+	<a href="/time-space/board/join.html"><span class="button">Mypage</span></a>
+<?php }else{ ?>
+	<form name="form_login" id="form_login" action="" autocomplete="on" method="post">
+		<label data-icon="u" for="id">ID </label> 
+		<input id="id" name="id" placeholder="yser Id" required="required" type="text" class="type-text" />
+		<label data-icon="p" for="password">Password </label> 
+		<input id="pw" name="pw" placeholder="your Password" required="required" type="password" class="type-text" />
+		<input type="submit" value="Login" class="type-submit">
+		<!--[if lte IE 8]>
+		<a href="/time-space/board/join.html"><span class="button_ie">Join</span></a>
+		<![endif]-->
+		<![if (gte IE 9)|(!IE)]>
+		   <a href="/time-space/board/join.html"><span class="button">Join</span></a>
+		<![endif]>
+	</form>
+<?php } ?>
+</div>
+<!--로그인영역끝-->
+<section id="subposts">
+	<?php
+		//셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = '$BOARD_ID'";
+		$SQL .= " AND (TITLE LIKE '%".$SEARCH."%'";
+		$SQL .= " OR CONTENT LIKE '%".$SEARCH."%')";
+		$SQL .= " ORDER BY IFNULL(TOP_NEWS,'OFF') DESC, SEQ DESC LIMIT $st_limit , $recnum_per_page";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+		$i=0;
+		if($result){
+			while($row = mysql_fetch_array($result)) {
+				//댓글셀렉트
+				$SQL = "SELECT";
+				$SQL .= " COUNT(SEQ) AS COMMENT_CNT";
+				$SQL .= " FROM T_BOARD_COMMENT";
+				$SQL .= " WHERE BOARD_SEQ = '".$row['SEQ']."'";
+				$SQL .= " AND BOARD_ID = '$BOARD_ID'";
+				$COMMENT_ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+				$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
+	?>
+	<article class="post">
+		<header>
+		<a href="view.html?BOARD_ID=<?=$BOARD_ID?>&SEQ=<?=$row['SEQ']?>"><h2>Title: [<?=$row[TITLE]?>]</h2></a>
+		<p>
+		Posted by <?=$row[USER_NM]?> on
+		<time datetime="2013-06-25"><?=$row[CREATE_DT]?></time>
+		<?php if($BOARD_ID=="notice" || $BOARD_ID=="pds"){?>
+			<span>[FILES]: 
+			<?php //첨부파일 다운로드로직
+			$SQL = "SELECT";
+			$SQL .= " SEQ,FILE_NM,FILE_SIZE,DOWN_CNT";
+			$SQL .= " ,BOARD_SEQ,BOARD_ID";
+			$SQL .= " ,CREATE_DT,CREATE_ID,UPDATE_DT,UPDATE_ID";
+			$SQL .= " FROM T_ATTACH_FILE";
+			$SQL .= " WHERE BOARD_SEQ = ".$row['SEQ']." AND BOARD_ID = '$BOARD_ID'";
+			$SQL .= " ORDER BY SEQ ASC";
+			//debug echo $SQL;
+			$fileresult = $GPLdb5->GPLexcute_query($SQL);
+			$i=0;
+			if($fileresult){
+				while($filerow = mysql_fetch_array($fileresult)) {	
+				if($filerow['FILE_NM']){
+				?>
+				<a href="/time-space/manage/core/function/download.php?filename=<?=$filerow['FILE_NM']?>&target=<?=$BOARD_ID?>">DOWNLOAD</a>
+			<?php 
+			}}}?>
+			</span>
+		<?php } ?>
+		<?php if($BOARD_ID=="repair"){?>
+			<span>[처리상태]:<?=$row['STATE']?></span>
+		<?php } ?> 
+		</p>
+		</header>
+		<p>
+		<?php if($_SESSION['valid_user']!=$row[USER_ID] && $BOARD_ID=="repair" ){ //본인이 쓴 글 수정삭제기능 ?>
+		<img src="/time-space/image/iconSecret.gif"> It is a secret article.		
+		<?php }else{ ?>
+		<?=cut_str($row[CONTENT],300,'...')?>
+		<?php } ?>
+		</p>
+		<footer>
+		<p></p>
+		</footer>
+	</article>
+	<?php	$i++;
+	          	}
+	      }
+	?>
+	<?php if($i==0){?>
+	<article class="post">
+		<header>
+		<h2>NONE DATA</h2>
+		<p></p>
+		</header>
+		<footer>
+		<p></p>
+		</footer>
+	</article>
+	<?php } ?>
+<!--paging시작-->
+<div id="board_list_paging" class="post">
+	 <?
+	 //================ pageing 출력 10번~12번 code ======================================
+		  if($start_num > 1){ 	// 10 - 이전 블럭 링크?>
+		  <span>
+			 <a href="list.html?now_page=<?=$before_block?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>" onFocus="blur()">
+			 Prev</a>
+		  </span>
+		  <? } ?>&nbsp;
+		 <?
+		  for($i=$start_num; $i<=$end_num; $i++){	// 11 - 페이지 링크
+			if(ceil($total_rec/$recnum_per_page) >= $i){
+			 if($now_page == $i){ ?>
+			 <span class="selected_page">
+			 <?=$i?>
+			 </li>
+		  <?    }else{ ?>
+		  <span>
+			 <a href="list.html?now_page=<?=$i?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>" onFocus="blur()"><?=$i?></a>
+		   </span>
+		 <?            }
+			}
+		  }  ?>&nbsp;
+		 <?
+		  if($end_num * $recnum_per_page < $total_rec){ 	// 12 - 다음 블럭 링크?>
+		  <span>
+			 <a href="list.html?now_page=<?=$next_block?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>" onFocus="blur()">
+			 Next</a>
+		   </span>
+	 <?  }
+	 //====================================================================
+	 ?>
+</div>
+<!--paging끝-->
+<!-- 등록버튼 시작 -->
+<div id="board_list_button_table">
+	<?php if($_SESSION['valid_level'] == 1 ) { ?>
+	 <a href="write.html?now_page=<?=$now_page?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>&MODE=write">
+	 <span class="button">WRITE</span></a>
+	 <?php } ?>
+	 <?php if($_SESSION['valid_user'] != "" && $_SESSION['valid_level'] != "1" && eregi($BOARD_ID, 'repair') == 1 ) { ?>
+	 <a href="write.html?now_page=<?=$now_page?>&GUBN=<?=$GUBN?>&SEARCH=<?=$SEARCH?>&BOARD_ID=<?=$BOARD_ID?>&MODE=write">
+	 <span class="button">WRITE</span></a>
+	 <?php } ?>
+</div>
+<!--검색영역시작-->
+<span class="br10"></span>
+<div id="board_list_search">
+	<form method="get" name="form_search" id="form_search" action="">
+	<select name="GUBN" id="GUBN" class="type-select">
+		<option selected="selected" value="1">ALL</option>
+		<option value="2">SUBJECT</option>
+		<option value="3">CONTENT</option>
+	</select>
+	<input type="text" name="SEARCH" id="SEARCH" size=15 class="type-text" value="">
+	<input type="hidden" name="BOARD_ID" id="BOARD_ID" size=15 class="type-text" value="<?=$BOARD_ID?>">
+	<input type=submit value="Search" class="type-submit">
+	</form> 
+</div>
+<!--검색영역끝-->
+</section>
+</div>
+<div id="back-to-top">Top ▲</div>
+<footer id="page_footer">
+	<p>&copy;Time-Space.biz since 2013-06-07</p>
+	<nav>
+	<ul>
+	<li><a href="http://time-space.biz">Homepage</a></li>
+	<li><a href="Preparation" class="disabled">Company Info</a></li>
+	<li><a href="Preparation" class="disabled">Service</a></li>
+	<li><a href="/time-space/index.php">Intranet</a></li>
+	</ul>
+</footer>
+</div>
+</body>
+</html>

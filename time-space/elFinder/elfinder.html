@@ -1,0 +1,99 @@
+<?php include_once $_SERVER['DOCUMENT_ROOT']."/time-space/manage/rhksflwk/auth_only.php" //관리자인증 ?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>elFinder 2.1.x source version with PHP connector</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+		<!-- Section CSS -->
+		<!-- jQuery UI (REQUIRED) -->
+		<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+
+		<!-- elFinder CSS (REQUIRED) -->
+		<link rel="stylesheet" type="text/css" href="css/elfinder.min.css">
+		<link rel="stylesheet" type="text/css" href="css/theme.css">
+
+		<!-- Section JavaScript -->
+		<!-- jQuery and jQuery UI (REQUIRED) -->
+		<!--[if lt IE 9]>
+		<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
+		<![endif]-->
+		<!--[if gte IE 9]><!-->
+		<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+		<!--<![endif]-->
+		<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+		<!-- elFinder JS (REQUIRED) -->
+		<script src="js/elfinder.min.js"></script>
+
+		<!-- GoogleDocs Quicklook plugin for GoogleDrive Volume (OPTIONAL) -->
+		<!--<script src="js/extras/quicklook.googledocs.js"></script>-->
+
+		<!-- elFinder translation (OPTIONAL) -->
+		<!--<script src="js/i18n/elfinder.ru.js"></script>-->
+		<link rel="stylesheet" href="codemirror/lib/codemirror.css">
+		<script src="codemirror/lib/codemirror.js"></script>
+		<script src="codemirror/mode/javascript/javascript.js"></script>
+		<script src="codemirror/mode/css/css.js"></script>
+		<script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
+		<script src="codemirror/mode/clike/clike.js"></script>
+		<script src="codemirror/mode/php/php.js"></script>
+		<script src="codemirror/mode/sql/sql.js"></script>
+		<script src="codemirror/mode/xml/xml.js"></script>
+		<script src="codemirror/addon/edit/matchbrackets.js"></script>
+		<link href="codemirror/addon/hint/show-hint.css" rel="stylesheet" type="text/css"/>
+    <script src="codemirror/addon/hint/show-hint.js" type="text/javascript"></script>
+    <script src="codemirror/addon/hint/css-hint.js" type="text/javascript"></script>
+    <script src="codemirror/addon/hint/html-hint.js" type="text/javascript"></script>
+    <script src="codemirror/addon/hint/javascript-hint.js" type="text/javascript"></script>
+		<style>
+		.CodeMirror {
+       width: 100% !important;
+       height: 100% !important;
+  	}
+		</style>
+		<!-- elFinder initialization (REQUIRED) -->
+		<script type="text/javascript" charset="utf-8">
+			// Documentation for client options:
+			// https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
+			$(document).ready(function() {
+				$('#elfinder').elfinder({
+					url : 'php/connector.minimal.php',  // connector URL (REQUIRED)
+					// , lang: 'ru'                    // language (OPTIONAL)
+					commandsOptions: {
+				    edit: {
+				      mimes: [],
+				      editors: [{
+				        mimes : ['text/plain', 'text/html', 'text/javascript', 'text/css', 'text/x-php', 'application/x-httpd-php'],
+				        load: function(textarea) {
+				          var mimeType = this.file.mime;
+				          return CodeMirror.fromTextArea(textarea, {
+				            mode: mimeType,
+				            lineNumbers: true,
+				            indentUnit: 4
+				          });
+				        },
+				        save: function(textarea, editor) {
+				          $(textarea).val(editor.getValue());
+				        }
+				      }]
+				    }
+				  }
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div style="margin:0;padding:0;list-style:none;text-align:right;border-bottom:solid 1px;">
+				<div style="float:left;padding-top:5px;">Hi! <?=$_SESSION['valid_name']?></div>
+				<a href="/time-space/index.php" target="_top" style="display:inline-block;" alt="HOME">
+				<img src="/time-space/manage/rhksflwk/menu/home.png" style="float:left;display:inline-block;margin-left:0px;border:0px;" title="HOME" /></a>
+				<a href="/time-space/manage/rhksflwk/logout.php" target="_top" style="display:inline-block;" alt="LogOut">
+				<img src="/time-space/manage/rhksflwk/menu/logout.jpg" style="float:left;display:inline-block;margin-left:0px;border:0px" title="LogOut" /></a>
+		</div>
+		<!-- Element where elFinder will be created (REQUIRED) -->
+		<div id="elfinder"></div>
+
+	</body>
+</html>

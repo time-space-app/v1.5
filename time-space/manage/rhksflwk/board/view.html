@@ -1,0 +1,151 @@
+﻿<!--DOCTYPE html-->
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/htmlcharset=utf-8" />
+<link rel="stylesheet" href="/time-space/reset.css" type="text/css">
+<link rel="stylesheet" href="/time-space/manage/rhksflwk/board/board.css" type="text/css">
+<link href="/time-space/skin/one/design/favicon.ico" rel="shortcut icon" type="image/ico" />
+<script type="text/javascript" charset="utf-8" src="/time-space/mobile/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/time-space/js/common.js"></script>
+<!--[if lt IE 9]>
+ <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 7]>
+<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+<title>Time-Space HTML5</title>
+</head>
+<body>
+<div id="wrap">
+<header id="board_list_header">
+	<h2>Time-Space is Html5 Makeup Web and Computer Repair</h2>
+</header>
+<span class="br10"></span>
+<!-- 테이블 시작 -->
+<div class="board_write_table">
+     <table summary="" class="write_table">
+      <caption></caption>
+       <colgroup>
+           <col width="10%" />
+	   <col width="30%" />
+	   <col width="10%" />
+	   <col width="30%" />
+	   <col width="10%" />
+	   <col width="10%" />
+       </colgroup>
+       <tbody>
+            <tr>
+                <th>NAME</th>
+                <td>타임-스페이스</td>
+                <th>REGDATE</th>
+                <td>2013-10-13</td>
+                <th>HITS</th>
+                <td>13</td>
+            </tr>
+            <tr>
+		<th>FILES</th>
+		<td colspan="5">
+		<a href="#">파일명</a><br/>
+		</td>
+	</tr>
+            <tr>
+            	<td colspan="6" class="contents">글 내용 입니다.
+            	</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- 테이블 종료 -->
+<!-- 등록버튼 시작 -->
+<div id="board_list_button_table">
+<a href="list.html"><span class="button">LIST</span></a>
+<input type="button" value="DELETE" name="DELETE" class="type-btn">
+<a href="write.html"><span class="button">EDIT</span></a>
+</div>
+<!-- 코멘트 시작 -->
+<div id="comment_wrap">
+<header id="board_list_header">
+	<h2>Comment Form</h2>
+</header>
+<span class="br10"></span>
+<div class="board_write_table">
+     <table summary="" class="write_table">
+      <caption></caption>
+       <colgroup>
+           <col width="20%" />
+	   <col width="55%" />
+	   <col width="20%" />
+       </colgroup>
+       <tbody>
+            <tr>
+                <th>타임-스페이스</th>
+                <td>코멘트내용</td>
+                <td>2013-10-13</td>
+            </tr>
+        </tbody>
+    </table>
+<!-- 테이블 시작 -->
+   <form method="post" name="frm" id="frm" action="write_ok.php" onsubmit="return submitForm(this)" enctype="multipart/form-data" >
+     <table summary="" class="comment_table">
+      <caption></caption>
+       <colgroup>
+           <col width="20%" />
+	   <col width="55%" />
+	   <col width="25%" />
+       </colgroup>
+       <tbody>
+        <tr>
+	       <th>NAME</th>
+	       <th>COMMENT</th>
+	       <th></th>
+	</tr>
+     	<tr>
+		<td>
+		<input type="text" name="USER_NM" id="USER_NM" value="" />
+		<SELECT ID="STATE" name='STATE'>
+	        <option value=''>-STATE-</option>
+	        <option value="처리중" "SELECTED">처리중</option>
+	        <option value="처리완료">처리완료</option>
+		</SELECT>
+		</td>
+		<td>
+		<textarea name="COMMENTS" id="COMMENTS" rows="3"></textarea>
+		</td>
+		<td>
+		<!-- 등록버튼 시작 -->
+		<div id="board_list_button_table">
+		<input type="submit" value="COMMIT" name="COMMIT" class="type-btn">
+		<a href="#"><span class="button">DEL</span></a>
+		</div>
+		</td>
+	</tr>
+       </tbody>
+     </table>
+   </form>
+</div>
+<!-- 코멘트 종료 -->
+<!-- 이전,다음 게시물 링크시작 -->
+<div id="prev_wrap">
+<div class="board_write_table">
+     <table summary="" class="write_table">
+      <caption>Preview, Nextview Contents</caption>
+       <colgroup>
+           <col width="100px" />
+	   <col />
+       </colgroup>
+       <tbody>
+            <tr>
+                <th>Prev</th>
+                <td><a href="#">이전게시물</a></td>
+            </tr>
+            <tr>
+                <th>Next</th>
+                <td><a href="#">다음게시물</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</body>
+</html>
