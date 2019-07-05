@@ -1,2 +1,4 @@
 # db설정 파일 제외
 time-space/**/db.php
+# .tmb 폴더 제외
+.tmb/
