@@ -269,7 +269,7 @@ CKEDITOR.replace( "CONTENT",
 				filebrowserImageUploadUrl:"/time-space/ckeditor/upload.php?type=Images"
 		    });
 CKEDITOR.config.docType = '<!DOCTYPE html>';
-CKEDITOR.config.contentsCss = ['/metro/css/metro-bootstrap.css'];
+CKEDITOR.config.contentsCss = ['/_metro/css/metro-bootstrap.css'];
 CKEDITOR.config.bodyClass = 'metro';
 </script>
 <?php } ?>

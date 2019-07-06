@@ -109,7 +109,7 @@ if($CATEGORY == "0"){
 <div id="wrap">
 <header id="board_list_header">
 	<h2>MIDDLE MENU NAME <?php if($MODE=="ADD"){ echo "ADD"; }else{ echo "EDIT"; }?>
-	<?php if($MODE=="EDIT"){?> [Auto Add Menu code: /MENU_CODE/<?php echo $L_CODE.$M_CODE.$S_CODE?> ](External File Only!)<?}?>
+	<?php if($MODE=="EDIT"){?> [Auto Add Menu code: /MENU_CODE/<?php echo $L_CODE.$M_CODE.$S_CODE?> ](External File Only!)<?php }?>
 	</h2>
 </header>
 <span class="br10"></span>
@@ -168,7 +168,7 @@ if($CATEGORY == "0"){
 <div id="wrap">
 <header id="board_list_header">
 	<h2>SMALL MENU NAME <?php if($MODE=="ADD"){ echo "ADD"; }else{ echo "EDIT"; }?>
-	<?php if($MODE=="EDIT"){?> [Auto Add Menu code: /MENU_CODE/<?php echo $L_CODE.$M_CODE.$S_CODE?> ](External File Only!)<?}?>
+	<?php if($MODE=="EDIT"){?> [Auto Add Menu code: /MENU_CODE/<?php echo $L_CODE.$M_CODE.$S_CODE?> ](External File Only!)<?php }?>
 	</h2>
 </header>
 <span class="br10"></span>

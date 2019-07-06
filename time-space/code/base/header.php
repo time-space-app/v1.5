@@ -41,8 +41,8 @@ echo '  <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <script src="code/base/javascript.js" type="text/javascript"></script>
         <link href="'.$code['skin_path'].'design/favicon.ico" rel="shortcut icon" type="image/ico" />';
 	echo '
-	<link href="/metro/css/metro-bootstrap.css" rel="stylesheet">
-    	<script src="/metro/js/jquery/jquery.min.js"></script>
-    	<script src="/metro/js/jquery/jquery.widget.min.js"></script>
-    	<script src="/metro/js/metro.min.js"></script>';
+	<link href="/_metro/css/metro-bootstrap.css" rel="stylesheet">
+    	<script src="/_metro/js/jquery/jquery.min.js"></script>
+    	<script src="/_metro/js/jquery/jquery.widget.min.js"></script>
+    	<script src="/_metro/js/metro.min.js"></script>';
 ?>

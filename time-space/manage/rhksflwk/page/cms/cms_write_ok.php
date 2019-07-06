@@ -30,9 +30,12 @@ foreach ($_POST as $key => $value){
 	//$$key = $arr_value[$i];
 	$i++;
 }
-$CONTENT = str_replace("\r\n", "<br/>",$CONTENT);
-$COMMENTS = str_replace("\r\n", "<br/>",$COMMENTS);
+//$CONTENT = str_replace("\r\n", "<br/>",$CONTENT);
+//$COMMENTS = str_replace("\r\n", "<br/>",$COMMENTS);
+$CONTENT = htmlspecialchars($CONTENT);
+$CONTENTS = htmlspecialchars($CONTENTS);
 //echo $post_var;
+//echo $MODE."mode".$T_CMS;
 //exit; //디버그
 if($MODE == "cms_write"){
 	$proc_save = "INSERT INTO $T_CMS (";

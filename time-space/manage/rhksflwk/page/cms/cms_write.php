@@ -27,8 +27,11 @@ $S_NAME= $_REQUEST['S_NAME'];
 $MODE= $_REQUEST['MODE'];
 $CATEGORY= $_REQUEST['CATEGORY'];
 ?>
-<?
+<?php
 //===========================
+//echo $MODE;//디버그
+//if(empty($ROW['USER_ID'])) $MODE = "cms_write"; else $MODE = "cms_view";
+
 if($MODE == "cms_edit"){ 
 	$proc_file = "SELECT L_CODE,M_CODE,S_CODE,USER_ID,USER_NM,EMAIL,TITLE,CONTENT,REGDATE,READCOUNT";
 	$proc_file .= " FROM $T_CMS";
@@ -91,6 +94,11 @@ if($MODE == "cms_edit"){
      }
 </script>
 <script type="text/javascript" src="/time-space/ckeditor/ckeditor.js"></script>
+<style>
+body table * {
+font-size:15px !important;"
+}
+</style>
 </head>
 <body>
 <div id="wrap">
@@ -100,6 +108,15 @@ if($MODE == "cms_edit"){
 <span class="br10"></span>
 <!--게시판 시작-->
 <form method="post" name="frm" id="frm" action="cms_write_ok.php" onsubmit="return submitForm(this)" enctype="multipart/form-data" >
+<!-- 등록버튼 시작 -->
+<div id="board_list_button_table" style="width:inherit;float:left;">
+	<a href="list.php">
+	<span class="button">CANCEL</span></a>
+	<?php if($MODE=="cms_edit"){?>
+	<input type="button" value="DELETE" name="DELETE" class="type-btn" onclick="del_chk(this.form);">
+	<?php }?>
+	<input type="submit" value="COMMIT" name="COMMIT" class="type-btn">
+</div>
 <!-- 테이블 시작 -->
 <div class="board_write_table">
      <table summary="" class="write_table">
@@ -123,9 +140,13 @@ if($MODE == "cms_edit"){
 			</td>
 		</tr>
 		<tr>
-			<th>Content</th>
-			<td><textarea name="CONTENT" id="CONTENT" rows="20"><?php echo str_replace("<br/>", "\r\n",$ROW['CONTENT']);?>
-			</textarea></td>
+		<?php
+		$content = stripslashes($ROW['CONTENT']);
+		$content = htmlspecialchars($content);
+		?>
+		<th>Content
+			<?php $html = htmlspecialchars_decode(str_replace("<br/>", "\r\n",$content)); ?></th>
+			<td><textarea name="CONTENT" id="CONTENT" rows="20"><?php echo $html//str_replace("<br/>", "\r\n",$ROW['CONTENT']);?> </textarea></td>
 		</tr>
 	</tbody>
 	</table>
@@ -155,13 +176,17 @@ if($MODE == "cms_edit"){
 <script type="text/javascript">
 CKEDITOR.replace( "CONTENT",
 		    {
-		        height: 400,
+		        height: 600,
 				filebrowserImageUploadUrl:"/time-space/ckeditor/upload.php?type=Images"
-		    });
+			});
+CKEDITOR.dtd.$removeEmpty['i'] = false;
+CKEDITOR.dtd.$removeEmpty['span'] = false;
+/*
 CKEDITOR.config.protectedSource.push(/<\?[\s\S]*?\?>/g);
 CKEDITOR.config.docType = '<!DOCTYPE html>';
-CKEDITOR.config.contentsCss = ['/metro/css/metro-bootstrap.css'];
+CKEDITOR.config.contentsCss = ['/_metro/css/metro-bootstrap.css'];
 CKEDITOR.config.bodyClass = 'metro';
+*/
 </script>
 </body>
 </html>

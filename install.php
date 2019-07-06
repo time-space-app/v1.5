@@ -50,27 +50,27 @@ if(preg_match('/(?i)msie [10]/',$_SERVER['HTTP_USER_AGENT']))
 <!--[if !IE]> -->
  <script src="http://code.jquery.com/jquery-2.0.0b2.js"></script>
 <!-- <![endif]-->
-<script src="/metro/js/ajax_functions.js"></script>
+<script src="/_metro/js/ajax_functions.js"></script>
 <script type="text/javascript">
 var myReq = getXMLHTTPRequest();
 </script>
 <link href="/time-space/skin/one/design/favicon.ico" rel="shortcut icon" type="image/ico" />
-    <link href="/metro/css/metro-bootstrap.css" rel="stylesheet">
-    <link href="/metro/css/metro-bootstrap-responsive.css" rel="stylesheet">
-    <link href="/metro/css/docs.css" rel="stylesheet">
-    <link href="/metro/js/prettify/prettify.css" rel="stylesheet">
+    <link href="/_metro/css/metro-bootstrap.css" rel="stylesheet">
+    <link href="/_metro/css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="/_metro/css/docs.css" rel="stylesheet">
+    <link href="/_metro/js/prettify/prettify.css" rel="stylesheet">
 
     <!-- Load JavaScript Libraries -->
-    <script src="/metro/js/jquery/jquery.min.js"></script>
-    <script src="/metro/js/jquery/jquery.widget.min.js"></script>
-    <script src="/metro/js/jquery/jquery.mousewheel.js"></script>
-    <script src="/metro/js/prettify/prettify.js"></script>
+    <script src="/_metro/js/jquery/jquery.min.js"></script>
+    <script src="/_metro/js/jquery/jquery.widget.min.js"></script>
+    <script src="/_metro/js/jquery/jquery.mousewheel.js"></script>
+    <script src="/_metro/js/prettify/prettify.js"></script>
 
     <!-- Metro UI CSS JavaScript plugins -->
-    <script src="/metro/js/load-metro.js"></script>
+    <script src="/_metro/js/load-metro.js"></script>
 
     <!-- Local JavaScript -->
-    <script src="/metro/js/docs.js"></script>
+    <script src="/_metro/js/docs.js"></script>
 
     <title>Time-Space:웹 CMS툴</title>
 <script type="text/javascript">
@@ -191,4 +191,4 @@ fclose($input);
             </div>
         </div>
 
-<?php include "metro/footer.php";?>
+<?php include "_metro/footer.php";?>

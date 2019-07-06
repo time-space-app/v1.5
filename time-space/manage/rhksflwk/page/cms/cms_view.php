@@ -38,6 +38,7 @@ $CATEGORY= $_REQUEST['CATEGORY'];
 	$proc_file .= " FROM $T_CMS";
 	$proc_file .= " WHERE L_CODE='$L_CODE' AND M_CODE='$M_CODE' AND S_CODE='$S_CODE'";
 	$ROW = $GPLdb5->GPLquery_fetch_assoc_one($proc_file);
+	if(empty($ROW['USER_ID'])) $MODE = "cms_write"; else $MODE = "cms_edit";
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -49,10 +50,10 @@ $CATEGORY= $_REQUEST['CATEGORY'];
 <meta name="author" content="Time-Space">
 <meta name="keywords" content="js, css, metro, framework, windows 8, metro ui">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link href="/metro/css/metro-bootstrap.css" rel="stylesheet">
-<script src="/metro/js/jquery/jquery.min.js"></script>
-<script src="/metro/js/jquery/jquery.widget.min.js"></script>
-<script src="/metro/js/metro.min.js"></script>
+<link href="/_metro/css/metro-bootstrap.css" rel="stylesheet">
+<script src="/_metro/js/jquery/jquery.min.js"></script>
+<script src="/_metro/js/jquery/jquery.widget.min.js"></script>
+<script src="/_metro/js/metro.min.js"></script>
 
 <link rel="stylesheet" href="/time-space/reset.css" type="text/css">
 <link rel="stylesheet" href="/time-space/manage/rhksflwk/board/board.css" type="text/css">
@@ -98,21 +99,37 @@ $CATEGORY= $_REQUEST['CATEGORY'];
 		   <col width="10%" />
 	       </colgroup>
 	       <tbody>
-		<tr>
-			<th>MENU</th>
-			<td><?php echo $ROW['TITLE']?></td>
-			<th>REGDATE</th>
-			<td><?php echo $ROW['REGDATE']?></td>
-			<th>HITS</th>
-			<td><?php echo $ROW['READCOUNT']?></td>
-		</tr>
-		<tr>
-			<td colspan="6" class="contents">
-				<?php echo str_replace("<br/>", "\r\n",$ROW['CONTENT']);?>	
-			</td>
-		</tr>
-		</tbody>
-	    </table>
+			<tr>
+				<th>MENU</th>
+				<td><?php echo $ROW['TITLE']?></td>
+				<th>REGDATE</th>
+				<td><?php echo $ROW['REGDATE']?></td>
+				<th>HITS</th>
+				<td><?php echo $ROW['READCOUNT']?></td>
+			</tr>
+			</tbody>
+		</table>
+		<table summary="" class="write_table">
+			<tbody>
+			<tr>
+				<td colspan="5">
+				<!-- 등록버튼 시작 -->
+				<div id="board_list_button_table" style="width:inherit;float:left;">
+					<a href="list.php">
+					<span class="button">LIST</span></a>
+					<input type="button" value="DELETE" name="DELETE" class="type-btn" onclick="del_chk();" />
+					<a href="cms_write.php?CATEGORY=<?php echo $CATEGORY?>&SEQ=<?php echo $SEQ?>&L_CODE=<?php echo $L_CODE?>&M_CODE=<?php echo $M_CODE?>&S_CODE=<?php echo $S_CODE?>&L_NAME=<?php echo $L_NAME?>&M_NAME=<?php echo $M_NAME?>&S_NAME=<?php echo $S_NAME?>&MODE=<?php echo $MODE?>">
+					<span class="button">EDIT</span></a>
+				</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="6" class="contents">
+					<pre style="font-size:15px;line-height:18px;"><?php echo str_replace("\r\n", "<br/>",$ROW['CONTENT']);?></pre>
+				</td>
+			</tr>
+			</tbody>
+		</table>
 	</div>
 	<!-- 테이블 종료 -->
 	<!-- 등록버튼 시작 -->
@@ -120,7 +137,7 @@ $CATEGORY= $_REQUEST['CATEGORY'];
 		<a href="list.php">
 		<span class="button">LIST</span></a>
 		<input type="button" value="DELETE" name="DELETE" class="type-btn" onclick="del_chk();" />
-		<a href="cms_write.php?CATEGORY=<?php echo $CATEGORY?>&SEQ=<?php echo $SEQ?>&L_CODE=<?php echo $L_CODE?>&M_CODE=<?php echo $M_CODE?>&S_CODE=<?php echo $S_CODE?>&MODE=cms_edit">
+		<a href="cms_write.php?CATEGORY=<?php echo $CATEGORY?>&SEQ=<?php echo $SEQ?>&L_CODE=<?php echo $L_CODE?>&M_CODE=<?php echo $M_CODE?>&S_CODE=<?php echo $S_CODE?>&L_NAME=<?php echo $L_NAME?>&M_NAME=<?php echo $M_NAME?>&S_NAME=<?php echo $S_NAME?>&MODE=<?php echo $MODE?>">
 		<span class="button">EDIT</span></a>
 	</div>
 	<div style="display:none">

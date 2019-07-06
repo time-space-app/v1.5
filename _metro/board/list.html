@@ -1,0 +1,229 @@
+<?php include "../header.php";?>
+<?php
+//게시판 공통변수 항상 페이지 상단에 위치
+$GUBN = $_REQUEST['GUBN'];
+$SEARCH = $_REQUEST['SEARCH'];
+$BOARD_ID = $_REQUEST['BOARD_ID'];
+$MODE = $_REQUEST['MODE'];
+$BOARD_SEQ = $_REQUEST['SEQ'];
+if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, repair, pds, faq
+?>
+<?php
+	//페이징설정 넘버링 시작
+	$now_page = $_REQUEST['now_page'];
+	//================ pageing 계산 code ======================================
+	// 1 - 현재 페이지 설정
+	if($now_page == ""){
+		$now_page = 1;
+	}
+	// 2 - 블럭크기 설정
+	if($block_size == ""){
+		$block_size = 7;
+	}
+	// 3 - 각 블럭의 start 페이지 값을 설정한다
+	if($now_page % $block_size == 0){
+		$start_num = abs($now_page - $block_size + 1);    // 현재 페이지가 블럭의 마지막 페이지 일 경우 해당 블럭의 시작 페이지 번호를 정한다
+	}else{
+		$start_num = floor($now_page/$block_size)*$block_size + 1; // 현재페이지가 블럭의 마지막 페이지가 아닐경우 시작 페이지를 지정한다
+	}
+	// 4 - 각 블럭의 end 페이지 값을 설정한다
+	$end_num = $start_num + $block_size - 1;
+	// 5 - 카운터 쿼리호출 (마지막 페이지에서 존재하지 않는 페이지 숫자를 없애주기 위해 토탈레코드 숫자를 구한다 )
+		$SQL = "SELECT";
+		$SQL .= " COUNT(SEQ) AS COUNT";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = '".$BOARD_ID."'";
+		$SQL .= " AND (TITLE LIKE '%".$SEARCH."%'";
+		$SQL .= " OR CONTENT LIKE '%".$SEARCH."%')";
+		$result = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+		if($result){
+			$total_rec = $result['COUNT'];
+		}
+	// 6 - 한페이지당 보여줄 레코드 수 설정
+	$recnum_per_page = 5;
+	// 7 - 불러오기 쿼리문에서 시작레코드 숫자 지정
+	if($now_page == 1){
+		$st_limit = 0;
+	}else{
+		$st_limit = $now_page * $recnum_per_page - $recnum_per_page;
+	}
+	// 8 - 이전 블럭 설정
+	$before_block = abs($start - 1);
+	// 9 - 다음 블럭 설정
+	$next_block = $end_num + 1;
+?>
+<?php
+	//메뉴 변수
+	switch ($BOARD_ID) { //notice, qa, repair, pds, faq
+		case 'notice'  : $body='1'; $title='NOTICE';break;
+		case 'community' : $body='2'; $title='COMMUNITY';break;
+		case 'qa'  : $body='3'; $title='Q/A';break;
+		case 'faq'  : $body='4'; $title='FAQ';break;
+		case 'pds'  : $body='5'; $title='PDS';break;
+		case 'stay-sea'  : $body='6'; $title='대분류1';break;
+		case 'stay-mi'  : $body='7'; $title='대분류2';break;
+		case 'stay-ho'  : $body='8'; $title='대분류3';break;
+		case 'stay-doo'  : $body='9'; $title='대분류4';break;
+		default   : $body='1'; $title='NOTICE';break;
+	}
+?>
+<div class="page">
+ <div class="page-region grid">
+      <h1>
+        <a href="#" class="history-back"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+        <?php echo $title?><small class="on-right">
+        <?php if($BOARD_ID!="notice" && empty($_SESSION['valid_level']) ) { ?>
+        회원만 쓰기 가능하십니다.<?php } ?></small>
+        <!--
+        <?php if(preg_match('/stay-/',$BOARD_ID)){ ?>
+        <a href="/_metro/board/reserve/write.html/BOARD_ID/<?=$BOARD_ID?>">
+        <button class="image-button bg-darkGreen fg-white image-left" style="height:27px;" onclick="javascript:location.href='../reserve/write.html?BOARD_ID=<?=$BOARD_ID?>'">
+        <?=$title?> 예약하기
+        <i class="icon-calendar bg-green fg-white"></i>
+        </button></a>
+        <? } ?>
+        -->
+      </h1>
+ <div class="page-region-content row">
+	<?php include "../submenu.php";?>
+	<div class="span9">
+		<table class="table striped bordered hovered">
+	        <tbody>
+		<?php
+		 //셀렉트 
+		$SQL = "SELECT";
+		$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+		$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+		$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+		$SQL .= " FROM T_BOARD";
+		$SQL .= " WHERE BOARD_ID = '$BOARD_ID'";
+		$SQL .= " AND (TITLE LIKE '%".$SEARCH."%'";
+		$SQL .= " OR CONTENT LIKE '%".$SEARCH."%')";
+		$SQL .= " ORDER BY TOP_NEWS DESC, SEQ DESC LIMIT $st_limit , $recnum_per_page";
+		$result = $GPLdb5->GPLexcute_query($SQL);
+		$i=0;
+		if($result){
+		?>
+		<?php if(preg_match('/stay-/',$BOARD_ID) || $BOARD_ID=="community") { ?>
+	        <tr><td>
+	        	<div class="listview small" id="postlist">
+	        	<?
+			while($row = mysql_fetch_array($result)) {
+				//댓글셀렉트
+				$SQL = "SELECT";
+				$SQL .= " COUNT(SEQ) AS COMMENT_CNT";
+				$SQL .= " FROM T_BOARD_COMMENT";
+				$SQL .= " WHERE BOARD_SEQ = '".$row['SEQ']."'";
+				$SQL .= " AND BOARD_ID = '$BOARD_ID'";
+				$COMMENT_ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+				$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
+			?>
+			<a href="/_metro/board/view.html/MENU_CODE/<?=$MENU_CODE?>/BOARD_ID/<?=$BOARD_ID?>/SEQ/<?=$row['SEQ']?>" class="list small bg-lightBlue fg-white" style="width:690px;">
+		  	<div class="list-content">
+		  	<span><img src="<?=get_image_file_from_html($row[CONTENT],1)?>" style="width:80px;float:left;padding-right:10px;"></span>
+		  	<span class="list-title ribbed-darkPink"><?=cut_str($row[TITLE],88,'...')?></span>
+		  	<span style="font-size:12px;spadding:5px;"><?=cut_str($row[CONTENT],288,'...')?></span>
+		  	</div>
+		  	</a>
+		  	<? } ?>
+		  	</div>
+		</td></tr>
+		<? }else{ ?>
+			<?
+			while($row = mysql_fetch_array($result)) {
+				//댓글셀렉트
+				$SQL = "SELECT";
+				$SQL .= " COUNT(SEQ) AS COMMENT_CNT";
+				$SQL .= " FROM T_BOARD_COMMENT";
+				$SQL .= " WHERE BOARD_SEQ = '".$row['SEQ']."'";
+				$SQL .= " AND BOARD_ID = '$BOARD_ID'";
+				$COMMENT_ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+				$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
+			?>
+			<tr><td>
+				<a href="/_metro/board/view.html/MENU_CODE/<?=$MENU_CODE?>/BOARD_ID/<?=$BOARD_ID?>/SEQ/<?=$row['SEQ']?>">
+				<?=cut_str($row[TITLE],88,'...')?><?=($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?>
+				<?php if($_SESSION['valid_user']!=$row[USER_ID] && $BOARD_ID=="qa"){ //본인이 쓴 글 수정삭제기능?>
+				<img src="/time-space/mobile/img/icon-pass.png" style="margin-bottom:1px;">
+				<?php } ?>
+				</a>
+			<tr><td>
+			<? } ?>	
+	   	<? } ?>
+	   	
+		<?php $i++;
+		      }
+		?>
+		</tbody>
+		</table>
+		
+		<!--paging시작-->
+		<div class="pagination">
+			<ul>
+			 <?
+			 //================ pageing 출력 10번~12번 code ======================================
+				  if($start_num > 1){ 	// 10 - 이전 블럭 링크?>
+					 <li class="prev"><a href="/_metro/board/list.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$before_block?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID=<?=$BOARD_ID?>" onFocus="blur()">
+					 <i class="icon-previous"></i>
+					 </a></li>
+				  <? } ?>&nbsp;
+				 <?
+				  for($i=$start_num; $i<=$end_num; $i++){	// 11 - 페이지 링크
+					if(ceil($total_rec/$recnum_per_page) >= $i){
+					 if($now_page == $i){ ?>
+					 <li class="active"><a>
+					 <?=$i?></a>
+					 </li>
+					  <?    }else{ ?>
+					 <li><a href="/_metro/board/list.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$i?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>" onFocus="blur()">
+					 <?=$i?>
+					 </a></li>		  	
+				 <?            }
+					}
+				  }  ?>&nbsp;
+				 <?
+				  if($end_num * $recnum_per_page < $total_rec){ 	// 12 - 다음 블럭 링크?>
+					 <li class="next"><a href="/_metro/board/list.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$next_block?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>" onFocus="blur()">
+					 <i class="icon-next"></i>
+					 </a><li>
+			 <?  }
+			 //====================================================================
+			 ?>
+			 </ul>
+		</div>
+		<!--paging끝-->
+		<!-- 등록버튼 시작 -->
+		<div id="board_list_button_table" style="text-align:right">
+		<?php if($_SESSION['valid_user'] != "" && $_SESSION['valid_level'] < 3 ) { ?>
+		 <a href="/_metro/board/write.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$now_page?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>/MODE/write">
+		 <span class="button large info">WRITE</span></a>
+		 <?php } ?>
+		 <?php if($_SESSION['valid_user'] != "" && $_SESSION['valid_level'] >=3 && ( $BOARD_ID =='community'||$BOARD_ID == 'qa' ) ) { ?>
+		 <a href="/_metro/board/write.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$now_page?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>/MODE/write">
+		 <span class="button large info">WRITE</span></a>
+		 <?php } ?>
+		 </div>
+            <!--검색영역시작-->
+		<div id="board_list_search">
+			<form method="get" name="form_search" id="form_search" action="/_metro/board/list.html">
+			<div class="input-control select span2" data-role="input-control">
+			<select name="GUBN" id="GUBN" class="type-select">
+				<option selected="selected" value="1">ALL</option>
+				<option value="2">subject</option>
+				<option value="3">content</option>
+			</select>
+			</div>
+			<div class="input-control text span2" data-role="input-control">
+			<input type="text" name="SEARCH" id="SEARCH" size=15 class="type-text" value="">
+			</div>
+			<input type="hidden" name="BOARD_ID" id="BOARD_ID" size=15 class="type-text" value="<?=$BOARD_ID?>">
+			<input type="hidden" name="MENU_CODE" id="MENU_CODE" size=15 class="type-text" value="<?=$MENU_CODE?>">
+			<button type="submit" class="button default">Search</button>
+			
+			</form> 
+		</div>
+	    <!--검색영역끝-->
+	</div>
+ </div>
+ </div>
+<?php include "../footer.php";?>

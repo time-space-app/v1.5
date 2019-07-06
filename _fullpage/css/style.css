@@ -1,0 +1,169 @@
+﻿/*공통 Start*/
+* { -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box; }
+body{ font-family: helvetica, meiryo, gulim, AppleGothic, sans-serif; font-size:16px; }
+blockquote, body, dd, div, dl, dt, fieldset, form, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
+    padding: 0;
+    margin: 0;
+}
+li { display: list-item;text-align: -webkit-match-parent; }
+ol, ul { list-style: none; }
+a { text-decoration: none; }
+img { max-width: 100%; }
+.align-center { text-align: center; }
+.btn-lg { padding: 16px 26px; }
+.container { padding-top: 10px; padding-bottom: 10px; }
+/*공통 End*/
+
+/*Menu Start*/
+.dropdown-menu{padding:0;margin:0;border:0 solid transition;border:0 solid rgba(0,0,0,.15);border-radius:0;
+    -webkit-box-shadow:none;box-shadow:none;}
+.navbar .nav-item.dropdown > .dropdown-menu{margin-top:0px;}
+.navbar .dropdown ul li a {color:#fff;text-transform:capitalize;padding:12px 15px;display: block;}
+.navbar .active a,.navbar .active a:focus,.navbar .active a:hover,.navbar li a:hover,.navbar li a:focus ,.navbar-default .navbar-nav>.show>a, .navbar-default .navbar-nav>.show>a:focus, .navbar-default .navbar-nav>.show>a:hover{
+    color: #fff;background: #4CAF50;outline: 0;}
+    /*==========Sub Menu=v==========*/
+    .navbar .collapse ul > li:hover > a{background: #4CAF50;}
+    .navbar .collapse ul ul > li:hover > a, .navbar-default .navbar-nav .show .dropdown-menu > li > a:focus, .navbar-default .navbar-nav .show .dropdown-menu > li > a:hover{
+        background: #4CAF50;}
+    .navbar .collapse ul ul ul > li:hover > a{background: #4CAF50;}
+    .navbar .collapse ul ul, .navbar .collapse ul ul.dropdown-menu{background:#1565C0;}
+    .navbar .collapse ul ul ul, .navbar .collapse ul ul ul.dropdown-menu{background:#1E88E5}
+    .navbar .collapse ul ul ul ul, .navbar .collapse ul ul ul ul.dropdown-menu{background:#64B5F6}
+    /******************************Drop-down menu work on hover**********************************/
+    .navbar-nav .show .dropdown-menu .dropdown-menu > li > a{padding:16px 15px 16px 35px}
+    .navbar-nav .show .dropdown-menu .dropdown-menu .dropdown-menu > li > a{padding:16px 15px 16px 45px}
+    /*menu-반응형 PC용*/
+    @media only screen and (min-width: 767px) {
+    .navbar { opacity : 0.9; }
+    .navbar .collapse ul li:hover> ul{display:block}
+    .navbar .collapse ul ul{position:absolute;top:100%;left:0;min-width:250px;display:none}
+    .navbar .collapse ul ul li{position:relative}
+    .navbar .collapse ul ul li:hover> ul{display:block}
+    .navbar .collapse ul ul ul{position:absolute;top:0;left:100%;min-width:250px;display:none}
+    .navbar .collapse ul ul ul li{position:relative}
+    .navbar .collapse ul ul ul li:hover ul{display:block}
+    .navbar .collapse ul ul ul ul{position:absolute;top:0;left:-100%;min-width:250px;display:none;z-index:1}
+    }
+
+    /*언어선택-구글번역기*/
+    .goog-te-banner-frame { top:55px !important; z-index: 1029 !important; opacity: 0.8; }
+    #google_translate_element {margin-top:5px;}
+    a.goog-te-menu-value:hover { text-decoration: none; background: none !important; color:black !important; }
+    #google_translate_element .goog-te-gadget-simple { border-radius: 20px; padding:5px;}
+    /*언어선택-사용자번역*/
+    .language-name { display:none; }
+    .language { 
+        position: fixed;
+        right: 80px;
+        top: 0px;
+        z-index: 1030;
+        opacity: 1;
+        color: white;
+    }
+    .language.active .language-current {color: #004f69;}
+    .language-current { margin: 15px 0 6px 15px; z-index: 99; cursor: pointer;}
+    .flag-ja-JP { background-position: -70px 0; }
+    .flag-en-US { background-position: -35px 0; }
+    .flag-zh-CN { background-position: 0 0; }
+    .flag-ko-KR { background-position: -105px 0; }
+    .flag-vi-VN { background-position: -140px 0; }
+    .flag {
+        width: 35px;
+        height: 24px;
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+        background-image: url('../images/flags.png');
+    }
+    .language-triangle {
+        position: absolute;
+        top: 24px;
+        left: 3px;
+        fill: #ff5f45;
+        height: 6px;
+        width: 8px;
+    }
+    .language.active .languages { display: block; }
+    .submenu { background: #fff;border-radius: 15px; }
+    .submenu ul li:hover{ background:#dddddd; }
+    .languages {
+        display: none;
+        padding: 46px 0 15px 0;
+        position: relative;
+        margin-top: -46px;
+        z-index: -1;
+    }
+    .submenu a {
+        padding: 6px 15px;
+        display: block;
+        color: #004f69;
+    }
+    /*언어선택 반응형 PC용*/
+    @media only screen and (min-width: 767px) {
+        .language.active { top:10px; }
+        .language { right: 10px; position: fixed;}
+        .flag { margin: 0 17px 0 0; }
+        .language-name { display:inline-block; }
+    }
+
+/*Menu End*/
+
+/*Header Start*/
+.header {
+    background: linear-gradient( rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.9) ), url('../images/bg-top.jpg');
+    background-position: center top;
+    background-size: cover;
+    color: white;
+}
+.header h3 { color: white }
+.header .cover-image { max-width:200px; }/* .header .slide { padding-left: 1px;} box-sizing 설정으로 필요없어짐. */
+.highlight { 
+    background-color: #ff5f45;opacity : 0.8;
+}
+    /* 슬아이드 화살표 재정의 반응형 PC용 */
+    @media only screen and (min-width: 767px) {
+        .fp-controlArrow.fp-next { right:45px; }
+    }
+    /* 슬아이드 화살표 재정의 반응형 모바일용 */
+    @media only screen and (max-width: 767px) {
+        .fp-controlArrow.fp-next {
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            padding: 15px;
+            margin-top:-15px;
+            transform: rotate(-45deg); -webkit-transform: rotate(-45deg);
+        }
+        .fp-controlArrow.fp-prev {
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            padding: 15px;
+            margin-top:-15px;
+            transform: rotate(135deg); -webkit-transform: rotate(135deg);
+        }
+    }
+/*Header End*/
+
+/*Content-Section Start*/
+.icon-title { margin-top: 40px;margin-bottom: 30px;}
+.dark-bg-stat { color: #555d6d; }
+.dark-bg-stat h3 { color: white; } 
+/*Content-Section End*/
+
+/*Footer Start*/
+.footer { text-align: center; color: white}
+/*Footer End*/
+
+/** Fixed button outside the fullpage.js wrapper */
+#moveDown{display:none}
+    /*moveDown-반응형 PC용 */
+    @media only screen and (min-width: 767px) {
+        #moveDown{display:block}
+    }
+#moveDown{ position: fixed;margin: 0;bottom: 0;left:50%;font-size:1.2rem; }
+#moveDown i {
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 15px;
+    }
+#moveDown .down { transform: rotate(45deg); -webkit-transform: rotate(45deg); }

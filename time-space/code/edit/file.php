@@ -37,7 +37,7 @@ echo '
 <script type="text/javascript">
 CKEDITOR.config.protectedSource.push(/<\?[\s\S]*?\?>/g);
 CKEDITOR.config.docType = "<!DOCTYPE html>";
-CKEDITOR.config.contentsCss = ["/metro/css/metro-bootstrap.css"];
+CKEDITOR.config.contentsCss = ["/_metro/css/metro-bootstrap.css"];
 CKEDITOR.config.bodyClass = "metro";
 CKEDITOR.editorConfig = function( config ) {
 config.extraPlugins = "codesnippet,lineutils,widget";

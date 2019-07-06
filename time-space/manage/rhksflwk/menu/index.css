@@ -38,8 +38,10 @@
 	    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#45c7eb', EndColorStr='#2698db');
 		font-weight:bold;
 		}
-.ui-layout-center { padding: 0px !important; }/*지정패널 패딩 0*/
-.ui-layout-west { border: none !important; }
-.ui-layout-resizer { /* all 'resizer-bars' */ 
+.ui-layout-center { padding: 0px !important; } /*지정패널 패딩 0*/
+.ui-layout-west { border: none !important; } 
+/*
+.ui-layout-resizer {
 		width:0px !important;
 		}
+		*/

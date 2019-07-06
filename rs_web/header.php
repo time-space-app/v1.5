@@ -104,7 +104,7 @@ $S_CODE= SUBSTR($MENU_CODE,6,3);
 <script src="/rs_web/include/js/script.js"></script><!-- 사용자 지정 자바스크립트 코드 -->
 <script src="/rs_web/include/js/libs/respond.min.js"></script><!-- IE 구 버전에서 미디어쿼리 가능하게하는 자바스크립트 코드 -->
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" /><![endif]--><!-- 호환성 보기모드이면서 크롬프레임웍상태로 화면 표시-->
-<script src="/metro/js/ajax_functions.js"></script>
+<script src="/_metro/js/ajax_functions.js"></script>
 <script type="text/javascript">
 var myReq = getXMLHTTPRequest();
 </script>
@@ -270,7 +270,7 @@ var myReq = getXMLHTTPRequest();
 		<a href="#contents" class="blind">skip navigation</a>
 		<ul class="clearfix"><!--반응형CSS-클래스만추가-->
 			<li on><a title="Posts" href="/rs_web/board/list.html/BOARD_ID/notice/MENU_CODE/003001000" style="display:block">Posts</a></li>
-			<li><a title="Work Request" href="/metro/page/canvas.html/MENU_CODE/002001000" style="display:block">하이브리드앱</a></li>
+			<li><a title="Work Request" href="/_metro/page/canvas.html/MENU_CODE/002001000" style="display:block">하이브리드앱</a></li>
 			<li><a title="WordPress" href="/wordpress/?page_id=24" style="display:block">WordPress</a></li>			
 			<?php if($_SESSION['valid_user'] != "") { ?>
 				<?php if($_SESSION['valid_level'] < 3) { ?>

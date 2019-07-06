@@ -113,17 +113,17 @@ $S_CODE= SUBSTR($MENU_CODE,6,3);
 		<a href="#contents" class="blind">skip navigation</a>
 		<ul class="clearfix"><!--반응형CSS-클래스만추가-->
 			<li><a title="Posts" href="/rs_web/board/list.html/BOARD_ID/notice/MENU_CODE/003001000">Posts</a></li>
-			<li><a title="Work Request" href="/metro/board/list.html/BOARD_ID/repair/MENU_CODE/003002000">Work Request</a></li>
+			<li><a title="Work Request" href="/_metro/board/list.html/BOARD_ID/repair/MENU_CODE/003002000">Work Request</a></li>
 			<li><a title="WordPress" href="/wordpress/?page_id=24">WordPress</a></li>			
 			<?php if($_SESSION['valid_user'] != "") { ?>
 				<?php if($_SESSION['valid_level'] < 3) { ?>
 				<li><a title="Intranet" href="/time-space/index.php" target="_new">Admin</a></li>
 				<?php } ?>
-		        <li><a title="LogOut" href="/metro/board/logout.php">LogOut</a></li>
-		        <li><a title="Mypage" href="/metro/board/join.html">Mypage</a></li>
+		        <li><a title="LogOut" href="/_metro/board/logout.php">LogOut</a></li>
+		        <li><a title="Mypage" href="/_metro/board/join.html">Mypage</a></li>
 		        <?php }else{ ?>
-		        <li><a title="Join" href="/metro/board/join.html">Join</a></li>
-		        <li><a title="Login" href="/metro/board/login.html">Login</a></li>
+		        <li><a title="Join" href="/_metro/board/join.html">Join</a></li>
+		        <li><a title="Login" href="/_metro/board/login.html">Login</a></li>
 		        <?php } ?>
 		</ul>
 	</nav>
@@ -184,7 +184,7 @@ $S_CODE= SUBSTR($MENU_CODE,6,3);
 		        	if($i1==3) $class="col-6 last"; else $class="col-3";
 			?>
 			<li class="<?=$class?>"><!--반응형CSS-클래스만추가-->
-			<a href="/metro/board/view.html/MENU_CODE/<?=$MENU_CODE?>/BOARD_ID/notice/SEQ/<?=$row[SEQ]?>">
+			<a href="/_metro/board/view.html/MENU_CODE/<?=$MENU_CODE?>/BOARD_ID/notice/SEQ/<?=$row[SEQ]?>">
 				<img src="<?=get_image_file_from_html($row[CONTENT],1)?>" alt="" />
 				<h5><?=cut_str($row[TITLE],64,'...')?></h5>
 				<p><?=cut_str($row[CONTENT],328,'...')?></p>

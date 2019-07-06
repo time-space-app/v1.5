@@ -253,7 +253,7 @@ CKEDITOR.replace( "PROFILE_INFO",
 			toolbar : 'Basic'
 		    });
 		CKEDITOR.config.docType = '<!DOCTYPE html>';
-		CKEDITOR.config.contentsCss = ['/metro/css/metro-bootstrap.css'];
+		CKEDITOR.config.contentsCss = ['/_metro/css/metro-bootstrap.css'];
 		CKEDITOR.config.bodyClass = 'metro';
 </script>
 -->

@@ -136,7 +136,7 @@ function get_image_file_from_html($html,$role=null) {
 		else
 			$retArray = $output[2];
 	} else {
-	$retArray = "/metro/image/small_logo.png";
+	$retArray = "/_metro/image/small_logo.png";
 	}
 	return $retArray;
 }

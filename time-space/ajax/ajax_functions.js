@@ -36,7 +36,7 @@ function theHTTPResponse() {
        document.getElementById('show_id').innerHTML = timeString.childNodes[0].nodeValue;
     }
   } else {
-    document.getElementById('show_id').innerHTML = '<img src="/metro/board/ajax-loader.gif"/>';
+    document.getElementById('show_id').innerHTML = '<img src="/_metro/board/ajax-loader.gif"/>';
   }
 }
 //아이디중복확인
