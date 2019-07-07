@@ -5,7 +5,7 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<!-- 외부 플러그인 CSS -->
@@ -40,46 +40,61 @@
 		<div class="container">
 			<div class="slide active">
 				<div class="row">
-					<div class="d-none d-md-block col-md-4 col-sm-4">
+					<div class="d-none d-md-block col-md-3 col-sm-3">
 						<img src="/_fullpage/images/lock-icon.jpg" class="cover-image float-right">
 					</div>
-					<div class="col-md-8 col-sm-8">
-						<h3><span class="highlight">fullPage 플러그인 - 오픈소스</span></h3>
-						<p>작업자: ㅇㅇㅇ &nbsp;&nbsp; 플러그인수:23 &nbsp;&nbsp; 등록일:2019.06.26</p>          
-						<p>《fullPage 플러그인》 오픈소스 작업결과 입니다! </p>
-						<p>소스는 https://github.com/kimilguk 에서 볼 수 있습니다.^^</p>
-						<p>▶ 결과물 바로가기: https://kimilguk.github.io/</p>
-						</span>
+					<div class="col-md-9 col-sm-9">
+						<h3><span class="highlight">名古屋国際日本語学校</span></h3>
+						<p>２１世紀を迎え世界の国際化が急速に進むに従い、日本でも学術、文化、</p>
+						<p>経済など様々な分野で日本から世界各国に </p>
+						<p>今、次の時代を担う若者たちは世界各国の人々と共に学び、生活し、交流を持つことを願い、 </p>
+						<p>適切な指導と環境を渇望しています。</p>
+						<p>本校の設立目的はこのような時代的要求に応え、</p>
+						<p>日本語教育を通して諸外国との友好と相互理解を進め、</p>
+						<p>異文化交流の架け橋となる人材を育成することにあります。 </p>
+						<p>そのために日本語教育だけに限らず、教える側の学生たちに対する理解にも気を配り、</p>
+						<p>学校と地域住民が留学生と諸外国により深い理解が持てるように学校行事を企画していくつもりです。</p>
+						<h4>校長 太田 雅隆</h4>
 					</div>
 				</div>
 			</div>
 			<div class="slide">
 				<div class="row">
-					<div class="d-none d-md-block col-md-4 col-sm-4">
+					<div class="d-none d-md-block col-md-3 col-sm-3">
 						<img src="/_fullpage/images/lock-icon.jpg" class="cover-image float-right">
 					</div>
-					<div class="col-md-8 col-sm-8">
-						<span class="highlight">
-						<h3><span class="highlight">반응형 웹 만들기 - 오픈소스</span></h3>
-						<p>작업자: ㅇㅇㅇ &nbsp;&nbsp; 플러그인수:23 &nbsp;&nbsp; 등록일:2019.06.26</p>          
-						<p>《fullPage 플러그인》 오픈소스 작업결과 입니다! </p>
-						<p>소스는 https://github.com/kimilguk 에서 볼 수 있습니다.^^</p>
-						<p>▶ 결과물 바로가기: https://kimilguk.github.io/</p>
-					  </span>
+					<div class="col-md-9 col-sm-9">
+						<h3><span class="highlight">名古屋国際日本語学校</span></h3>
+						<p>２１世紀を迎え世界の国際化が急速に進むに従い、日本でも学術、文化、</p>
+						<p>経済など様々な分野で日本から世界各国に </p>
+						<p>今、次の時代を担う若者たちは世界各国の人々と共に学び、生活し、交流を持つことを願い、 </p>
+						<p>適切な指導と環境を渇望しています。</p>
+						<p>本校の設立目的はこのような時代的要求に応え、</p>
+						<p>日本語教育を通して諸外国との友好と相互理解を進め、</p>
+						<p>異文化交流の架け橋となる人材を育成することにあります。 </p>
+						<p>そのために日本語教育だけに限らず、教える側の学生たちに対する理解にも気を配り、</p>
+						<p>学校と地域住民が留学生と諸外国により深い理解が持てるように学校行事を企画していくつもりです。</p>
+						<h4>校長 太田 雅隆</h4>
 					</div>
 				</div>
 			</div>
 			<div class="slide">
 				<div class="row">
-					<div class="d-none d-md-block col-md-4 col-sm-4">
+					<div class="d-none d-md-block col-md-3 col-sm-3">
 						<img src="/_fullpage/images/lock-icon.jpg" class="cover-image float-right">
 					</div>
-					<div class="col-md-8 col-sm-8">
-						<h3><span class="highlight">부트스트랩4 웹 만들기 - 오픈소스</span></h3>
-						<p>작업자: ㅇㅇㅇ &nbsp;&nbsp; 플러그인수:23 &nbsp;&nbsp; 등록일:2019.06.26</p>          
-						<p>《fullPage 플러그인》 오픈소스 작업결과 입니다! </p>
-						<p>소스는 https://github.com/kimilguk 에서 볼 수 있습니다.^^</p>
-						<p>▶ 결과물 바로가기: https://kimilguk.github.io/</p>
+					<div class="col-md-9 col-sm-9">
+						<h3><span class="highlight">名古屋国際日本語学校</span></h3>
+						<p>２１世紀を迎え世界の国際化が急速に進むに従い、日本でも学術、文化、</p>
+						<p>経済など様々な分野で日本から世界各国に </p>
+						<p>今、次の時代を担う若者たちは世界各国の人々と共に学び、生活し、交流を持つことを願い、 </p>
+						<p>適切な指導と環境を渇望しています。</p>
+						<p>本校の設立目的はこのような時代的要求に応え、</p>
+						<p>日本語教育を通して諸外国との友好と相互理解を進め、</p>
+						<p>異文化交流の架け橋となる人材を育成することにあります。 </p>
+						<p>そのために日本語教育だけに限らず、教える側の学生たちに対する理解にも気を配り、</p>
+						<p>学校と地域住民が留学生と諸外国により深い理解が持てるように学校行事を企画していくつもりです。</p>
+						<h4>校長 太田 雅隆</h4>
 					</div>
 				</div>
 			</div>

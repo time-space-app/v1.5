@@ -45,6 +45,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.allowedContent = true;
 	config.fullPage= true;
 	config.enterMode = CKEDITOR.ENTER_BR;
+	config.protectedSource.push( /<\?[\s\S]*?\?>/g );   // PHP Code
 	//config.extraPlugins = 'codesnippet';
 };
 /*

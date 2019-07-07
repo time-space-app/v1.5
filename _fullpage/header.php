@@ -89,7 +89,7 @@ $S_CODE= SUBSTR($MENU_CODE,6,3);
 if(preg_match('/(?i)msie [10]/',$_SERVER['HTTP_USER_AGENT']))
 {
     // if IE = 10 but 1-9 version replace }else if{... [1-9]
-   echo '<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" >'; //rest of your code
+   //echo '<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" >'; //rest of your code
 }
 ?>
 <?php //입력값 바인딩
@@ -107,4 +107,3 @@ if(preg_match('/(?i)msie [10]/',$_SERVER['HTTP_USER_AGENT']))
 	$proc_file .= " WHERE L_CODE='$L_CODE' AND M_CODE='$M_CODE' AND S_CODE='$S_CODE'";
 	$ROW = $GPLdb5->GPLquery_fetch_assoc_one($proc_file);
 ?>
-<?php include $_SERVER['DOCUMENT_ROOT']."/_fullpage/top_menu.php";?>
