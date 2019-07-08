@@ -3,52 +3,66 @@
     if (!isset($_SESSION['valid_user'])) $_SESSION['valid_user']=null;
 ?>
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="UTF-8" />
-        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
-        <title>Login</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
-        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
-        <meta name="author" content="Codrops" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
-        <style>
-            #wrapper {position: inherit;} 
-            #login { top:50%; left:50%; transform: translate(-50%, -50%); margin:0; width:400px; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <section>	
-                <div id="wrapper">
-                    <div id="login" class="animate form">
-                    <?php if($_SESSION['valid_user'] != "") { ?>
-                        <h1><a href="/">Go to Home</a></h1> 
-                    <?php }else{ ?>
-                        <form  action="./rhksflwk/auth.php" autocomplete="on" method="post" > 
-                            <h1>Log in <span style="font-size:1.2rem;"><a href="/">Go to Home</a></span></h1>
-                            <p> 
-                                <label for="id" class="uname" data-icon="u" > ID </label>
-                                <input id="id" name="id" required="required" type="text" placeholder="yser Id"/>
-                            </p>
-                            <p> 
-                                <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                                <input id="pw" name="pw" required="required" type="password" placeholder="your Password" /> 
-                            </p>
-                            <p class="login button"> 
-                                <input type="submit" value="Login" /> 
-                            </p>
-                        </form>
-                    <?php } ?>
+<html lang="ja">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>Login</title>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center text-white mb-4">Bootstrap 4 Login Form</h2>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <!-- form card login -->
+                        <div class="card rounded-0">
+                            <?php if($_SESSION['valid_user'] != "") { ?>
+                                <h3 class="text-center"><a href="/">Go to Home</a></h3> 
+                                <div class="card-header text-center">
+                                    <h3 class="mb-0">Logged</h3>
+                                </div>
+                            <?php }else{ ?>
+                            <div class="card-header">
+                                <h3 class="mb-0">Login</h3>
+                            </div>
+                            <div class="card-body">
+                                <form action="./rhksflwk/auth.php" class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                                    <div class="form-group">
+                                        <label for="id">Username</label>
+                                        <input type="text" class="form-control form-control-lg rounded-0" name="id" id="id" required="">
+                                        <div class="invalid-feedback">Oops, you missed this one.</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control form-control-lg rounded-0" name="pw" id="pw" required="" autocomplete="new-password">
+                                        <div class="invalid-feedback">Enter your password too!</div>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
+                                </form>
+                            </div>
+                            <?php } ?>
+                            <!--/card-block-->
+                        </div>
+                        <!-- /form card login -->
                     </div>
                 </div>
-            </section>
+                <!--/row-->
+            </div>
+            <!--/col-->
         </div>
-    </body>
+        <!--/row-->
+    </div>
+    <!--/container-->
+    <!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
 </html>
