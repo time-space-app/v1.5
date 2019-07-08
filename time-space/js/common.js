@@ -38,6 +38,19 @@ if(event.preventDefault){
     }
 alert(address);
 });
+function getQueryStringObject() {
+    var a = window.location.search.substr(1).split('&');
+    if (a == "") return {};
+    var b = {};
+    for (var i = 0; i < a.length; ++i) {
+        var p = a[i].split('=', 2);
+        if (p.length == 1)
+            b[p[0]] = "";
+        else
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    }
+    return b;
+}
 //70% 투명도에 해당하는 Hex값 얻기 (Javasciprt) css에서 사용
 //alert(Math.floor(0.7 * 255).toString(16));
 //아래코드는 선택된 메뉴 bold처리
@@ -46,11 +59,14 @@ if(!document.querySelector){return;}
 window.addEventListener("load",function(){
 	var url=document.URL;
 	var m=document.URL.match(/\/([a-zA-Z0-9\.\-\_]+)[^\/]*$/);
-	var fname=m?m[1]:null;
+    var fname=m?m[1]:null;
+    //<?php echo $_REQUEST['BOARD_ID'] ?> 아래 2개 라인으로 교체
+    var qs = getQueryStringObject();
+    var board_id=qs.BOARD_ID;
 	if(!fname){return};
 	fname= fname.replace("view.html", "list.html");
 	fname= fname.replace("write.html", "list.html");
-	var a=document.querySelector('#page_header>nav>ul>li>a[href$="/'+fname+'?go=pc&BOARD_ID=<?=$_REQUEST['BOARD_ID']?>"]');
+	var a=document.querySelector('#page_header>nav>ul>li>a[href$="/'+fname+'?go=pc&BOARD_ID='+board_id+'"]');
 	if(!a){return};
 	a.removeAttribute("href");
 	class_add(a,"show");
