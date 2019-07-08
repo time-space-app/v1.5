@@ -42,14 +42,14 @@ if (isset($_POST['id']) && isset($_POST['pw']))
 	  			parent.location.href='/time-space/index.php';
 	  			</script>
 	  			");
-	  }else{
+	  }else if (count($row) >0){
+	  	echo "<meta http-equiv='Refresh' content='0;url=/'>";
+		}else{
 	  	echo "<script>alert('Login Fail.')</script>";
-	  	//echo "<meta http-equiv='Refresh' content='0;url=/time-space/manage/rhksflwk.php'>";
-	  	echo "<meta http-equiv='Refresh' content='0;url=/time-space/index.php'>";
+	  	echo "<meta http-equiv='Refresh' content='0;url=/'>";
 	  }
-
 }else{
 	echo "<script>alert('NO INPUT VALUE.')</script>";
-	echo "<meta http-equiv='Refresh' content='0;url=/time-space/manage/rhksflwk.php'>";
+	echo "<meta http-equiv='Refresh' content='0;url=/time-space/manage/'>";
 }
 ?>

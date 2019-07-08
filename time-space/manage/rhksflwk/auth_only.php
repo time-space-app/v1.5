@@ -16,11 +16,11 @@ header('Content-Type: text/html; charset=UTF-8');
 		session_destroy();
 		echo "<script>alert('LOGIN FAIL. RETRY LOGIN.')</script>";
 		echo("	<script language='javascript'>
-				parent.location.href='/time-space/manage/rhksflwk.php';
+				parent.location.href='/time-space/manage/';
 				</script>
 			");
 		//자바스크립트가 꺼저 있을때
-		echo "<meta http-equiv='Refresh' content='0;url=/time-space/manage/rhksflwk.php' target='_top'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/time-space/manage/' target='_top'>";
 		exit;
 	}
 ?>

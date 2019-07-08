@@ -34,7 +34,7 @@
 				$dropclass="";
 			}//echo "여기".$dropdown;//디버그
 			?>
-			<li class="nav-item<?php echo $ACTIVE?><?php echo $dropdown?> l_menu">
+			<li class="nav-item<?php echo $ACTIVE?><?php echo $dropdown?>">
 				<a class="nav-link<?php echo $dropdown_toggle?>" href="<?php echo $row['L_URL']?>"<?php echo $dropclass?><?php echo $TARGET?>><?php echo $row['L_NAME']?></a>
 				<?php if($num_rows2) { ?>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -80,7 +80,23 @@
 					</ul>
 				<?php }//중메뉴 끝 ?>
 			</li>
-        <?php }} //대메뉴끝?>
+		<?php }} //대메뉴끝?>
+		<!-- 로그인 메뉴 -->
+			<?php if($_SESSION['valid_user'] != "") { ?>
+				<?php if($_SESSION['valid_level'] < 3) { ?>
+				<li class="nav-item">
+					<a class="nav-link" title="Intranet" href="/time-space/index.php" target="_new">Admin</a>
+				</li>
+				<?php } ?>
+			<li class="nav-item">
+				<a class="nav-link" title="LogOut" href="/time-space/manage/logout.php">LogOut</a>
+			</li>
+			<?php }else{ ?>
+			<li class="nav-item">
+				<a class="nav-link" title="Login" href="/time-space/manage/">Login</a>
+			</li>
+			<?php } ?>
+			</li>
         <!-- 구글 다국어 플러그인 메뉴 -->
             <li class="nav-item">
 					<div id="google_translate_element"></div>

@@ -1,4 +1,8 @@
-﻿<!--DOCTYPE html-->
+﻿<?php 
+    if (!isset($_SESSION)) session_start(); 
+    if (!isset($_SESSION['valid_user'])) $_SESSION['valid_user']=null;
+?>
+<!--DOCTYPE html-->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/htmlcharset=utf-8" />
@@ -22,6 +26,9 @@
 	</header>
 	<div id="contents">
 	<section style="text-align:right;width:100%;margin-top:40px;font-size:0.8em">
+	<?php if($_SESSION['valid_user'] != "") { ?>
+                        <h1><a href="/">Go to Home</a></h1> 
+    <?php }else{ ?>
 		<form action="./rhksflwk/auth.php" autocomplete="on" method="post">
 		<p>
 		<label data-icon="u" for="id">ID </label> 
@@ -31,6 +38,7 @@
 		<input type="submit" value="Login" />
 		</p>
 		</form>
+	<?php } ?>
 	</section>
 	</div>
 </div>
