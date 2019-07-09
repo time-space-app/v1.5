@@ -4,6 +4,10 @@
     - 초기 DB에 기본 Home 메뉴 생성 쿼리 추가 (설치시 관리자 admin / admin1234 추가하는 방식과 같음).
     - 플러그인 종류 변수처리.
     - 프레임웍 게시판 노출처리.
+ - 2019.07.09 기술문서 블로그 생성.
+    - 로컬PC에 루비rubyinstaller-devkit-2.5.5-1-x64 설치(https://rubyinstaller.org/) 후 블로그 생성
+    - 기술참조1: https://nolboo.kim/blog/2013/10/15/free-blog-with-github-jekyll/
+    - 기술참조2: https://shryu8902.github.io/jekyll/jekyll-on-windows/
  - 2019.07.08 로그인 처리-코어수정.
     - 프레임웍 변수 v1.4 -> v1.5 버전정보 값 변경(/time-space/version.php).
  - 2019.07.07 3단까지 서브메뉴 추가 작동 처리-코어수정.
