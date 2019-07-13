@@ -226,7 +226,7 @@ class GPLbase {
     if (empty($this->session_gc_maxlifetime)) $this->set_session_gc_maxlifetime();
     @@ini_set("session.gc_maxlifetime", $this->session_gc_maxlifetime); // session data의 gabage collection 존재 기간을 지정 (초)
     @session_set_cookie_params(0, "/");
-    /*로컬호스트에서 테스트시 주석 실서버에서는 주석을 해제해 주세요-김일국
+    /*로컬호스트에서 테스트시 주석 실서버에서는 주석을 해제해 주세요-TimeSpace
     if (!empty($this->cookie_domain)) {
       @@ini_set('session.cookie_domain', '.' . $this->cookie_domain);
     }

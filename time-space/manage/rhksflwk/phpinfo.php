@@ -18,7 +18,7 @@ $subject="안녕하세요! $_sitename 입니다";
 //드림위버나 나모같은 홈페이지 저작툴로 메일폼을 작성하신 후 소스에서 "를 삭제하시고
 //스크립트의 경우는 "를 '로 바꾸어서 불러오시면 됩니다. 또한 이미지나 링크를 절대주소
 //로 작성해주세요. http://www........ 이런식으로 하셔야됩니다. //$member_data[user_id]
-$comment="<b>김일국</b>회원님, 안녕하세요!
+$comment="<b>TimeSpace</b>회원님, 안녕하세요!
 <p align=center >회원등록 통보메일</p>
 <table align=center cellspacing=0 width=427 border=1 bordercolordark=white bordercolorlight=black>
 <tr>
