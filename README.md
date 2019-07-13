@@ -1,9 +1,8 @@
 # v1.5
  /*타입스페이스 v1.5 변경내역 작업중...*/ 
- - 앞으로 할일
-    - 초기 DB에 기본 Home 메뉴 생성 쿼리 추가 (설치시 관리자 admin / admin1234 추가하는 방식과 같음).
-    - 플러그인 종류 변수처리.
-    - 프레임웍 게시판 노출처리.
+ - 앞으로 이 코멘트는 https://time-space-app.github.io Git기술문서 사이트에 작성예정.
+ - 앞으로 이곳은 TimeSpace-v!.5 소스만 존재하게 됩니다.
+ 
  - 2019.07.09 기술문서 블로그 생성.
     - 로컬PC에 루비rubyinstaller-devkit-2.5.5-1-x64 설치(https://rubyinstaller.org/) 후 블로그 생성
     - 기술참조1: https://nolboo.kim/blog/2013/10/15/free-blog-with-github-jekyll/
