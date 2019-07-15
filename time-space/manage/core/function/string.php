@@ -274,7 +274,7 @@ function OBJ_BIND_IE8($DATA,$OBJ_NAME){
 	</script>";
 }
 /**************************************************************************
-폴더에서 파일명 추출하기
+폴더에서 File명 추출하기
 **************************************************************************/
 function myallfile($dir, $ext = '')
 {
@@ -319,7 +319,7 @@ function myallfile($dir, $ext = '')
 function ImageFileExists($path,$filenm)
 {
 	$upLoad = $_SERVER['DOCUMENT_ROOT']."/time-space/upload/".$path."/".$filenm;
-	$exist = file_exists("$upLoad");    //파일있는지 검사
+	$exist = file_exists("$upLoad");    //File있는지 검사
 	if($exist && $filenm!="")
 		$PATH_IMG="/time-space/upload/".$path."/".$filenm.'?'.date(YmdHms);
 	 else

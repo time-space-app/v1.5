@@ -9,7 +9,7 @@ $GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);/
 $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 ?>
 <?php
-//게시판 공통변수 항상 페이지 상단에 위치
+//Board 공통변수 항상 페이지 상단에 위치
 $GUBN = $_REQUEST['GUBN'];
 $SEARCH = $_REQUEST['SEARCH'];
 $MODE = $_REQUEST['MODE'];
@@ -198,6 +198,6 @@ function selectmail() {
 </div>
 </form>
 </div>
-<!--게시판 끝-->
+<!--Board 끝-->
 </body>
 </html>

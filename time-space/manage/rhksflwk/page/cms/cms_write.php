@@ -16,7 +16,7 @@ $T_S_MENU = "T_S_MENU";
 $T_CMS = "T_CMS";
 ?>
 <?php
-//게시판 공통변수 항상 페이지 상단에 위치
+//Board 공통변수 항상 페이지 상단에 위치
 $SEQ= $_REQUEST['SEQ'];
 $L_CODE= $_REQUEST['L_CODE'];
 $M_CODE= $_REQUEST['M_CODE'];
@@ -106,7 +106,7 @@ font-size:15px !important;"
 	<h2>Page Content [Menu code:<?php echo $L_CODE.$M_CODE.$S_CODE?>]</h2>
 </header>
 <span class="br10"></span>
-<!--게시판 시작-->
+<!--Board 시작-->
 <form method="post" name="frm" id="frm" action="cms_write_ok.php" onsubmit="return submitForm(this)" enctype="multipart/form-data" >
 <!-- 등록버튼 시작 -->
 <div id="board_list_button_table" style="width:inherit;float:left;">
@@ -172,8 +172,11 @@ font-size:15px !important;"
 	</div>
 </form>
 </div>
-<!--게시판 끝-->
+<!--Board 끝-->
 <script type="text/javascript">
+CKEDITOR.replace( 'CONTENT', {
+    customConfig: '/time-space/ckeditor/config_cms.js'
+});
 CKEDITOR.replace( "CONTENT",
 		    {
 		        height: 600,

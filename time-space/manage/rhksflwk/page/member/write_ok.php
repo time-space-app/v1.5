@@ -77,7 +77,7 @@ if(isset($_POST['EMAIL_YN']) && ($_POST['EMAIL_YN']!="false")) $EMAIL_YN="true";
 $CONTENT = str_replace("\r\n", "<br/>",$CONTENT);
 $COMMENTS = str_replace("\r\n", "<br/>",$COMMENTS);
 $PROFILE_INFO= str_replace("\r\n", "<br/>",$PROFILE_INFO);
-//첨부파일1 처리 시작
+//첨부File1 처리 시작
 if($_FILES["FILEUPLOAD0"]["tmp_name"]) {
 	$tmp_name = $_FILES["FILEUPLOAD0"]["tmp_name"];
 	$FILE_NM = $_FILES["FILEUPLOAD0"]["name"];
@@ -88,11 +88,11 @@ if($_FILES["FILEUPLOAD0"]["tmp_name"]) {
 			exit;
 			return false;
 		}
-	$realfilename=$LOGIN_ID.".jpg";//POST로 받은 파일명 중복방지 코드
-	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 파일명 중복방지처리
-	$upLoad  = "../../../../upload/profile/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글파일명
-	$exist = file_exists("$upLoad");    //파일있는지 검사
-	if($exist) @unlink($upLoad);		 //중복된 파일을 삭제한다
+	$realfilename=$LOGIN_ID.".jpg";//POST로 받은 File명 중복방지 코드
+	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 File명 중복방지처리
+	$upLoad  = "../../../../upload/profile/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글File명
+	$exist = file_exists("$upLoad");    //File있는지 검사
+	if($exist) @unlink($upLoad);		 //중복된 File을 삭제한다
 	move_uploaded_file($tmp_name, $upLoad);
 }
 
@@ -221,12 +221,12 @@ if($MODE=="excel_checked"){
 	
 	$sheetIndex = $objPHPExcel->setActiveSheetIndex(0);
 	
-	// 제목
+	// Subject
 	$sheetIndex->setCellValue('A1',$subtitle.' 예약확인');
 	$sheetIndex->mergeCells('A1:H1');
 	$sheetIndex->getStyle('A1')->getFont()->setSize(20)->setBold(true);
 	$sheetIndex->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-	// 부제목
+	// 부Subject
 	$sheetIndex->setCellValue('A2',$ROW['USER_NM'].'('.$ROW['USER_ID'].')');
 	$sheetIndex->mergeCells('A2:H2');
 	$sheetIndex->getStyle('A2')->getFont()->setSize(12)->setBold(true);
@@ -293,14 +293,14 @@ if (!$cnt) {
 }
 /** PHPExcel */
  require_once $_SERVER['DOCUMENT_ROOT'].'/PHPExcel/Classes/PHPExcel.php';
-/* PHPExcel.php 파일의 경로를 정확하게 지정해준다. */
+/* PHPExcel.php File의 경로를 정확하게 지정해준다. */
  
 // Create new PHPExcel object
 $objPHPExcel = new PHPExcel();
  
 // Set properties
 // Excel 문서 속성을 지정해주는 부분이다. 적당히 수정하면 된다.
-$objPHPExcel->getProperties()->setCreator("작성자")
+$objPHPExcel->getProperties()->setCreator("Writer")
                              ->setLastModifiedBy("최종수정자")
                              ->setTitle("회원리스트")
                              ->setSubject("회원리스트")
@@ -309,13 +309,13 @@ $objPHPExcel->getProperties()->setCreator("작성자")
                              ->setCategory("License");
  
 // Add some data
-// Excel 파일의 각 셀의 타이틀을 정해준다.
+// Excel File의 각 셀의 타이틀을 정해준다.
 $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue("A1", "아이디")
             ->setCellValue("B1", "이름")
             ->setCellValue("C1", "이메일")
             ->setCellValue("D1", "로그인")
-            ->setCellValue("E1", "등록일시");
+            ->setCellValue("E1", "UpDate시");
  
 // for 문을 이용해 DB에서 가져온 데이터를 순차적으로 입력한다.
 // 변수 i의 값은 2부터 시작하도록 해야한다.while($row = mysqli_fetch_array($result)) { 
@@ -337,7 +337,7 @@ $objPHPExcel->getActiveSheet()->setTitle("회원리스트");
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);
  
-// 파일의 저장형식이 utf-8일 경우 한글파일 이름은 깨지므로 euc-kr로 변환해준다.
+// File의 저장형식이 utf-8일 경우 한글File 이름은 깨지므로 euc-kr로 변환해준다.
 $filename = iconv("UTF-8", "EUC-KR", "회원리스트");
  
 // Redirect output to a client’s web browser (Excel5)

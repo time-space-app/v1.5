@@ -83,8 +83,8 @@
 		        	while($row = mysql_fetch_array($result)) { $i1++;
 			?>
 			<li>
-		    		<a href="/_metro/board/view.html?BOARD_ID=notice&SEQ=<?=$row['SEQ']?>">
-				<?=cut_str($row[TITLE],68,'...')?><!--<span><?=$row[CREATE_DT]?></span>-->
+		    		<a href="/_metro/board/view.html?BOARD_ID=notice&SEQ=<?php echo $row['SEQ']?>">
+				<?php echo cut_str($row[TITLE],68,'...')?><!--<span><?php echo $row[CREATE_DT]?></span>-->
 				</a>
 		   	</li>
 			<?php
@@ -163,12 +163,12 @@ Study To Support Metro UI Framework &lt; IE9:
                             <img src="/_metro/image/small_logo.png" alt="" class="span2"/>
                         </div>
                         <h2 class="fg-white ntm"><a href="/_metro/board/list.html?BOARD_ID=repair" title="" class="fg-white ntm"><span>Latest Work Request</span></a><br/>
-                        <a href="/_metro/board/view.html?BOARD_ID=repair&SEQ=<?=$row['SEQ']?>" class="fg-white ntm">
-	                 <?=cut_str($row[TITLE],58,'...')?><?=($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?></a></h2>
+                        <a href="/_metro/board/view.html?BOARD_ID=repair&SEQ=<?php echo $row['SEQ']?>" class="fg-white ntm">
+	                 <?php echo cut_str($row[TITLE],58,'...')?><?php echo ($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?></a></h2>
 			<?php if($_SESSION['valid_user']!=$row[USER_ID]){ //본인이 쓴 글 수정삭제기능?>
 			<p class="fg-white"><img src="/time-space/mobile/img/icon-pass.png" style="margin-bottom:1px;"> Secret Article</p>
 			<?php } ?>
-                        <a class="button small1 inverse" href="/_metro/board/view.html?BOARD_ID=repair&SEQ=<?=$row['SEQ']?>">보기링크</a>
+                        <a class="button small1 inverse" href="/_metro/board/view.html?BOARD_ID=repair&SEQ=<?php echo $row['SEQ']?>">보기링크</a>
                     </div>
 		<?php
 		          	}

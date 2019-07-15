@@ -22,7 +22,7 @@ if (file_exists(GPLDIR.'/core/config/db.php'))
 }
 else
 {
-    echo "<script type='text/javascript'>alert('DB 설정 파일이 존재하지 않습니다.\\n\\n신규 솔루션 설치 후 실행하시기 바랍니다.');</script>";
+    echo "<script type='text/javascript'>alert('DB 설정 File이 존재하지 않습니다.\\n\\n신규 솔루션 설치 후 실행하시기 바랍니다.');</script>";
     echo "<meta http-equiv='Refresh' content='0;url=/install.php'>";
 	exit;
 }

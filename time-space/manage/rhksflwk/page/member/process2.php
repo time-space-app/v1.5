@@ -13,11 +13,11 @@ $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 	$filename	=	$_REQUEST["filename"];
 	/////////////////////////////디비에 데이터 인서트/////////////////////////////
 	$path = "./temp";//임시디렉토리
-	$uploaddir = "./temp/". $filename;//임시파일
+	$uploaddir = "./temp/". $filename;//임시File
 	if($mode=="insert"){
 		$row = 1;//줄수 초기화
-		$fp = fopen ("$uploaddir","r");//파일오픈
-		while ($data = fgetcsv ($fp, 1000, ",")) {//csv파일열기
+		$fp = fopen ("$uploaddir","r");//File오픈
+		while ($data = fgetcsv ($fp, 1000, ",")) {//csvFile열기
 		$num = count ($data);//총 줄수카운드
 		
 		$proc_file = "SELECT COUNT(LOGIN_ID) AS DUPCNT";
@@ -38,12 +38,12 @@ $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 		$row++;			
 		}
 		fclose ($fp);
-		@unlink($uploaddir);//실제 파일삭제
+		@unlink($uploaddir);//실제 File삭제
 		@rmdir($path);//실제 디렉토리 삭제
 	}
 	if($mode=="del"){
-		/////////////////////////////임시파일,디렉토리 삭제/////////////////////////////	
-		@unlink($uploaddir);//실제 파일삭제
+		/////////////////////////////임시File,디렉토리 삭제/////////////////////////////	
+		@unlink($uploaddir);//실제 File삭제
 		@rmdir($path);//실제 디렉토리 삭제
 	}
 	$location="./list.php";

@@ -68,14 +68,14 @@ $now_page = $_REQUEST['now_page'];
  <div class="page-region grid">
  <h2>
  <a href="#" class="history-back"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
-                    <?=$title?><small class="on-right"><?=$TITLE?></small>
+                    <?php echo $title?><small class="on-right"><?php echo $TITLE?></small>
                     <?php if(preg_match('/stay-/',$BOARD_ID)){ ?>
-                    	<a href="/_metro/reserve/write.html?BOARD_ID=<?=$BOARD_ID?>">
-		        <button class="image-button bg-darkGreen fg-white image-left" style="height:27px;" onclick="javascript:location.href='/_metro/reserve/write.html?BOARD_ID=<?=$BOARD_ID?>'">
-		        <?=$title?> 예약하기
+                    	<a href="/_metro/reserve/write.html?BOARD_ID=<?php echo $BOARD_ID?>">
+		        <button class="image-button bg-darkGreen fg-white image-left" style="height:27px;" onclick="javascript:location.href='/_metro/reserve/write.html?BOARD_ID=<?php echo $BOARD_ID?>'">
+		        <?php echo $title?> 예약하기
 		        <i class="icon-calendar bg-green fg-white"></i>
 		    </button></a>
-		    <? } ?>
+		    <?php } ?>
  </h2>
  <div class="page-region-content row">
 	<?php include "../submenu.php";?>
@@ -84,10 +84,10 @@ $now_page = $_REQUEST['now_page'];
 		
 	<?php }else{ ?>
 		<h3 id="_default"><span style="font-size:30px;"><i class="icon-accessibility on-left"></i>
-		Posted by <?=$NAME?> on
-		<time datetime="2013-06-25"><?=$REGDATE?></time></span>
+		Posted by <?php echo $NAME?> on
+		<time datetime="2013-06-25"><?php echo $REGDATE?></time></span>
 		<?php if($BOARD_ID=="qa"|| $BOARD_ID=="repair"){?>
-				<br>[처리상태]:<?=$STATE?>
+				<br>[처리상태]:<?php echo $STATE?>
 		<?php } ?> 
 		<?php if ($FILECNT > 0){ ?>
 			<span>
@@ -95,7 +95,7 @@ $now_page = $_REQUEST['now_page'];
 				if($fileresult){
 					while($filerow = mysql_fetch_array($fileresult)) {	
 					?>
-					[FILES]: <a href="/time-space/manage/core/function/download.php?filename=<?=$filerow['FILE_NM']?>&target=<?=$BOARD_ID?>"><?=$filerow['FILE_NM']?></a><br/>
+					[FILES]: <a href="/time-space/manage/core/function/download.php?filename=<?php echo $filerow['FILE_NM']?>&target=<?php echo $BOARD_ID?>"><?php echo $filerow['FILE_NM']?></a><br/>
 				<?php } ?>
 				<?php } ?>
 			</span>
@@ -103,7 +103,7 @@ $now_page = $_REQUEST['now_page'];
 		</h3>
 	<?php } ?>
 	<p class="description">
-		<?=str_replace("<br/>", "\r\n",$CONTENT);?>
+		<?php echo str_replace("<br/>", "\r\n",$CONTENT);?>
 		<?
 		//$CONTENT=str_replace('   ','',$CONTENT);
 		//$CONTENT=str_replace("\t",'',$CONTENT);
@@ -116,25 +116,25 @@ $now_page = $_REQUEST['now_page'];
 	<!-- 등록버튼 시작 -->
 	<span class="clear10"></span>
 	<form method="post" name="del_frm" id="del_frm" action="/_metro/board/write_ok.php" onsubmit="return del_chk(this)" >
-	<input type="hidden" value="<?=$MODE?>" name="MODE" id="MODE">
-	<input type="hidden" value="<?=$BOARD_SEQ?>" name="BOARD_SEQ" id="BOARD_SEQ">
-	<input type="hidden" value="<?=$BOARD_ID?>" name="BOARD_ID" id="BOARD_ID">
-	<input type="hidden" value="<?=$FILENUM[0]?>" name="FILENUM0" id="FILENUM0">
-	<input type="hidden" value="<?=$FILENUM[1]?>" name="FILENUM1" id="FILENUM1">
-	<input type="hidden" value="<?=$FILE_NM[0]?>" name="FILE_NM0" id="FILE_NM0">
-	<input type="hidden" value="<?=$FILE_NM[1]?>" name="FILE_NM1" id="FILE_NM1">
+	<input type="hidden" value="<?php echo $MODE?>" name="MODE" id="MODE">
+	<input type="hidden" value="<?php echo $BOARD_SEQ?>" name="BOARD_SEQ" id="BOARD_SEQ">
+	<input type="hidden" value="<?php echo $BOARD_ID?>" name="BOARD_ID" id="BOARD_ID">
+	<input type="hidden" value="<?php echo $FILENUM[0]?>" name="FILENUM0" id="FILENUM0">
+	<input type="hidden" value="<?php echo $FILENUM[1]?>" name="FILENUM1" id="FILENUM1">
+	<input type="hidden" value="<?php echo $FILE_NM[0]?>" name="FILE_NM0" id="FILE_NM0">
+	<input type="hidden" value="<?php echo $FILE_NM[1]?>" name="FILE_NM1" id="FILE_NM1">
 	<input type="hidden" value="" name="FILE_DEL0" id="FILE_DEL0">
 	<input type="hidden" value="" name="FILE_DEL1" id="FILE_DEL1">
-	<input type="hidden" value="<?=$SEARCH?>" name="SEARCH" id="SEARCH">
-	<input type="hidden" value="<?=$GUBN?>" name="GUBN" id="GUBN">
-	<input type="hidden" value="<?=$now_page?>" name="now_page" id="now_page">
-	<input type="hidden" name="MENU_CODE" id="MENU_CODE" size=15 class="type-text" value="<?=$MENU_CODE?>">
+	<input type="hidden" value="<?php echo $SEARCH?>" name="SEARCH" id="SEARCH">
+	<input type="hidden" value="<?php echo $GUBN?>" name="GUBN" id="GUBN">
+	<input type="hidden" value="<?php echo $now_page?>" name="now_page" id="now_page">
+	<input type="hidden" name="MENU_CODE" id="MENU_CODE" size=15 class="type-text" value="<?php echo $MENU_CODE?>">
 	<div id="board_list_button_table" style="text-align:right">
-		<a href="/_metro/board/list.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$now_page?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>/MODE/list'">
+		<a href="/_metro/board/list.html/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/list'">
 		<span class="button large info">LIST</span></a>
 		<?php if($_SESSION['valid_user']==$USER_ID ||($_SESSION['valid_user'] != "" && $_SESSION['valid_level'] < 3) ){ //본인이 쓴 글 수정삭제기능?>
 		<button type="submit" class="button large info" value="DELETE">DELETE</button>
-		<a href="/_metro/board/write.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$now_page?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>/MODE/edit/SEQ/<?=$BOARD_SEQ?>">
+		<a href="/_metro/board/write.html/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/edit/SEQ/<?php echo $BOARD_SEQ?>">
 		<span class="button large info">EDIT</span></a>
 		<?php }?>
 	</div></form>
@@ -170,11 +170,11 @@ $now_page = $_REQUEST['now_page'];
 			       </colgroup>
 			       <tbody>
 				<tr>
-				<th><?=$row['USER_NM']?></th>
-				<th><?=$row['COMMENTS']?></th>
-				<th><?=$row['CREATE_DT']?></th>
+				<th><?php echo $row['USER_NM']?></th>
+				<th><?php echo $row['COMMENTS']?></th>
+				<th><?php echo $row['CREATE_DT']?></th>
 				<th><?php //if($_SESSION['valid_user']==$USER_ID && $_SESSION['valid_name']==$NAME){ //본인이 쓴 글 삭제기능?>
-				<!-- <a href="write_ok.php?BOARD_SEQ=<?=$BOARD_SEQ?>&BOARD_ID=<?=$BOARD_ID?>&COMMENT_MODE=delete&SEQ=<?=$row['SEQ']?>">
+				<!-- <a href="write_ok.php?BOARD_SEQ=<?php echo $BOARD_SEQ?>&BOARD_ID=<?php echo $BOARD_ID?>&COMMENT_MODE=delete&SEQ=<?php echo $row['SEQ']?>">
 				DEL</a> -->
 				<?php //}?>
 				</th>
@@ -198,15 +198,15 @@ $now_page = $_REQUEST['now_page'];
 			<tr>
 			<td>
 			<div class="input-control text span3 block" data-role="input-control">
-			<input type="text" name="USER_NM" id="USER_NM" value="<?=($row['USER_NM']=="")?$_SESSION['valid_name']:$row['USER_NM'];?>" />
+			<input type="text" name="USER_NM" id="USER_NM" value="<?php echo ($row['USER_NM']=="")?$_SESSION['valid_name']:$row['USER_NM'];?>" />
 			</td>
 			
 			<td>
 			<div class="input-control select" data-role="input-control">
 			<SELECT ID="STATE" name='STATE'>
 		        <option value=''>-STATE-</option>
-		        <option value="처리중" <?=($STATE=="처리중")?"SELECTED":"";?>>처리중</option>
-		        <option value="처리완료" <?=($STATE=="처리완료")?"SELECTED":"";?>>처리완료</option>
+		        <option value="처리중" <?php echo ($STATE=="처리중")?"SELECTED":"";?>>처리중</option>
+		        <option value="처리완료" <?php echo ($STATE=="처리완료")?"SELECTED":"";?>>처리완료</option>
 			</SELECT>
 			</div>
 			</td>
@@ -214,14 +214,14 @@ $now_page = $_REQUEST['now_page'];
 			<tr>
 			<td>
 			<div class="input-control textarea" data-role="input-control">
-			<textarea name="COMMENTS" id="COMMENTS" rows="3"><?=str_replace("<br/>", "\r\n",$row['COMMENTS']);?></textarea>
+			<textarea name="COMMENTS" id="COMMENTS" rows="3"><?php echo str_replace("<br/>", "\r\n",$row['COMMENTS']);?></textarea>
 			</div>
 			</td>
 			<td>
 			<!-- 등록버튼 시작 -->
 			<div id="board_list_button_table">
 			<button type="submit" class="button default">COMMIT</button>
-			<a href="/_metro/board/write_ok.php/MENU_CODE/<?=$MENU_CODE?>/BOARD_SEQ/<?=$BOARD_SEQ?>/BOARD_ID/<?=$BOARD_ID?>/COMMENT_MODE/delete/SEQ/<?=$row['SEQ']?>">
+			<a href="/_metro/board/write_ok.php/MENU_CODE/<?php echo $MENU_CODE?>/BOARD_SEQ/<?php echo $BOARD_SEQ?>/BOARD_ID/<?php echo $BOARD_ID?>/COMMENT_MODE/delete/SEQ/<?php echo $row['SEQ']?>">
 			<span class="button default">DEL</span></a>
 			</div>
 			</td>
@@ -229,13 +229,13 @@ $now_page = $_REQUEST['now_page'];
 			</tbody>
 		   </table>
 			<div style="display:none">
-			<input type="text" value="<?=$COMMENT_MODE?>" name="COMMENT_MODE" id="COMMENT_MODE">
-			<input type="text" value="<?=$BOARD_SEQ?>" name="BOARD_SEQ" id="BOARD_SEQ">
-			<input type="text" value="<?=$BOARD_ID?>" name="BOARD_ID" id="BOARD_ID">
-			<input type="text" value="<?=$row['SEQ']?>" name="SEQ" id="SEQ">
-			<input type="text" value="<?=$_SESSION['valid_user']?>" name="USER_ID" id="USER_ID">
-			<input type="hidden" name="MENU_CODE" id="MENU_CODE" size=15 class="type-text" value="<?=$MENU_CODE?>">
-			<!--<input type="text" value="<?=($ROW['USER_ID']=="")?$_SESSION['valid_user']:$ROW['USER_ID'];?>" name="USER_ID" id="USER_ID">-->
+			<input type="text" value="<?php echo $COMMENT_MODE?>" name="COMMENT_MODE" id="COMMENT_MODE">
+			<input type="text" value="<?php echo $BOARD_SEQ?>" name="BOARD_SEQ" id="BOARD_SEQ">
+			<input type="text" value="<?php echo $BOARD_ID?>" name="BOARD_ID" id="BOARD_ID">
+			<input type="text" value="<?php echo $row['SEQ']?>" name="SEQ" id="SEQ">
+			<input type="text" value="<?php echo $_SESSION['valid_user']?>" name="USER_ID" id="USER_ID">
+			<input type="hidden" name="MENU_CODE" id="MENU_CODE" size=15 class="type-text" value="<?php echo $MENU_CODE?>">
+			<!--<input type="text" value="<?php echo ($ROW['USER_ID']=="")?$_SESSION['valid_user']:$ROW['USER_ID'];?>" name="USER_ID" id="USER_ID">-->
 			</div>
 		   </form>
 			<?php } ?>
@@ -267,8 +267,8 @@ $now_page = $_REQUEST['now_page'];
 			?>
 						<tr><th>Prev</th>
 						<td>
-						<a href="/_metro/board/view.html/MENU_CODE/<?=$MENU_CODE?>/SEQ/<?=$row['SEQ']?>/now_page/<?=$now_page?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>/MODE/view">
-							<?=$row['TITLE']?>
+						<a href="/_metro/board/view.html/MENU_CODE/<?php echo $MENU_CODE?>/SEQ/<?php echo $row['SEQ']?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/view">
+							<?php echo $row['TITLE']?>
 						</a>
 						<?php if($_SESSION['valid_user']!=$row[USER_ID] && ($BOARD_ID=="qa"|| $BOARD_ID=="repair") ){ //본인이 쓴 글 수정삭제기능 ?>
 						<img src="/time-space/mobile/img/icon-pass.png">		
@@ -282,8 +282,8 @@ $now_page = $_REQUEST['now_page'];
 			?>			
 						<tr><th>Next</th>
 						<td>
-						<a href="/_metro/board/view.html/MENU_CODE/<?=$MENU_CODE?>/SEQ/<?=$row['SEQ']?>/now_page/<?=$now_page?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>/MODE/view">
-							<?=$row['TITLE']?>
+						<a href="/_metro/board/view.html/MENU_CODE/<?php echo $MENU_CODE?>/SEQ/<?php echo $row['SEQ']?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/view">
+							<?php echo $row['TITLE']?>
 						</a>
 						<?php if($_SESSION['valid_user']!=$row[USER_ID] && ($BOARD_ID=="qa"|| $BOARD_ID=="repair")){ //본인이 쓴 글 수정삭제기능 ?>
 						<img src="/time-space/mobile/img/icon-pass.png">		

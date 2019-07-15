@@ -17,7 +17,7 @@ if (isset($_POST['id']) && isset($_POST['pw']))
 	  	$_SESSION['valid_name'] = $row['USER_NM'];//iconv('utf-8', 'euc-kr', $row['USER_NM']);
 	  	$_SESSION['valid_level'] = $row['USER_LEVEL'];
 	  	$_SESSION['valid_email'] = $row['USER_EMAIL'];
-	  	if($row['USER_LEVEL']<3)$_SESSION['login_security']   = 1;//파일시스템 연동세션
+	  	if($row['USER_LEVEL']<3)$_SESSION['login_security']   = 1;//File시스템 연동세션
 	  	session_cache_limiter('private');
 	  	@ini_set("session.cookie_lifetime", "86400");
 	  	@ini_set("session.cache_expire", "86400");

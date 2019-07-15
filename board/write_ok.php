@@ -7,13 +7,67 @@ include_once GPLDIR_CLASS . '/GPLbase.class.php';
 $GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);//상속받은 개체 멤버클래스 사용
 $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 ?>
+<?php //검색엔진최적화를 위한 URl쿼리 특수문자 / 문자로 대체 후 변수 뽑기 작업
+if(strpos( $_SERVER['REQUEST_URI'] , "MENU_CODE/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "MENU_CODE" ));
+$_REQUEST['MENU_CODE']=$arr_param[1];//echo $MENU_CODE.'<br/>';
+}
+if(strpos( $_SERVER['REQUEST_URI'] , "BOARD_ID/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "BOARD_ID" ));
+$_REQUEST['BOARD_ID']=str_replace(" ","",$arr_param[1]);//echo $BOARD_ID.'<br/>';
+}
+if(strpos( $_SERVER['REQUEST_URI'] , "/SEQ/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "/SEQ" ));
+$_REQUEST['SEQ']=str_replace(" ","",$arr_param[2]);//echo $SEQ.'<br/>';
+}
+if(strpos( $_SERVER['REQUEST_URI'] , "BOARD_SEQ/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "BOARD_SEQ" ));
+$_REQUEST['BOARD_SEQ']=str_replace(" ","",$arr_param[1]);//echo $BOARD_SEQ.'<br/>';
+}
+if(strpos( $_SERVER['REQUEST_URI'] , "now_page/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "now_page" ));
+$now_page=str_replace(" ","",$arr_param[1]);//echo $now_page.'<br/>';
+}
+if(strpos( $_SERVER['REQUEST_URI'] , "GUBN/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "GUBN" ));
+$GUBN=str_replace(" ","",$arr_param[1]);//echo $GUBN.'<br/>';
+}
+if(strpos( $_SERVER['REQUEST_URI'] , "SEARCH/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "SEARCH" ));
+$SEARCH=urldecode(str_replace(" ","",$arr_param[1]));//echo $SEARCH.'<br/>';
+}
+if(strpos( $_SERVER['REQUEST_URI'] , "/MODE/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "/MODE" ));
+$MODE=str_replace(" ","",$arr_param[2]);//echo $MODE.'<br/>';
+}
+if(strpos( $_SERVER['REQUEST_URI'] , "CATEGORY/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "CATEGORY" ));
+$CATEGORY=str_replace(" ","",$arr_param[1]);//echo $MODE.'<br/>';
+}
+if(strpos( $_SERVER['REQUEST_URI'] , "COMMENT_MODE/" )){
+$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "COMMENT_MODE" ));
+$_REQUEST['COMMENT_MODE']=str_replace(" ","",$arr_param[1]);//echo $MODE.'<br/>';
+}
+//echo $COMMENT_MODE;
+//exit;
+?>
+<?php //메뉴값 바인딩
+//게시판 공통변수 항상 페이지 상단에 위치
+$MENU_CODE= str_replace(" ","",$_REQUEST['MENU_CODE']);
+$L_CODE= SUBSTR($MENU_CODE,0,3);
+$M_CODE= SUBSTR($MENU_CODE,3,3);
+$S_CODE= SUBSTR($MENU_CODE,6,3);
+?>
 <?php /*자동등록방지코드*/
 if($_SESSION['valid_user'] == ""){
 if($_POST['SE_NUM1']=='' || $_POST['SE_NUM2']=='' || trim($_POST['SE_NUM1'])+trim($_POST['SE_NUM2'])!=trim($_POST['SE_NUM'])){
 		echo "<script type='text/javascript'>alert('보안코드=INSERT NOT NULL OR WRONG.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=list.html?now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&MODE=list'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
 		exit;
 	}
+		echo "<script type='text/javascript'>alert('보안코드=로그인 Only.');</script>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
+		exit;
 }
 ?>
 <?php
@@ -36,9 +90,9 @@ $CONTENT = str_replace("\r\n", "<br/>",$CONTENT);
 $COMMENTS = str_replace("\r\n", "<br/>",$COMMENTS);
 //echo $post_var;
 //exit; //디버그
-//File 삭제 처리 시작
+//파일 삭제 처리 시작
 if($FILE_DEL0=="FILE_DEL0"){
-	//첨부File 삭제시작
+	//첨부파일 삭제시작
 	$proc_delete = "DELETE FROM T_ATTACH_FILE WHERE BOARD_SEQ = '$BOARD_SEQ'";
 	$proc_delete .= " AND BOARD_ID = '$BOARD_ID'";
 	$proc_delete .= " AND SEQ = '$FILE_NUM0'";
@@ -49,13 +103,13 @@ if($FILE_DEL0=="FILE_DEL0"){
 		$FILECNT = $FILECNT - 1;
 	}
 	if($FILE_NM0 != ""){
-		$upLoad  = "../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_NM0); // 중복체크전 업로드 경로+한글File명
-		$exist = file_exists("$upLoad");    //File있는지 검사
-		if($exist) @unlink($upLoad);		 //File을 삭제한다
+		$upLoad  = "../../time-space/upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_NM0); // 중복체크전 업로드 경로+한글파일명
+		$exist = file_exists("$upLoad");    //파일있는지 검사
+		if($exist) @unlink($upLoad);		 //파일을 삭제한다
 	}
 }
 if($FILE_DEL1=="FILE_DEL1"){
-	//첨부File 삭제시작
+	//첨부파일 삭제시작
 	$proc_delete = "DELETE FROM T_ATTACH_FILE WHERE BOARD_SEQ = '$BOARD_SEQ'";
 	$proc_delete .= " AND BOARD_ID = '$BOARD_ID'";
 	$proc_delete .= " AND SEQ = '$FILE_NUM1'";
@@ -66,9 +120,9 @@ if($FILE_DEL1=="FILE_DEL1"){
 		$FILECNT = $FILECNT - 1;
 	}
 	if($FILE_NM1 != ""){
-		$upLoad  = "../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_NM1); // 중복체크전 업로드 경로+한글File명
-		$exist = file_exists("$upLoad");    //File있는지 검사
-		if($exist) @unlink($upLoad);		 //File을 삭제한다
+		$upLoad  = "../../time-space/upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_NM1); // 중복체크전 업로드 경로+한글파일명
+		$exist = file_exists("$upLoad");    //파일있는지 검사
+		if($exist) @unlink($upLoad);		 //파일을 삭제한다
 	}
 }
 //고유ID생성
@@ -81,16 +135,16 @@ if($BOARD_SEQ==""){
 }
 //echo $BOARD_SEQ;
 //exit; //디버그
-//첨부File1 처리 시작
+//첨부파일1 처리 시작
 if($_FILES["FILEUPLOAD0"]["tmp_name"]) {
 	if($MODE == "write")$SEQ = $BOARD_SEQ+1; else $SEQ = $BOARD_SEQ; //최신글 번호 구하기
 	$tmp_name = $_FILES["FILEUPLOAD0"]["tmp_name"];
 	$FILE_NM = $_FILES["FILEUPLOAD0"]["name"];
-	$realfilename=date("YmdHms").$FILE_NM;//POST로 받은 File명 중복방지 코드
-	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 File명 중복방지처리
-	$upLoad  = "../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글File명
-	$exist = file_exists("$upLoad");    //File있는지 검사
-	if($exist) @unlink($upLoad);		 //중복된 File을 삭제한다
+	$realfilename=date("YmdHms").$FILE_NM;//POST로 받은 파일명 중복방지 코드
+	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 파일명 중복방지처리
+	$upLoad  = "../../time-space/upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글파일명
+	$exist = file_exists("$upLoad");    //파일있는지 검사
+	if($exist) @unlink($upLoad);		 //중복된 파일을 삭제한다
 	move_uploaded_file($tmp_name, $upLoad);
 	$SQL = "SELECT MAX(SEQ) AS FILE_SEQ FROM T_ATTACH_FILE";
 	$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
@@ -112,16 +166,16 @@ if($_FILES["FILEUPLOAD0"]["tmp_name"]) {
 			$FILECNT = $FILECNT + 1;
 	}
 }
-//첨부File2 처리 시작
+//첨부파일2 처리 시작
 if($_FILES["FILEUPLOAD1"]["tmp_name"]) {
 	if($MODE == "write")$SEQ = $BOARD_SEQ+1; else $SEQ = $BOARD_SEQ; //최신글 번호 구하기
 	$tmp_name = $_FILES["FILEUPLOAD1"]["tmp_name"];
 	$FILE_NM = $_FILES["FILEUPLOAD1"]["name"];
-	$realfilename=date("YmdHms").$FILE_NM;//POST로 받은 File명 중복방지 코드
-	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 File명 중복방지처리
-	$upLoad  = "../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글File명
-	$exist = file_exists("$upLoad");    //File있는지 검사
-	if($exist) @unlink($upLoad);		 //중복된 File을 삭제한다
+	$realfilename=date("YmdHms").$FILE_NM;//POST로 받은 파일명 중복방지 코드
+	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 파일명 중복방지처리
+	$upLoad  = "../../time-space/upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글파일명
+	$exist = file_exists("$upLoad");    //파일있는지 검사
+	if($exist) @unlink($upLoad);		 //중복된 파일을 삭제한다
 	move_uploaded_file($tmp_name, $upLoad);
 	$SQL = "SELECT MAX(SEQ) AS FILE_SEQ FROM T_ATTACH_FILE";
 	$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
@@ -144,7 +198,7 @@ if($_FILES["FILEUPLOAD1"]["tmp_name"]) {
 	}
 }
 //
-//echo $MODE;
+//echo $COMMENT_MODE."여기";
 //exit; //디버그
 if($MODE == "write"){
 	$SEQ = $BOARD_SEQ+1; //최신글 번호 구하기
@@ -171,13 +225,43 @@ if($MODE == "write"){
 	$result = $GPLdb5->GPLexcute_query($proc_save); //결과값 리턴
 	$i = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0){
+		if($_SESSION['valid_level'] > 3||$BOARD_ID=="qa") {
+			$todaydate=date('Y-m-d');
+			$comment1 ="
+			Date :$todaydate\r\n
+			FromName :$USER_NM\r\n
+			ToName :Webmaster\r\n
+			Subject :$TITLE.'문의'\r\n
+			Contents :$CONTENT ";
+			$comment2=nl2br($comment1);
+			$to = "mohta6500@japan-explore.net"; 
+			$fname = $USER_ID; 
+			$mail_from=$EMAIL; 
+			$subject = $TITLE.'문의';
+			$subject = "=?UTF-8?B?".base64_encode($subject)."?="."\r\n"; 
+			$header ="Content-Type: text/html; charset=UTF-8\r\n"; 
+			$header .= "From: $fname <$mail_from>\n"; 
+			$body = $comment2; 
+			$result=mail($to, $subject, $body, $header, '-f'.$mail_from);
+			/* 디버그
+			if(!$result){
+			   echo "<script>
+			         alert('Sending Error!');
+			         </script>";
+			   }else{
+			   echo "<script>
+			         alert('Sending OK!');
+			         </script>";
+			 }*/
+		 }
+
 		echo "<script type='text/javascript'>alert('SAVE OK.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=list.html?now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&MODE=list'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('SAVE FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=list.html?now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&MODE=list'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
 	}
 }
 if($MODE == "edit"){
@@ -229,12 +313,12 @@ if($MODE == "edit"){
 			 }*/
 		}
 		echo "<script type='text/javascript'>alert('EDIT OK.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=view.html?now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&SEQ=$BOARD_SEQ'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('EDIT FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=view.html?now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&SEQ=$BOARD_SEQ'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
 	}
 }
 
@@ -247,12 +331,12 @@ if($MODE == "delete"){
 	$i = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0){
 		echo "<script type='text/javascript'>alert(\"DELETE OK.\");</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=list.html?BOARD_ID=$BOARD_ID'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/BOARD_ID/$BOARD_ID'>";
 	}
 	else 
 	{
 		echo "<script type='text/javascript'>alert('DELETE FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=list.html'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE'>";
 	}
 exit;
 }
@@ -286,12 +370,12 @@ if($_REQUEST['COMMENT_MODE'] == "write"){
 	$i2 = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0 || $i2>0){
 		echo "<script type='text/javascript'>alert('SAVE OK.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=view.html?SEQ=$BOARD_SEQ&now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&MODE=view'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('SAVE FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=view.html?SEQ=$BOARD_SEQ&now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&MODE=view'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
 	}
 }
 if($_REQUEST['COMMENT_MODE'] == "edit"){
@@ -315,12 +399,12 @@ if($_REQUEST['COMMENT_MODE'] == "edit"){
 	$i2 = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0 || $i2>0){
 		echo "<script type='text/javascript'>alert('COMMENT OK.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=view.html?now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&SEQ=$BOARD_SEQ'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('COMMENT FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=view.html?now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&SEQ=$BOARD_SEQ'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
 	}
 }
 if($_REQUEST['COMMENT_MODE'] == "delete"){
@@ -333,12 +417,12 @@ if($_REQUEST['COMMENT_MODE'] == "delete"){
 	$i = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0){
 		echo "<script type='text/javascript'>alert(\"DELETE OK.\");</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=view.html?SEQ=$BOARD_SEQ&now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&MODE=view'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('DELETE FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=view.html?SEQ=$BOARD_SEQ&now_page=$now_page&GUBN=$GUBN&SEARCH=$SEARCH&BOARD_ID=$BOARD_ID&MODE=view'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
 	}
 	exit;
 }

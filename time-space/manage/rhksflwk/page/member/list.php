@@ -9,7 +9,7 @@ $GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);/
 $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 ?>
 <?php
-//게시판 공통변수 항상 페이지 상단에 위치
+//Board 공통변수 항상 페이지 상단에 위치
 $GUBN = $_REQUEST['GUBN'];
 $SEARCH = $_REQUEST['SEARCH'];
 $MODE = $_REQUEST['MODE'];
@@ -280,7 +280,7 @@ function member_excel(){
 <table>
 	<tr>
 		<td>
-			CSV 파일을 선택해주세요!!
+			CSV File을 선택해주세요!!
 		</td>
 	</tr>
 	<tr>
@@ -294,7 +294,7 @@ function member_excel(){
 <table>
 	<tr>
 		<td>
-			엑셀 파일을 선택해주세요!!
+			엑셀 File을 선택해주세요!!
 		</td>
 	</tr>
 	<tr>

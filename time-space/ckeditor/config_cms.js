@@ -39,9 +39,16 @@ CKEDITOR.editorConfig = function( config ) {
 	config.height = '400px';
 	config.resize_dir = 'vertical';
 	config.toolbarCanCollapse = false;
+	config.startupMode = 'source';
 	config.removePlugins = 'contextmenu';
+	config.extraPlugins = 'codemirror';
+	config.allowedContent = true;
+	config.fullPage= true;
+	config.enterMode = CKEDITOR.ENTER_BR;
+	config.protectedSource.push( /<\?[\s\S]*?\?>/g );   // PHP Code
 	//config.extraPlugins = 'codesnippet';
 };
+/*
 CKEDITOR.on("instanceReady", function(ev) {
 	ev.editor.dataProcessor.writer.indentationChars = "";
 	ev.editor.dataProcessor.writer.setRules('p', {
@@ -72,9 +79,9 @@ CKEDITOR.on("instanceReady", function(ev) {
 		breakBeforeClose : false,
 		breakAfterClose : false
 	});
-	/*
-	setTimeout(function() {
-        $("iframe").contents().find(".cke_editable p").css("margin","0");
-   	}, 1000);*/
-});
-CKEDITOR.dtd.$removeEmpty['span'] = 0;
+	
+	//setTimeout(function() {
+    //   $("iframe").contents().find(".cke_editable p").css("margin","0");
+   	//}, 1000);
+});*/
+//CKEDITOR.dtd.$removeEmpty['span'] = 0;

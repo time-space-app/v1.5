@@ -13,12 +13,12 @@ $MENU_CODE= "003001000";
             </div>
             <div class="user-id-name">
                 <span class="first-name">Welcome</span>
-                <span class="last-name"><?=empty($_SESSION['valid_name'])? Guest : $_SESSION['valid_name']?></span>
+                <span class="last-name"><?php echo empty($_SESSION['valid_name'])? Guest : $_SESSION['valid_name']?></span>
             </div>
         </div>
 
         <div class="tile-group six" style="padding-top:0px;">
-            <a class="tile double bg-lightBlue live" data-role="live-tile" data-effect="slideUp" href="/_metro/board/list.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice">
+            <a class="tile double bg-lightBlue live" data-role="live-tile" data-effect="slideUp" href="/_metro/board/list.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice">
 <!--[if lte IE 8 ]>
 <div id="carousel2" class="carousel bg-transparent no-overflow">
 <![endif]-->
@@ -35,12 +35,12 @@ $MENU_CODE= "003001000";
 		?>
                 <div class="tile-content email slide">
                     <div class="email-image">
-                        <img src="<?=get_image_file_from_html($row[CONTENT],1)?>">
+                        <img src="<?php echo get_image_file_from_html($row[CONTENT],1)?>">
                     </div>
                     <div class="email-data">
-                        <span class="email-data-title"><?=cut_str($row[TITLE],44,'...')?></span>
+                        <span class="email-data-title"><?php echo cut_str($row[TITLE],44,'...')?></span>
                         <span class="email-data-subtitle">Notice</span>
-                        <span class="email-data-text"><?=cut_str($row[CONTENT],28,'...')?></span>
+                        <span class="email-data-text"><?php echo cut_str($row[CONTENT],28,'...')?></span>
                     </div>
                 </div>
                 <?php
@@ -78,12 +78,12 @@ $MENU_CODE= "003001000";
                         <button class="btn-date"></button>
                     </div>
                     <div class="text-right padding10 ntp">
-                        <h1 class="fg-white no-margin"><?=date("d", time());?></h1>
-                        <p class="fg-white"><?=date("l", time());?></p>
+                        <h1 class="fg-white no-margin"><?php echo date("d", time());?></h1>
+                        <p class="fg-white"><?php echo date("l", time());?></p>
                     </div>
                 </div>
                 <div class="brand">
-                    <div class="label"><h3 class="no-margin fg-white"><span class="icon-calendar"></span> <?=date("Y", time());?> <?=date("F", time());?></h3></div>
+                    <div class="label"><h3 class="no-margin fg-white"><span class="icon-calendar"></span> <?php echo date("Y", time());?> <?php echo date("F", time());?></h3></div>
                 </div>
             </a> <!-- end tile -->
 
@@ -98,12 +98,12 @@ $MENU_CODE= "003001000";
 			$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
 			$img_array = get_image_file_from_html($row[CONTENT],1);
 		?>
-		<a href="/_metro/board/view.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice&SEQ=<?=$row[SEQ]?>">
+		<a href="/_metro/board/view.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice&SEQ=<?php echo $row[SEQ]?>">
                 <div class="tile-content image">
-                    <img src="<?=$img_array?>">
+                    <img src="<?php echo $img_array?>">
                 </div>
                 <div class="brand">
-                    <div class="label no-margin"><span class="bg-dark"><?=cut_str($row[TITLE],20,'...')?></span></div>
+                    <div class="label no-margin"><span class="bg-dark"><?php echo cut_str($row[TITLE],20,'...')?></span></div>
                 </div>
             </a>
             </div> <!-- end tile -->
@@ -164,15 +164,15 @@ $MENU_CODE= "003001000";
 			}
 		?>
 		<div class="tile-content slide"> 
-                    <div class="padding10" style="background: url(http://us.i1.yimg.com/us.yimg.com/i/us/we/52/<?=$children[0]['code']?>.gif) no-repeat top right;">
-                        <h1 class="fg-white ntm"><?=$children[0]['temp']?>&deg;</h1>
-                        <h1 class="fg-white no-margin"><?=$city?></h1>
-                        <h5 class="fg-white no-margin"><?=$children[0]['text']?></h5>
+                    <div class="padding10" style="background: url(http://us.i1.yimg.com/us.yimg.com/i/us/we/52/<?php echo $children[0]['code']?>.gif) no-repeat top right;">
+                        <h1 class="fg-white ntm"><?php echo $children[0]['temp']?>&deg;</h1>
+                        <h1 class="fg-white no-margin"><?php echo $city?></h1>
+                        <h5 class="fg-white no-margin"><?php echo $children[0]['text']?></h5>
                         <p class="tertiary-text fg-white no-margin">Today</p>
-                        <h4 class="fg-white no-margin"><?=$children[0]['date']?></h4>
+                        <h4 class="fg-white no-margin"><?php echo $children[0]['date']?></h4>
                     </div>
                 </div>
-		<? } ?>	
+		<?php } ?>	
 <!--[if lte IE 8 ]>
 </div>
 <script>
@@ -207,12 +207,12 @@ $MENU_CODE= "003001000";
 			$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
 			$img_array = get_image_file_from_html($row[CONTENT],1);
 		?>
-		<a href="/_metro/board/view.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice&SEQ=<?=$row[SEQ]?>">
+		<a href="/_metro/board/view.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice&SEQ=<?php echo $row[SEQ]?>">
                 <div class="tile-content image">
-                    <img src="<?=$img_array?>">
+                    <img src="<?php echo $img_array?>">
                 </div>
                 <div class="brand">
-                    <div class="label no-margin"><span class="bg-dark"><?=cut_str($row[TITLE],50,'...')?></span></div>
+                    <div class="label no-margin"><span class="bg-dark"><?php echo cut_str($row[TITLE],50,'...')?></span></div>
                 </div>
                 </a>
             </div> <!-- end tile -->
@@ -227,12 +227,12 @@ $MENU_CODE= "003001000";
 		$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
 		$img_array = get_image_file_from_html($row[CONTENT],1);
 	    ?>
-	    <a href="/_metro/board/view.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice&SEQ=<?=$row[SEQ]?>" class="tile bg-lightBlue">
+	    <a href="/_metro/board/view.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice&SEQ=<?php echo $row[SEQ]?>" class="tile bg-lightBlue">
                 <div class="tile-content image">
-                    <img src="<?=$img_array?>">
+                    <img src="<?php echo $img_array?>">
                 </div>
                 <div class="brand">
-                    <div class="label no-margin"><span class="bg-dark"><?=cut_str($row[TITLE],20,'...')?></span></div>
+                    <div class="label no-margin"><span class="bg-dark"><?php echo cut_str($row[TITLE],20,'...')?></span></div>
                 </div>
             </a>
 
@@ -246,12 +246,12 @@ $MENU_CODE= "003001000";
 		$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
 		$img_array = get_image_file_from_html($row[CONTENT],1);
 	     ?>
-		<a href="/_metro/board/view.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice&SEQ=<?=$row[SEQ]?>" class="tile bg-darkOrange">
+		<a href="/_metro/board/view.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice&SEQ=<?php echo $row[SEQ]?>" class="tile bg-darkOrange">
                 <div class="tile-content image">
-                    <img src="<?=$img_array?>">
+                    <img src="<?php echo $img_array?>">
                 </div>
                 <div class="brand">
-                    <div class="label no-margin"><span class="bg-dark"><?=cut_str($row[TITLE],20,'...')?></span></div>
+                    <div class="label no-margin"><span class="bg-dark"><?php echo cut_str($row[TITLE],20,'...')?></span></div>
                 </div>
             </a>
 
@@ -265,12 +265,12 @@ $MENU_CODE= "003001000";
 		$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
 		$img_array = get_image_file_from_html($row[CONTENT],1);
 	    ?>
-	    <a href="/_metro/board/view.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice&SEQ=<?=$row[SEQ]?>" class="tile double bg-lightBlue">
+	    <a href="/_metro/board/view.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice&SEQ=<?php echo $row[SEQ]?>" class="tile double bg-lightBlue">
                 <div class="tile-content image">
-                    <img src="<?=$img_array?>">
+                    <img src="<?php echo $img_array?>">
                 </div>
                 <div class="brand">
-                    <div class="label"><span class="bg-dark"><?=cut_str($row[TITLE],44,'...')?></span></div>
+                    <div class="label"><span class="bg-dark"><?php echo cut_str($row[TITLE],44,'...')?></span></div>
                 </div>
             </a>
 
@@ -284,12 +284,12 @@ $MENU_CODE= "003001000";
 		$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
 		$img_array = get_image_file_from_html($row[CONTENT],1);
 	    ?>
-	    <a href="/_metro/board/view.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice&SEQ=<?=$row[SEQ]?>" class="tile double bg-darkGreen">
+	    <a href="/_metro/board/view.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice&SEQ=<?php echo $row[SEQ]?>" class="tile double bg-darkGreen">
                 <div class="tile-content image">
-                    <img src="<?=$img_array?>">
+                    <img src="<?php echo $img_array?>">
                 </div>
                 <div class="brand">
-                    <div class="label"><span class="bg-dark"><?=cut_str($row[TITLE],44,'...')?></span></div>
+                    <div class="label"><span class="bg-dark"><?php echo cut_str($row[TITLE],44,'...')?></span></div>
                 </div>
             </a>
         </div> <!-- End group six -->
@@ -341,13 +341,13 @@ $MENU_CODE= "003001000";
 	        if($result){
 	        	while($row = mysql_fetch_array($result)) { $i1++;
 	    ?>
-	    <a href="/_metro/board/view.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice&SEQ=<?=$row['SEQ']?>">
+	    <a href="/_metro/board/view.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice&SEQ=<?php echo $row['SEQ']?>">
             <div class="tile bg-dark">
                 <div class="tile-content icon">
-                    <img src="<?=get_image_file_from_html($row[CONTENT],1)?>">
+                    <img src="<?php echo get_image_file_from_html($row[CONTENT],1)?>">
                 </div>
                 <div class="brand">
-                    <div class="label"><?=cut_str($row[TITLE],18,'...')?></div>
+                    <div class="label"><?php echo cut_str($row[TITLE],18,'...')?></div>
                 </div>
             </div>
             </a>
@@ -359,7 +359,7 @@ $MENU_CODE= "003001000";
 
         <div class="tile-group double">
             <div class="tile double">
-            	<a href="/_metro/board/view.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice&SEQ=9">
+            	<a href="/_metro/board/view.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice&SEQ=9">
                 <div class="tile-content image-set">
             	<?php
 			 //셀렉트 
@@ -373,7 +373,7 @@ $MENU_CODE= "003001000";
 	        	for($line = 0; $line < 5; $line++){
 	        		if(empty($img_array[$line]))$img_array[$line]="/_metro/image/small_logo.png";
 		?>
-                    <img src="<?=$img_array[$line]?>">
+                    <img src="<?php echo $img_array[$line]?>">
                 <? 	} ?>
                 </div>
                 </a>
@@ -394,8 +394,8 @@ $MENU_CODE= "003001000";
 		        	while($row = mysql_fetch_array($result)) { $i1++;
 		?>
                 <div class="tile-content image slide">
-                    <a href="/_metro/board/view.html?MENU_CODE=<?=$MENU_CODE?>&BOARD_ID=notice&SEQ=<?=$row['SEQ']?>">
-                    <img src="<?=get_image_file_from_html($row[CONTENT],1)?>"></a>
+                    <a href="/_metro/board/view.html?MENU_CODE=<?php echo $MENU_CODE?>&BOARD_ID=notice&SEQ=<?php echo $row['SEQ']?>">
+                    <img src="<?php echo get_image_file_from_html($row[CONTENT],1)?>"></a>
                 </div>
                  <?php
 		          	}

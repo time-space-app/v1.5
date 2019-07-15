@@ -53,7 +53,7 @@ if(isset($_POST['EMAIL_YN']) && ($_POST['EMAIL_YN']!="false")) $EMAIL_YN="true";
 $CONTENT = str_replace("\r\n", "<br/>",$CONTENT);
 $COMMENTS = str_replace("\r\n", "<br/>",$COMMENTS);
 $PROFILE_INFO= str_replace("\r\n", "<br/>",$PROFILE_INFO);
-//첨부파일1 처리 시작
+//첨부File1 처리 시작
 if($_FILES["FILEUPLOAD0"]["tmp_name"]) {
 	$tmp_name = $_FILES["FILEUPLOAD0"]["tmp_name"];
 	$FILE_NM = $_FILES["FILEUPLOAD0"]["name"];
@@ -64,11 +64,11 @@ if($_FILES["FILEUPLOAD0"]["tmp_name"]) {
 			exit;
 			return false;
 		}
-	$realfilename=$LOGIN_ID.".jpg";//POST로 받은 파일명 중복방지 코드
-	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 파일명 중복방지처리
-	$upLoad  = "../../../../upload/profile/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글파일명
-	$exist = file_exists("$upLoad");    //파일있는지 검사
-	if($exist) @unlink($upLoad);		 //중복된 파일을 삭제한다
+	$realfilename=$LOGIN_ID.".jpg";//POST로 받은 File명 중복방지 코드
+	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 File명 중복방지처리
+	$upLoad  = "../../../../upload/profile/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글File명
+	$exist = file_exists("$upLoad");    //File있는지 검사
+	if($exist) @unlink($upLoad);		 //중복된 File을 삭제한다
 	move_uploaded_file($tmp_name, $upLoad);
 }
 if($MODE == "write"){

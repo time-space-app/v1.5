@@ -8,7 +8,7 @@ $GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);/
 $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 ?>
 <?php //입력값 바인딩
-//게시판 공통변수 항상 페이지 상단에 위치
+//Board 공통변수 항상 페이지 상단에 위치
 $BOARD_SEQ = $_REQUEST['SEQ'];
 $BOARD_ID = 'notice';
 //정보 가져오기 쿼리정리

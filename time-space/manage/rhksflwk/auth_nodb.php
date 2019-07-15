@@ -13,7 +13,7 @@ if (isset($_POST['id']) && isset($_POST['pw']))
 	  	$_SESSION['valid_name'] = '타임스페이스';//iconv('utf-8', 'euc-kr', $row['USER_NM']);
 	  	$_SESSION['valid_level'] = '1';
 	  	$_SESSION['valid_email'] = $row['USER_EMAIL'];
-		$_SESSION['login_security']   = 1;//파일시스템 연동세션
+		$_SESSION['login_security']   = 1;//File시스템 연동세션
 	    //echo '로그인완료: '.$_SESSION['valid_name'].' <br />';
 	    //echo '<a href="/manage/admin/logout.php">로그아웃</a><br />';
 	  	session_cache_limiter('private');

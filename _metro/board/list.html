@@ -76,12 +76,12 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, repair, pds, faq
         회원만 쓰기 가능하십니다.<?php } ?></small>
         <!--
         <?php if(preg_match('/stay-/',$BOARD_ID)){ ?>
-        <a href="/_metro/board/reserve/write.html/BOARD_ID/<?=$BOARD_ID?>">
-        <button class="image-button bg-darkGreen fg-white image-left" style="height:27px;" onclick="javascript:location.href='../reserve/write.html?BOARD_ID=<?=$BOARD_ID?>'">
-        <?=$title?> 예약하기
+        <a href="/_metro/board/reserve/write.html/BOARD_ID/<?php echo $BOARD_ID?>">
+        <button class="image-button bg-darkGreen fg-white image-left" style="height:27px;" onclick="javascript:location.href='../reserve/write.html?BOARD_ID=<?php echo $BOARD_ID?>'">
+        <?php echo $title?> 예약하기
         <i class="icon-calendar bg-green fg-white"></i>
         </button></a>
-        <? } ?>
+        <?php } ?>
         -->
       </h1>
  <div class="page-region-content row">
@@ -118,17 +118,17 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, repair, pds, faq
 				$COMMENT_ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
 				$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
 			?>
-			<a href="/_metro/board/view.html/MENU_CODE/<?=$MENU_CODE?>/BOARD_ID/<?=$BOARD_ID?>/SEQ/<?=$row['SEQ']?>" class="list small bg-lightBlue fg-white" style="width:690px;">
+			<a href="/_metro/board/view.html/MENU_CODE/<?php echo $MENU_CODE?>/BOARD_ID/<?php echo $BOARD_ID?>/SEQ/<?php echo $row['SEQ']?>" class="list small bg-lightBlue fg-white" style="width:690px;">
 		  	<div class="list-content">
-		  	<span><img src="<?=get_image_file_from_html($row[CONTENT],1)?>" style="width:80px;float:left;padding-right:10px;"></span>
-		  	<span class="list-title ribbed-darkPink"><?=cut_str($row[TITLE],88,'...')?></span>
-		  	<span style="font-size:12px;spadding:5px;"><?=cut_str($row[CONTENT],288,'...')?></span>
+		  	<span><img src="<?php echo get_image_file_from_html($row[CONTENT],1)?>" style="width:80px;float:left;padding-right:10px;"></span>
+		  	<span class="list-title ribbed-darkPink"><?php echo cut_str($row[TITLE],88,'...')?></span>
+		  	<span style="font-size:12px;spadding:5px;"><?php echo cut_str($row[CONTENT],288,'...')?></span>
 		  	</div>
 		  	</a>
-		  	<? } ?>
+		  	<?php } ?>
 		  	</div>
 		</td></tr>
-		<? }else{ ?>
+		<?php }else{ ?>
 			<?
 			while($row = mysql_fetch_array($result)) {
 				//댓글셀렉트
@@ -141,15 +141,15 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, repair, pds, faq
 				$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
 			?>
 			<tr><td>
-				<a href="/_metro/board/view.html/MENU_CODE/<?=$MENU_CODE?>/BOARD_ID/<?=$BOARD_ID?>/SEQ/<?=$row['SEQ']?>">
-				<?=cut_str($row[TITLE],88,'...')?><?=($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?>
+				<a href="/_metro/board/view.html/MENU_CODE/<?php echo $MENU_CODE?>/BOARD_ID/<?php echo $BOARD_ID?>/SEQ/<?php echo $row['SEQ']?>">
+				<?php echo cut_str($row[TITLE],88,'...')?><?php echo ($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?>
 				<?php if($_SESSION['valid_user']!=$row[USER_ID] && $BOARD_ID=="qa"){ //본인이 쓴 글 수정삭제기능?>
 				<img src="/time-space/mobile/img/icon-pass.png" style="margin-bottom:1px;">
 				<?php } ?>
 				</a>
 			<tr><td>
-			<? } ?>	
-	   	<? } ?>
+			<?php } ?>	
+	   	<?php } ?>
 	   	
 		<?php $i++;
 		      }
@@ -163,27 +163,27 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, repair, pds, faq
 			 <?
 			 //================ pageing 출력 10번~12번 code ======================================
 				  if($start_num > 1){ 	// 10 - 이전 블럭 링크?>
-					 <li class="prev"><a href="/_metro/board/list.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$before_block?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID=<?=$BOARD_ID?>" onFocus="blur()">
+					 <li class="prev"><a href="/_metro/board/list.html/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $before_block?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID=<?php echo $BOARD_ID?>" onFocus="blur()">
 					 <i class="icon-previous"></i>
 					 </a></li>
-				  <? } ?>&nbsp;
+				  <?php } ?>&nbsp;
 				 <?
 				  for($i=$start_num; $i<=$end_num; $i++){	// 11 - 페이지 링크
 					if(ceil($total_rec/$recnum_per_page) >= $i){
 					 if($now_page == $i){ ?>
 					 <li class="active"><a>
-					 <?=$i?></a>
+					 <?php echo $i?></a>
 					 </li>
 					  <?    }else{ ?>
-					 <li><a href="/_metro/board/list.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$i?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>" onFocus="blur()">
-					 <?=$i?>
+					 <li><a href="/_metro/board/list.html/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $i?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>" onFocus="blur()">
+					 <?php echo $i?>
 					 </a></li>		  	
 				 <?            }
 					}
 				  }  ?>&nbsp;
 				 <?
 				  if($end_num * $recnum_per_page < $total_rec){ 	// 12 - 다음 블럭 링크?>
-					 <li class="next"><a href="/_metro/board/list.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$next_block?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>" onFocus="blur()">
+					 <li class="next"><a href="/_metro/board/list.html/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $next_block?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>" onFocus="blur()">
 					 <i class="icon-next"></i>
 					 </a><li>
 			 <?  }
@@ -195,11 +195,11 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, repair, pds, faq
 		<!-- 등록버튼 시작 -->
 		<div id="board_list_button_table" style="text-align:right">
 		<?php if($_SESSION['valid_user'] != "" && $_SESSION['valid_level'] < 3 ) { ?>
-		 <a href="/_metro/board/write.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$now_page?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>/MODE/write">
+		 <a href="/_metro/board/write.html/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/write">
 		 <span class="button large info">WRITE</span></a>
 		 <?php } ?>
 		 <?php if($_SESSION['valid_user'] != "" && $_SESSION['valid_level'] >=3 && ( $BOARD_ID =='community'||$BOARD_ID == 'qa' ) ) { ?>
-		 <a href="/_metro/board/write.html/MENU_CODE/<?=$MENU_CODE?>/now_page/<?=$now_page?>/GUBN/<?=$GUBN?>/SEARCH/<?=$SEARCH?>/BOARD_ID/<?=$BOARD_ID?>/MODE/write">
+		 <a href="/_metro/board/write.html/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/write">
 		 <span class="button large info">WRITE</span></a>
 		 <?php } ?>
 		 </div>
@@ -216,8 +216,8 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, repair, pds, faq
 			<div class="input-control text span2" data-role="input-control">
 			<input type="text" name="SEARCH" id="SEARCH" size=15 class="type-text" value="">
 			</div>
-			<input type="hidden" name="BOARD_ID" id="BOARD_ID" size=15 class="type-text" value="<?=$BOARD_ID?>">
-			<input type="hidden" name="MENU_CODE" id="MENU_CODE" size=15 class="type-text" value="<?=$MENU_CODE?>">
+			<input type="hidden" name="BOARD_ID" id="BOARD_ID" size=15 class="type-text" value="<?php echo $BOARD_ID?>">
+			<input type="hidden" name="MENU_CODE" id="MENU_CODE" size=15 class="type-text" value="<?php echo $MENU_CODE?>">
 			<button type="submit" class="button default">Search</button>
 			
 			</form> 

@@ -16,7 +16,7 @@ class GPLbase {
   //기본 환경설정 변수
   var $encoding;//페이지 기본 인코딩
   var $url_default;//설치된 기본url
-  var $path_default;//현재파일의 기본경로에 대한 상대경로
+  var $path_default;//현재File의 기본경로에 대한 상대경로
   var $mode_echo_script_microtime;//스크립트 실행 타임 출력 방법 지정
   //현재 페이지에서 측정된 변수
   var $start_microtime;//스크립트 시작 마이크로 타임
@@ -128,7 +128,7 @@ class GPLbase {
 
     $this->url_default = preg_replace("`//+$`", '/', $url . '/');
   }
-  //현재 실행되는 파일의 경로와 기본 경로의 상대경로 세팅
+  //현재 실행되는 File의 경로와 기본 경로의 상대경로 세팅
   function set_path_default($path=''){
     if (!empty($path)) {
       $this->path_default = $path;
@@ -234,7 +234,7 @@ class GPLbase {
     @session_start();
     $this->del_session();
   }
-  //지정일 이상된 파일은 자동으로 지운다.
+  //지정일 이상된 File은 자동으로 지운다.
   function del_session(){
     if (empty($this->time_del_force_session)) return;
     $d = dir($this->session_save_path);

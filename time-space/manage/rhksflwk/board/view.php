@@ -9,7 +9,7 @@ $GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);/
 $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 ?>
 <?php //입력값 바인딩
-//게시판 공통변수 항상 페이지 상단에 위치
+//Board 공통변수 항상 페이지 상단에 위치
 $GUBN = $_REQUEST['GUBN'];
 $SEARCH = $_REQUEST['SEARCH'];
 $BOARD_ID = $_REQUEST['BOARD_ID'];
@@ -67,7 +67,7 @@ $now_page = $_REQUEST['now_page'];
 		default   : $body='1'; $title='NOTICE';break;
 	}
 ?>
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">

@@ -33,7 +33,7 @@ class GPLmysqli extends GPLmessage{
 	}
 	/**
 	 * DataBase 연결 함수
-	 * 설정파일을 참조하여 연결하며 기본 인코딩은 UTF-8
+	 * 설정File을 참조하여 연결하며 기본 인코딩은 UTF-8
 	 * @filesource config/db.php
 	 */
 	public function GPLmysql_connect(){

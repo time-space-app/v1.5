@@ -37,9 +37,9 @@ $CONTENT = str_replace("\r\n", "<br/>",$CONTENT);
 $COMMENTS = str_replace("\r\n", "<br/>",$COMMENTS);
 //echo $post_var;
 //exit; //디버그
-//파일 삭제 처리 시작
+//File 삭제 처리 시작
 if($FILE_DEL0=="FILE_DEL0"){
-	//첨부파일 삭제시작
+	//첨부File 삭제시작
 	$proc_delete = "DELETE FROM T_ATTACH_FILE WHERE BOARD_SEQ = '$BOARD_SEQ'";
 	$proc_delete .= " AND BOARD_ID = '$BOARD_ID'";
 	$proc_delete .= " AND SEQ = '$FILE_NUM0'";
@@ -50,13 +50,13 @@ if($FILE_DEL0=="FILE_DEL0"){
 		$FILECNT = $FILECNT - 1;
 	}
 	if($FILE_NM0 != ""){
-		$upLoad  = "../../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_NM0); // 중복체크전 업로드 경로+한글파일명
-		$exist = file_exists("$upLoad");    //파일있는지 검사
-		if($exist) @unlink($upLoad);		 //파일을 삭제한다
+		$upLoad  = "../../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_NM0); // 중복체크전 업로드 경로+한글File명
+		$exist = file_exists("$upLoad");    //File있는지 검사
+		if($exist) @unlink($upLoad);		 //File을 삭제한다
 	}
 }
 if($FILE_DEL1=="FILE_DEL1"){
-	//첨부파일 삭제시작
+	//첨부File 삭제시작
 	$proc_delete = "DELETE FROM T_ATTACH_FILE WHERE BOARD_SEQ = '$BOARD_SEQ'";
 	$proc_delete .= " AND BOARD_ID = '$BOARD_ID'";
 	$proc_delete .= " AND SEQ = '$FILE_NUM1'";
@@ -67,9 +67,9 @@ if($FILE_DEL1=="FILE_DEL1"){
 		$FILECNT = $FILECNT - 1;
 	}
 	if($FILE_NM1 != ""){
-		$upLoad  = "../../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_NM1); // 중복체크전 업로드 경로+한글파일명
-		$exist = file_exists("$upLoad");    //파일있는지 검사
-		if($exist) @unlink($upLoad);		 //파일을 삭제한다
+		$upLoad  = "../../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_NM1); // 중복체크전 업로드 경로+한글File명
+		$exist = file_exists("$upLoad");    //File있는지 검사
+		if($exist) @unlink($upLoad);		 //File을 삭제한다
 	}
 }
 //고유ID생성
@@ -82,16 +82,16 @@ if($BOARD_SEQ==""){
 }
 //echo $BOARD_SEQ;
 //exit; //디버그
-//첨부파일1 처리 시작
+//첨부File1 처리 시작
 if($_FILES["FILEUPLOAD0"]["tmp_name"]) {
 	if($MODE == "write")$SEQ = $BOARD_SEQ+1; else $SEQ = $BOARD_SEQ; //최신글 번호 구하기
 	$tmp_name = $_FILES["FILEUPLOAD0"]["tmp_name"];
 	$FILE_NM = $_FILES["FILEUPLOAD0"]["name"];
-	$realfilename=date("YmdHms").$FILE_NM;//POST로 받은 파일명 중복방지 코드
-	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 파일명 중복방지처리
-	$upLoad  = "../../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글파일명
-	$exist = file_exists("$upLoad");    //파일있는지 검사
-	if($exist) @unlink($upLoad);		 //중복된 파일을 삭제한다
+	$realfilename=date("YmdHms").$FILE_NM;//POST로 받은 File명 중복방지 코드
+	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 File명 중복방지처리
+	$upLoad  = "../../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글File명
+	$exist = file_exists("$upLoad");    //File있는지 검사
+	if($exist) @unlink($upLoad);		 //중복된 File을 삭제한다
 	move_uploaded_file($tmp_name, $upLoad);
 	$SQL = "SELECT MAX(SEQ) AS FILE_SEQ FROM T_ATTACH_FILE";
 	$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
@@ -115,16 +115,16 @@ if($_FILES["FILEUPLOAD0"]["tmp_name"]) {
 }
 //echo $proc_save;
 //exit;
-//첨부파일2 처리 시작
+//첨부File2 처리 시작
 if($_FILES["FILEUPLOAD1"]["tmp_name"]) {
 	if($MODE == "write")$SEQ = $BOARD_SEQ+1; else $SEQ = $BOARD_SEQ; //최신글 번호 구하기
 	$tmp_name = $_FILES["FILEUPLOAD1"]["tmp_name"];
 	$FILE_NM = $_FILES["FILEUPLOAD1"]["name"];
-	$realfilename=date("YmdHms").$FILE_NM;//POST로 받은 파일명 중복방지 코드
-	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 파일명 중복방지처리
-	$upLoad  = "../../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글파일명
-	$exist = file_exists("$upLoad");    //파일있는지 검사
-	if($exist) @unlink($upLoad);		 //중복된 파일을 삭제한다
+	$realfilename=date("YmdHms").$FILE_NM;//POST로 받은 File명 중복방지 코드
+	$FILE_SAVE_NM = strtolower($realfilename); //대문자->소문자 윈도우에서 대소문자 같은 File명 중복방지처리
+	$upLoad  = "../../../upload/$BOARD_ID/".iconv('UTF-8','EUC-KR',$FILE_SAVE_NM); // 중복체크전 업로드 경로+한글File명
+	$exist = file_exists("$upLoad");    //File있는지 검사
+	if($exist) @unlink($upLoad);		 //중복된 File을 삭제한다
 	move_uploaded_file($tmp_name, $upLoad);
 	$SQL = "SELECT MAX(SEQ) AS FILE_SEQ FROM T_ATTACH_FILE";
 	$row = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
@@ -149,6 +149,7 @@ if($_FILES["FILEUPLOAD1"]["tmp_name"]) {
 //
 //echo $MODE;
 //exit; //디버그
+if ( $FILECNT < 0 || is_null($FILECNT) || isset($FILECNT) || empty($FILECNT) ) {$FILECNT=0;}
 if($MODE == "write"){
 	$SEQ = $BOARD_SEQ+1; //최신글 번호 구하기
 	$proc_save = "INSERT INTO T_BOARD (";

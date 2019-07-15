@@ -31,7 +31,7 @@ if ( $main['mode'] == 'edit' ) { // file ##
             var debug = '.$_SESSION['debug'].';
             
             function whenCompleted() {
-				//alert("'.$save['contents'].'");//µð¹ö±×
+				//alert("'.$save['contents'].'");//No
 	            var e = document.getElementById(\'save\'); 
 	            if ( debug == 1 ) { // debug ##
 	                if ( ajax.responseStatus ){

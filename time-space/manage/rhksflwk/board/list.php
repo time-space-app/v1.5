@@ -9,7 +9,7 @@ $GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);/
 $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 ?>
 <?php
-//게시판 공통변수 항상 페이지 상단에 위치
+//Board 공통변수 항상 페이지 상단에 위치
 $GUBN = $_REQUEST['GUBN'];
 $SEARCH = $_REQUEST['SEARCH'];
 $BOARD_ID = $_REQUEST['BOARD_ID'];
@@ -99,7 +99,7 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, qa, pds, faq
 <body>
 <div id="wrap">
 <header id="board_list_header">
-	<h2><?php echo $title." 게시판"?></h2>
+	<h2><?php echo $title." Board"?></h2>
 </header>
 <!--검색영역시작-->
 <div id="board_list_search">
@@ -118,7 +118,7 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, qa, pds, faq
 <!-- 테이블 시작 -->
 <div class="board_list_table">
     <table class="list_table">
-        <caption>타임-스페이스 게시판 디자인</caption>
+        <caption>타임-스페이스 Board 디자인</caption>
         <colgroup>
 	   <col width="10%" />
 	   <col width="45%" />
@@ -138,14 +138,14 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, qa, pds, faq
 	  </colgroup>
         <thead>
             <tr>
-                <th>글번호</th>
-                <th>제목</th>
+                <th>No</th>
+                <th>Subject</th>
                 <?php if($BOARD_ID!="faq"){?>
-                <th>작성자</th>
-                <th>등록일</th>
+                <th>Writer</th>
+                <th>UpDate</th>
                 <?php } ?>
                 <?php if($BOARD_ID=="notice" || $BOARD_ID=="pds"){?>
-                <th>파일</th>
+                <th>File</th>
                 <?php } ?>
                 <?php if($BOARD_ID=="qa"){?>
 		<th>상태</th>
@@ -193,7 +193,7 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, qa, pds, faq
 		<?php }?> 
 		<?php if($BOARD_ID=="notice" || $BOARD_ID=="pds"){?>
 			<td>
-				<?php //첨부파일 다운로드로직
+				<?php //첨부File 다운로드로직
 				$SQL = "SELECT";
 				$SQL .= " SEQ,FILE_NM,FILE_SIZE,DOWN_CNT";
 				$SQL .= " ,BOARD_SEQ,BOARD_ID";

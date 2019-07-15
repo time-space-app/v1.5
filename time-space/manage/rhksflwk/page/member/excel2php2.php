@@ -13,7 +13,7 @@ $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 	$filename	=	$_REQUEST["filename"];
 	/////////////////////////////디비에 데이터 인서트/////////////////////////////
 	$path = "./temp";//임시디렉토리
-	$uploaddir = "./temp/". $filename;//임시파일
+	$uploaddir = "./temp/". $filename;//임시File
 	if($mode=="insert"){
 		
 		require_once $_SERVER['DOCUMENT_ROOT'].'/Excel/reader.php';
@@ -48,13 +48,13 @@ $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 			
 		}
 		//echo "<br/>";		//디버그
-		@unlink($uploaddir);//실제 파일삭제
+		@unlink($uploaddir);//실제 File삭제
 		@rmdir($path);//실제 디렉토리 삭제
 		//exit;//디버그
 	}
 	if($mode=="del"){
-		/////////////////////////////임시파일,디렉토리 삭제/////////////////////////////	
-		@unlink($uploaddir);//실제 파일삭제
+		/////////////////////////////임시File,디렉토리 삭제/////////////////////////////	
+		@unlink($uploaddir);//실제 File삭제
 		@rmdir($path);//실제 디렉토리 삭제
 	}
 	$location="./list.php";

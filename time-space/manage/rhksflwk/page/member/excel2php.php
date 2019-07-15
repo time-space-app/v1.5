@@ -9,10 +9,10 @@ $GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);/
 $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 ?>
 <?php
-/////////////////////////////파일 업로드/////////////////////////////
+/////////////////////////////File 업로드/////////////////////////////
 
-	$filename = $_FILES['xls']['name'];//파일명
-	$filesize = $_FILES['xls']['size'];//파일크기
+	$filename = $_FILES['xls']['name'];//File명
+	$filesize = $_FILES['xls']['size'];//File크기
 	$file_extension = strtolower(array_pop(explode('.', $filename))) ;//확장자추출
 	$path = "./temp";
 	umask(0); 
@@ -23,7 +23,7 @@ $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 	copy($_FILES['xls']['tmp_name'], $uploaddir);
 ?>
 출력내용이 정확합니까?? 
-<a href="excel2php2.php?filename=<?php echo $filename?>&mode=insert">디비에 입력하기</a> /   <a href="excel2php2.php?filename=<?php echo $filename?>&mode=del">취소하고 파일을 다시업로드 합니다.</a>
+<a href="excel2php2.php?filename=<?php echo $filename?>&mode=insert">디비에 입력하기</a> /   <a href="excel2php2.php?filename=<?php echo $filename?>&mode=del">취소하고 File을 다시업로드 합니다.</a>
 <?php
 //$_SESSION[chk_code]="YmdHis";
 if($_POST[chk_code] == $_SESSION[chk_code] && $_FILES[xls][tmp_name]){
@@ -291,7 +291,7 @@ print_r($data);
 echo "</PRE>";
 */
 ?>
-<input type="button" value="Excel 파일 다시 입력" onClick="location.href='excel2php2.php?filename=<?php echo $filename?>&mode=del'">
+<input type="button" value="Excel File 다시 입력" onClick="location.href='excel2php2.php?filename=<?php echo $filename?>&mode=del'">
 <?php
 @unlink($_FILES[xls][tmp_name]);
 }else{
@@ -301,7 +301,7 @@ $_SESSION[chk_code] = $chk_code;
 <form name="fExcel" method="post" enctype="multipart/form-data">
 <input type="hidden" name="chk_code" value="<?php echo $chk_code?>">
 셀 고정 보기 : <input type="checkbox" name="force_nobr" value="1"><br>
-엑셀파일 : <input type="file" name="xls"> <input type="submit" value=" 확 인 ">
+엑셀File : <input type="file" name="xls"> <input type="submit" value=" 확 인 ">
 </form>
 <?php
 }

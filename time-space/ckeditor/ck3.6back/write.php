@@ -9,7 +9,7 @@ $GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);/
 $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 ?>
 <?php
-//게시판 공통변수 항상 페이지 상단에 위치
+//Board 공통변수 항상 페이지 상단에 위치
 $GUBN = $_REQUEST['GUBN'];
 $SEARCH = $_REQUEST['SEARCH'];
 $BOARD_ID = $_REQUEST['BOARD_ID'];
@@ -143,10 +143,10 @@ $se_num2 = mt_rand(1, 9);
 <body class="sub1_<?php echo $body?>">
 <div id="wrap">
 <header id="board_list_header">
-	<h2><?php echo $title." 게시판"?></h2>
+	<h2><?php echo $title." Board"?></h2>
 </header>
 <span class="br10"></span>
-<!--게시판 시작-->
+<!--Board 시작-->
 <form method="post" name="frm" id="frm" action="write_ok.php" onsubmit="return submitForm(this)" enctype="multipart/form-data" >
 <!-- 테이블 시작 -->
 <div class="board_write_table">
@@ -260,7 +260,7 @@ $se_num2 = mt_rand(1, 9);
 	</div>
 </form>
 </div>
-<!--게시판 끝-->
+<!--Board 끝-->
 <?php if($BOARD_ID=="notice" || $BOARD_ID=="community" || preg_match('/stay-/',$BOARD_ID)) { ?>
 <script type="text/javascript">
 CKEDITOR.replace( "CONTENT",

@@ -16,7 +16,7 @@ $T_S_MENU = "T_S_MENU";
 $T_CMS = "T_CMS";
 ?>
 <?php
-//게시판 공통변수 항상 페이지 상단에 위치
+//Board 공통변수 항상 페이지 상단에 위치
 $SEQ= $_REQUEST['SEQ'];
 $L_CODE= $_REQUEST['L_CODE'];
 $M_CODE= $_REQUEST['M_CODE'];

@@ -14,7 +14,7 @@
 			echo 'IMAGE ONLY UPLOAD';
 			return false;
 		}
-		$file_name=date("YmdHms").".".$ext;//POST로 받은 파일명 중복방지 코드
+		$file_name=date("YmdHms").".".$ext;//POST로 받은 File명 중복방지 코드
 		$save_dir = sprintf('%s/%s', $up_dir, $file_name);
 		$save_url = sprintf('%s/%s', $up_url, $file_name);
 			

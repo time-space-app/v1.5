@@ -11,7 +11,7 @@ $file_path = $upload_path.$filename;
 $handle = fopen($file_path, "rb");
     if(!$handle) 
     { 
-        echo "{$filename} 파일을 찾을 수 없습니다"; 
+        echo "{$filename} File을 찾을 수 없습니다"; 
         exit; 
     } 
     if(strstr($HTTP_USER_AGENT, "MSIE 6.")) 
