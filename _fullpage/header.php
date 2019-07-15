@@ -74,7 +74,7 @@ $T_CMS = "T_CMS";
 if(empty($_REQUEST['MENU_CODE'])) $_REQUEST['MENU_CODE']= "001000000"; 
 ?>
 <?php //메뉴값 바인딩
-//게시판 공통변수 항상 페이지 상단에 위치
+//메뉴 공통변수 항상 페이지 상단에 위치
 $MENU_CODE= str_replace(" ","",$_REQUEST['MENU_CODE']);
 $L_CODE= SUBSTR($MENU_CODE,0,3);
 $M_CODE= SUBSTR($MENU_CODE,3,3);
