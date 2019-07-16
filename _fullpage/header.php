@@ -92,8 +92,8 @@ if(preg_match('/(?i)msie [10]/',$_SERVER['HTTP_USER_AGENT']))
    //echo '<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" >'; //rest of your code
 }
 ?>
-<?php //입력값 바인딩
-//게시판 공통변수 항상 페이지 상단에 위치
+<?php
+//메뉴-콘텐츠 공통변수 항상 페이지 상단에 위치
 //조회카운터+1
 	$proc_edit = "UPDATE T_CMS SET";
 	$proc_edit .=" READCOUNT = IFNULL(READCOUNT,0) + 1";

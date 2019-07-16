@@ -40,22 +40,153 @@
 		<div class="container">
 			<div class="slide active">
 				<div class="row">
-					<div class="d-none d-md-block col-md-3 col-sm-3">
-						<img src="/_fullpage/images/lock-icon.jpg" class="cover-image float-right">
+				<?php
+					//게시판 공통변수 항상 페이지 상단에 위치
+					$GUBN = $_REQUEST['GUBN'];
+					$SEARCH = $_REQUEST['SEARCH'];
+					$BOARD_ID = $_REQUEST['BOARD_ID'];
+					$MODE = $_REQUEST['MODE'];
+					$BOARD_SEQ = $_REQUEST['SEQ'];
+							if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, repair, pds, faq
+							$now_page = $_REQUEST['now_page'];
+					?>
+					<?php
+						//페이징설정 넘버링 시작
+						$now_page = $_REQUEST['now_page'];
+						//================ pageing 계산 code ======================================
+						// 1 - 현재 페이지 설정
+						if($now_page == ""){
+							$now_page = 1;
+						}
+						// 2 - 블럭크기 설정
+						if($block_size == ""){
+							$block_size = 7;
+						}
+						// 3 - 각 블럭의 start 페이지 값을 설정한다
+						if($now_page % $block_size == 0){
+							$start_num = abs($now_page - $block_size + 1);    // 현재 페이지가 블럭의 마지막 페이지 일 경우 해당 블럭의 시작 페이지 번호를 정한다
+						}else{
+							$start_num = floor($now_page/$block_size)*$block_size + 1; // 현재페이지가 블럭의 마지막 페이지가 아닐경우 시작 페이지를 지정한다
+						}
+						// 4 - 각 블럭의 end 페이지 값을 설정한다
+						$end_num = $start_num + $block_size - 1;
+						// 5 - 카운터 쿼리호출 (마지막 페이지에서 존재하지 않는 페이지 숫자를 없애주기 위해 토탈레코드 숫자를 구한다 )
+							$SQL = "SELECT";
+							$SQL .= " COUNT(SEQ) AS COUNT";
+							$SQL .= " FROM T_BOARD";
+							$SQL .= " WHERE BOARD_ID = '".$BOARD_ID."'";
+							$SQL .= " AND (TITLE LIKE '%".$SEARCH."%'";
+							$SQL .= " OR CONTENT LIKE '%".$SEARCH."%')";
+							$result = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+							if($result){
+								$total_rec = $result['COUNT'];
+							}
+						// 6 - 한페이지당 보여줄 레코드 수 설정
+						$recnum_per_page = 3;
+						// 7 - 불러오기 쿼리문에서 시작레코드 숫자 지정
+						if($now_page == 1){
+							$st_limit = 0;
+						}else{
+							$st_limit = $now_page * $recnum_per_page - $recnum_per_page;
+						}
+						// 8 - 이전 블럭 설정
+						$before_block = abs($start - 1);
+						// 9 - 다음 블럭 설정
+						$next_block = $end_num + 1;
+					?>
+					<?php
+						//메뉴 변수
+						switch ($BOARD_ID) { //notice, qa, repair, pds, faq
+							case 'notice'  : $body='1'; $title='NOTICE';break;
+							case 'community' : $body='2'; $title='COMMUNITY';break;
+							case 'qa'  : $body='3'; $title='Q/A';break;
+							case 'faq'  : $body='4'; $title='FAQ';break;
+							case 'pds'  : $body='5'; $title='PDS';break;
+							case 'stay-sea'  : $body='6'; $title='대분류1';break;
+							case 'stay-mi'  : $body='7'; $title='대분류2';break;
+							case 'stay-ho'  : $body='8'; $title='대분류3';break;
+							case 'stay-doo'  : $body='9'; $title='대분류4';break;
+							default   : $body='1'; $title='NOTICE';break;
+						}
+					?>
+					<style>
+					.listview .list-content { text-align: left; border-right: 1px solid; }
+					.listview .list-content a { color: white; }
+					.listview .list-content:last-child { border-right: none; }
+					</style>
+				  <div class="form-inline mx-auto">
+					<h1>
+						<?php echo $title?>&nbsp;&nbsp;<small class="on-right">
+						<?php if($BOARD_ID!="notice" && empty($_SESSION['valid_level']) ) { ?>
+						<!--회원만 쓰기 가능하십니다.--><?php } ?></small>
+					</h1>
 					</div>
-					<div class="col-md-9 col-sm-9">
-						<h3><span class="highlight">名古屋国際日本語学校</span></h3>
-						<p>２１世紀を迎え世界の国際化が急速に進むに従い、日本でも学術、文化、</p>
-						<p>経済など様々な分野で日本から世界各国に </p>
-						<p>今、次の時代を担う若者たちは世界各国の人々と共に学び、生活し、交流を持つことを願い、 </p>
-						<p>適切な指導と環境を渇望しています。</p>
-						<p>本校の設立目的はこのような時代的要求に応え、</p>
-						<p>日本語教育を通して諸外国との友好と相互理解を進め、</p>
-						<p>異文化交流の架け橋となる人材を育成することにあります。 </p>
-						<p>そのために日本語教育だけに限らず、教える側の学生たちに対する理解にも気を配り、</p>
-						<p>学校と地域住民が留学生と諸外国により深い理解が持てるように学校行事を企画していくつもりです。</p>
-						<h4>校長 太田 雅隆</h4>
-					</div>
+					<div class="col-md-12">
+					<table class="table table-striped table-bordered table-hover table-dark text-center" style="opacity: 0.9;">
+							<tbody><tr><td>
+                              <div class="listview">
+									<?php
+										//셀렉트 
+										$SQL = "SELECT";
+										$SQL .= " SEQ,BOARD_ID,USER_ID,USER_NM,EMAIL,TITLE,CONTENT";
+										$SQL .= " ,DATE_FORMAT(REGDATE, '%Y-%m-%d') AS CREATE_DT";
+										$SQL .= " ,READCOUNT,FILECNT,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
+										$SQL .= " FROM T_BOARD";
+										$SQL .= " WHERE BOARD_ID = '$BOARD_ID'";
+										$SQL .= " AND (TITLE LIKE '%".$SEARCH."%'";
+										$SQL .= " OR CONTENT LIKE '%".$SEARCH."%')";
+										$SQL .= " ORDER BY IFNULL(TOP_NEWS,'OFF') DESC, SEQ DESC LIMIT $st_limit , $recnum_per_page";
+										$result = $GPLdb5->GPLexcute_query($SQL);
+										$i=0;
+										$num_rows = $result->num_rows;//echo $num_rows; //디버그
+										if($num_rows>0){
+											while($row = mysqli_fetch_array($result)) {
+												//댓글셀렉트
+												$SQL = "SELECT";
+												$SQL .= " COUNT(SEQ) AS COMMENT_CNT";
+												$SQL .= " FROM T_BOARD_COMMENT";
+												$SQL .= " WHERE BOARD_SEQ = '".$row['SEQ']."'";
+												$SQL .= " AND BOARD_ID = '$BOARD_ID'";
+												$COMMENT_ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
+												$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
+									?>
+										<div class="list-content col-md-4 float-left">
+											<a href="/board/view.php?SEQ=<?php echo $row['SEQ']?>&now_page=<?php echo $now_page?>&GUBN=<?php echo $GUBN?>&SEARCH=<?php echo $SEARCH?>&BOARD_ID=<?php echo $BOARD_ID?>&MODE=view">
+											<span><img src="<?php echo get_image_file_from_html($row[CONTENT],1)?>" style="width:80px;float:left;padding-right:10px;"></span>
+											<span class="list-title ribbed-darkPink">[<?php echo cut_str($row[TITLE],88,'...')?>]<?php echo ($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?></span>
+											<br><span style="font-size:12px;spadding:5px;"><?php echo cut_str($row[CONTENT],388,'...')?></span>
+											</a>
+											<?php //첨부File 다운로드로직
+											$SQL = "SELECT";
+											$SQL .= " SEQ,FILE_NM,FILE_SIZE,DOWN_CNT";
+											$SQL .= " ,BOARD_SEQ,BOARD_ID";
+											$SQL .= " ,CREATE_DT,CREATE_ID,UPDATE_DT,UPDATE_ID";
+											$SQL .= " FROM T_ATTACH_FILE";
+											$SQL .= " WHERE BOARD_SEQ = ".$row['SEQ']." AND BOARD_ID = '$BOARD_ID'";
+											$SQL .= " ORDER BY SEQ ASC";
+											//echo $SQL;//debug 
+											$fileresult = $GPLdb5->GPLexcute_query($SQL);
+											$i=0;
+											if($fileresult){
+												while($filerow = mysqli_fetch_array($fileresult)) {	
+												if($filerow['FILE_NM']){
+												?>
+												<a href="/time-space/manage/core/function/download.php?filename=<?php echo $filerow['FILE_NM']?>&target=<?php echo $BOARD_ID?>">[DOWNLOAD]</a>
+											<?php 
+											}}}?>
+										</div>
+									<?php
+											$i++;
+											}
+									?>
+                              	<?php }else{ ?>
+								<div class="list-content">NONE DATA</div>
+								<?php } ?>
+                              </div>
+                              </td></tr>
+                      </tbody>
+					</table>
+                  </div>
 				</div>
 			</div>
 			<div class="slide">
