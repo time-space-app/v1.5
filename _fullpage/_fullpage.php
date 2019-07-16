@@ -201,7 +201,7 @@
 						<img src="/_fullpage/images/lock-icon.jpg" class="cover-image float-right">
 					</div>
 					<div class="col-md-9 col-sm-9">
-						<h3><span class="highlight">名古屋国際日本語学校</span></h3>
+						<h3><span class="highlight">O O O O O O O学校</span></h3>
 						<p>２１世紀を迎え世界の国際化が急速に進むに従い、日本でも学術、文化、</p>
 						<p>経済など様々な分野で日本から世界各国に </p>
 						<p>今、次の時代を担う若者たちは世界各国の人々と共に学び、生活し、交流を持つことを願い、 </p>
@@ -211,7 +211,7 @@
 						<p>異文化交流の架け橋となる人材を育成することにあります。 </p>
 						<p>そのために日本語教育だけに限らず、教える側の学生たちに対する理解にも気を配り、</p>
 						<p>学校と地域住民が留学生と諸外国により深い理解が持てるように学校行事を企画していくつもりです。</p>
-						<h4>校長 太田 雅隆</h4>
+						<h4>校長 O O O O</h4>
 					</div>
 				</div>
 			</div>
@@ -221,7 +221,7 @@
 						<img src="/_fullpage/images/lock-icon.jpg" class="cover-image float-right">
 					</div>
 					<div class="col-md-9 col-sm-9">
-						<h3><span class="highlight">名古屋国際日本語学校</span></h3>
+						<h3><span class="highlight">O O O O O O O学校</span></h3>
 						<p>２１世紀を迎え世界の国際化が急速に進むに従い、日本でも学術、文化、</p>
 						<p>経済など様々な分野で日本から世界各国に </p>
 						<p>今、次の時代を担う若者たちは世界各国の人々と共に学び、生活し、交流を持つことを願い、 </p>
@@ -231,7 +231,7 @@
 						<p>異文化交流の架け橋となる人材を育成することにあります。 </p>
 						<p>そのために日本語教育だけに限らず、教える側の学生たちに対する理解にも気を配り、</p>
 						<p>学校と地域住民が留学生と諸外国により深い理解が持てるように学校行事を企画していくつもりです。</p>
-						<h4>校長 太田 雅隆</h4>
+						<h4>校長 O O O O</h4>
 					</div>
 				</div>
 			</div>
