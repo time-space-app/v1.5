@@ -110,21 +110,16 @@
 						}
 					?>
 					<style>
-					.listview .list-content { text-align: left; border-right: 1px solid; }
+					.listview .list-content { text-align: left; }
 					.listview .list-content a { color: white; }
-					.listview .list-content:last-child { border-right: none; }
 					</style>
-				  <div class="form-inline mx-auto">
-					<h1>
-						<?php echo $title?>&nbsp;&nbsp;<small class="on-right">
-						<?php if($BOARD_ID!="notice" && empty($_SESSION['valid_level']) ) { ?>
-						<!--회원만 쓰기 가능하십니다.--><?php } ?></small>
-					</h1>
-					</div>
-					<div class="col-md-12">
-					<table class="table table-striped table-bordered table-hover table-dark text-center" style="opacity: 0.9;">
-							<tbody><tr><td>
-                              <div class="listview">
+							<div class="mx-auto table text-center">
+							<h1>
+								<?php echo $title?>&nbsp;&nbsp;<small class="on-right">
+								<?php if($BOARD_ID!="notice" && empty($_SESSION['valid_level']) ) { ?>
+								<!--회원만 쓰기 가능하십니다.--><?php } ?></small>
+							</h1>
+							</div>
 									<?php
 										//셀렉트 
 										$SQL = "SELECT";
@@ -150,43 +145,54 @@
 												$COMMENT_ROW = $GPLdb5->GPLquery_fetch_assoc_one($SQL);
 												$COMMENT_CNT = $COMMENT_ROW['COMMENT_CNT'];
 									?>
-										<div class="list-content col-md-4 float-left">
-											<a href="/board/view.php?SEQ=<?php echo $row['SEQ']?>&now_page=<?php echo $now_page?>&GUBN=<?php echo $GUBN?>&SEARCH=<?php echo $SEARCH?>&BOARD_ID=<?php echo $BOARD_ID?>&MODE=view">
-											<span><img src="<?php echo get_image_file_from_html($row[CONTENT],1)?>" style="width:80px;float:left;padding-right:10px;"></span>
-											<span class="list-title ribbed-darkPink">[<?php echo cut_str($row[TITLE],88,'...')?>]<?php echo ($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?></span>
-											<br><span style="font-size:12px;spadding:5px;"><?php echo cut_str($row[CONTENT],388,'...')?></span>
-											</a>
-											<?php //첨부File 다운로드로직
-											$SQL = "SELECT";
-											$SQL .= " SEQ,FILE_NM,FILE_SIZE,DOWN_CNT";
-											$SQL .= " ,BOARD_SEQ,BOARD_ID";
-											$SQL .= " ,CREATE_DT,CREATE_ID,UPDATE_DT,UPDATE_ID";
-											$SQL .= " FROM T_ATTACH_FILE";
-											$SQL .= " WHERE BOARD_SEQ = ".$row['SEQ']." AND BOARD_ID = '$BOARD_ID'";
-											$SQL .= " ORDER BY SEQ ASC";
-											//echo $SQL;//debug 
-											$fileresult = $GPLdb5->GPLexcute_query($SQL);
-											$i=0;
-											if($fileresult){
-												while($filerow = mysqli_fetch_array($fileresult)) {	
-												if($filerow['FILE_NM']){
-												?>
-												<a href="/time-space/manage/core/function/download.php?filename=<?php echo $filerow['FILE_NM']?>&target=<?php echo $BOARD_ID?>">[DOWNLOAD]</a>
-											<?php 
-											}}}?>
-										</div>
+								<div class="col-md-4 float-left">
+									<table class="table table-striped table-bordered table-hover table-dark text-center" style="opacity: 0.9;">
+									<tbody><tr><td>
+                    <div class="listview">
+											<div class="list-content">
+												<a href="/board/view.php?SEQ=<?php echo $row['SEQ']?>&now_page=<?php echo $now_page?>&GUBN=<?php echo $GUBN?>&SEARCH=<?php echo $SEARCH?>&BOARD_ID=<?php echo $BOARD_ID?>&MODE=view">
+												<span><img src="<?php echo get_image_file_from_html($row[CONTENT],1)?>" style="width:80px;float:left;padding-right:10px;"></span>
+												<span class="list-title ribbed-darkPink">[<?php echo cut_str($row[TITLE],88,'...')?>]<?php echo ($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?></span>
+												<br><span style="font-size:12px;spadding:5px;"><?php echo cut_str($row[CONTENT],388,'...')?></span>
+												</a>
+												<?php //첨부File 다운로드로직
+												$SQL = "SELECT";
+												$SQL .= " SEQ,FILE_NM,FILE_SIZE,DOWN_CNT";
+												$SQL .= " ,BOARD_SEQ,BOARD_ID";
+												$SQL .= " ,CREATE_DT,CREATE_ID,UPDATE_DT,UPDATE_ID";
+												$SQL .= " FROM T_ATTACH_FILE";
+												$SQL .= " WHERE BOARD_SEQ = ".$row['SEQ']." AND BOARD_ID = '$BOARD_ID'";
+												$SQL .= " ORDER BY SEQ ASC";
+												//echo $SQL;//debug 
+												$fileresult = $GPLdb5->GPLexcute_query($SQL);
+												$i=0;
+												if($fileresult){
+													while($filerow = mysqli_fetch_array($fileresult)) {	
+													if($filerow['FILE_NM']){
+													?>
+													<a href="/time-space/manage/core/function/download.php?filename=<?php echo $filerow['FILE_NM']?>&target=<?php echo $BOARD_ID?>">[DOWNLOAD]</a>
+												<?php 
+												}}}?>
+											</div>
+                  	</div>
+									</td></tr>
+									</tbody>
+									</table>
+								</div>
 									<?php
-											$i++;
-											}
+										$i++;
+										}
 									?>
-                              	<?php }else{ ?>
-								<div class="list-content">NONE DATA</div>
-								<?php } ?>
-                              </div>
-                              </td></tr>
-                      </tbody>
-					</table>
-                  </div>
+									<?php }else{ ?>
+								<div class="col-md-4 float-left">
+									<table class="table table-striped table-bordered table-hover table-dark text-center" style="opacity: 0.9;">
+									<tbody><tr><td>
+                 	<div class="listview">
+									<div class="list-content">NONE DATA</div>
+								 	</div></td></tr></tbody></table>
+								</div>
+									<?php } ?>
+							
 				</div>
 			</div>
 			<div class="slide">

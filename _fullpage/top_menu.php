@@ -93,7 +93,7 @@
 			</li>
 			<?php }else{ ?>
 			<li class="nav-item">
-				<a class="nav-link" title="Login" href="/time-space/manage/">Login</a>
+				<a class="nav-link" title="Login" href="/time-space/manage/">Login<?php echo $_SESSION['valid_user']; ?></a>
 			</li>
 			<?php } ?>
 			</li>

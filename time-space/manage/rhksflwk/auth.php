@@ -43,6 +43,16 @@ if (isset($_POST['id']) && isset($_POST['pw']))
 	  			</script>
 	  			");
 	  }else if (count($row) >0){
+			$_SESSION['valid_user'] = $userid;
+	  	$_SESSION['valid_name'] = $row['USER_NM'];//iconv('utf-8', 'euc-kr', $row['USER_NM']);
+	  	$_SESSION['valid_level'] = $row['USER_LEVEL'];
+	  	$_SESSION['valid_email'] = $row['USER_EMAIL'];
+	    //echo '로그인완료: '.$_SESSION['valid_name'].' <br />';
+	    //echo '<a href="/manage/admin/logout.php">로그아웃</a><br />';
+	  	session_cache_limiter('private');
+	  	@ini_set("session.cookie_lifetime", "86400");
+	  	@ini_set("session.cache_expire", "86400");
+	  	@ini_set("session.gc_maxlifetime", "86400");
 	  	echo "<meta http-equiv='Refresh' content='0;url=/'>";
 		}else{
 	  	echo "<script>alert('Login Fail.')</script>";
