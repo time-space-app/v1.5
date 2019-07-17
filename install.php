@@ -132,7 +132,8 @@ var myReq = getXMLHTTPRequest();
 <pre>
 <?php
 $input= fopen("LICENSE.html", "r");
-$result= fread($input, 3500);
+//$result= fread($input, 4000);
+$result = fread($input, filesize("LICENSE.html"));
 $result = substr($result,$s=strpos($result,'<pre>')+5,strrpos($result,'</pre>')-$s);
 //$result = strip_tags($result);
 echo $result;
