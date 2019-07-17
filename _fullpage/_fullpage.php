@@ -164,11 +164,11 @@
 												}
 											?>
 											<?php }else{ ?>
-										<div class="col-md-4 float-left">
+										<div class="col-md-12 float-left">
 											<table class="table table-striped table-bordered table-hover table-dark text-center" style="opacity: 0.9;">
 											<tbody><tr><td>
 											<div class="listview">
-											<div class="list-content">NONE DATA</div>
+											<div class="list-content text-center">NONE DATA</div>
 											</div></td></tr></tbody></table>
 										</div>
 											<?php } ?>

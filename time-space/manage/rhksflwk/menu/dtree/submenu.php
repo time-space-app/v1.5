@@ -28,8 +28,8 @@
 		d.add(4,3,'Cms','/time-space/manage/rhksflwk/page/cms/list.php','','mainFrame');
 		d.add(5,0,'Board Info','','');
 		d.add(6,5,'Notice','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=notice','','mainFrame');
-		d.add(7,5,'Community','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=community','','mainFrame');
-		d.add(8,5,'QA','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=qa','','mainFrame');
+		//추후지원예정 d.add(7,5,'Community','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=community','','mainFrame');
+		//추후지원예정 d.add(8,5,'QA','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=qa','','mainFrame');
 -		d.add(14,-1,'File-Management','/time-space/index.php','','_top');
 		document.write(d);
 		//-->
@@ -43,8 +43,8 @@
 		d.add(2,1,'Cms','/time-space/manage/rhksflwk/page/cms/list.php','','mainFrame');
 		d.add(3,0,'Board Info','','');
 		d.add(4,3,'Notice','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=notice','','mainFrame');
-		d.add(5,3,'Community','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=community','','mainFrame');
-		d.add(6,3,'QA','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=qa','','mainFrame');
+		//추후지원예정 d.add(5,3,'Community','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=community','','mainFrame');
+		//추후지원예정 d.add(6,3,'QA','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=qa','','mainFrame');
 		document.write(d);
 		//-->
 	</script>
