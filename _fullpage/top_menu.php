@@ -1,5 +1,4 @@
-<!-- Menu -->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"><!-- Nav PHP메뉴 -->
 	<a class="navbar-brand" href="/" >LOGO</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -115,3 +114,20 @@
 		</ul>
 	</div>	
 </nav>
+<div class="language active"><!-- 다국어 메뉴 -->
+	<div class="language-current">
+			<span class="flag flag-ja-JP"></span>
+			<div class="language-name">Japanese</div>
+	</div>
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="language-triangle">
+		<polygon points="0,0 8,0 4, 6">
+	</polygon></svg>
+	<div class="submenu languages">
+			<ul>
+				<li><a href="#/en/"><span class="flag flag-en-US"></span><span class="language-name">English</span></a></li>
+				<li><a href="#/zh/"><span class="flag flag-zh-CN"></span><span class="language-name">Chinese</span></a></li>
+				<li><a href="#/ko/"><span class="flag flag-ko-KR"></span><span class="language-name">Korean</span></a></li>
+				<li><a href="#/vi/"><span class="flag flag-vi-VN"></span><span class="language-name">Vietnamese</span></a></li>
+			</ul>
+	</div>
+</div>

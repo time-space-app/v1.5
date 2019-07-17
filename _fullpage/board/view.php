@@ -1,6 +1,6 @@
-<?php include $_SERVER['DOCUMENT_ROOT']."/_fullpage/header.php";?>
-<?php include $_SERVER['DOCUMENT_ROOT']."/board/board_header.php";?>
-<?php
+<?php include_once "../header.php"; //전체공통 PHP헤더 ?>
+<?php include_once "board_header.php"; //보드공통 PHP헤더 ?>
+<?php //보드 뷰전용 PHP코드
 	//조회카운터+1
 	$proc_edit = "UPDATE T_BOARD SET";
 	$proc_edit .=" READCOUNT = IFNULL(READCOUNT,0) + 1";
@@ -37,13 +37,14 @@
 		$fileresult = $GPLdb5->GPLexcute_query($SQL);
 	}
 ?>
-<?php if($_SESSION['valid_level'] > 3 || $_SESSION['valid_level'] == '') {
-	if($_SESSION['valid_user']!=$USER_ID && ($BOARD_ID=="qa"|| $BOARD_ID=="repair") ){ //본인이 쓴 글 수정삭제기능
+<?php //본인이 쓴 글 수정삭제기능
+	if($_SESSION['valid_level'] > 3 || $_SESSION['valid_level'] == '') {
+	if($_SESSION['valid_user']!=$USER_ID && ($BOARD_ID=="qa"|| $BOARD_ID=="repair") ){ 
 		echo "<script type='text/javascript'>alert('It is a secret article.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/board/list.php/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/_fullpage/board/list.php/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
 	exit;}
 	} ?>
-<div class="header section">
+<div class="header section"> <!-- 보드 뷰전용 HTML+PHP -->
 	<div class="container">
 			<div class="row">
 			<div class="col-md-12 bg-white" style="color:#343a40;margin-top:50px;">
@@ -70,7 +71,7 @@
 						<?php echo str_replace("<br/>", "\r\n",$CONTENT);?>
 					</p>
 					<!-- 등록버튼 시작 -->
-					<form method="post" name="del_frm" id="del_frm" action="/board/write_ok.php" onsubmit="return del_chk(this)" >
+					<form method="post" name="del_frm" id="del_frm" action="/_fullpage/board/write_ok.php" onsubmit="return del_chk(this)" >
 						<input type="hidden" value="<?php echo $MODE?>" name="MODE" id="MODE">
 						<input type="hidden" value="<?php echo $BOARD_SEQ?>" name="BOARD_SEQ" id="BOARD_SEQ">
 						<input type="hidden" value="<?php echo $BOARD_ID?>" name="BOARD_ID" id="BOARD_ID">
@@ -85,11 +86,11 @@
 						<input type="hidden" value="<?php echo $now_page?>" name="now_page" id="now_page">
 						<input type="hidden" name="MENU_CODE" id="MENU_CODE" size=15 class="type-text" value="<?php echo $MENU_CODE?>">
 						<div>
-							<a href="/board/list.php/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/list'">
+							<a href="/_fullpage/board/list.php/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/list'">
 							<span class="btn btn-info float-right">LIST</span></a>
 							<?php if($_SESSION['valid_user']==$USER_ID ||($_SESSION['valid_user'] != "" && $_SESSION['valid_level'] < 3) ){ //본인이 쓴 글 수정삭제기능?>
 							<button type="submit" class="btn btn-info float-right d-none" value="DELETE">DELETE</button>
-							<a href="/board/write.php/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/edit/SEQ/<?php echo $BOARD_SEQ?>">
+							<a href="/_fullpage/board/write.php/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/edit/SEQ/<?php echo $BOARD_SEQ?>">
 							<span class="btn btn-info float-right d-none">EDIT</span></a>
 							<?php }?>
 						</div>
@@ -143,7 +144,7 @@
 						</div>
 						<?php if($_SESSION['valid_level'] < 3 && $_SESSION['valid_level'] > 0) { ?>
 						<!-- 테이블 시작 -->
-							<form method="post" name="frm" id="frm" action="/board/write_ok.php" onsubmit="return submitForm(this)" enctype="multipart/form-data" >
+							<form method="post" name="frm" id="frm" action="/_fullpage/board/write_ok.php" onsubmit="return submitForm(this)" enctype="multipart/form-data" >
 								<table summary="" class="table">
 									<caption></caption>
 									<colgroup>
@@ -177,7 +178,7 @@
 							<!-- 등록버튼 시작 -->
 							<div id="board_list_button_table">
 							<button type="submit" class="button default">COMMIT</button>
-							<a href="/board/write_ok.php/MENU_CODE/<?php echo $MENU_CODE?>/BOARD_SEQ/<?php echo $BOARD_SEQ?>/BOARD_ID/<?php echo $BOARD_ID?>/COMMENT_MODE/delete/SEQ/<?php echo $row['SEQ']?>">
+							<a href="/_fullpage/board/write_ok.php/MENU_CODE/<?php echo $MENU_CODE?>/BOARD_SEQ/<?php echo $BOARD_SEQ?>/BOARD_ID/<?php echo $BOARD_ID?>/COMMENT_MODE/delete/SEQ/<?php echo $row['SEQ']?>">
 							<span class="button default">DEL</span></a>
 							</div>
 							</td>
@@ -225,7 +226,7 @@
 										?>
 													<tr><th>Prev</th>
 													<td>
-													<a href="/board/view.php/MENU_CODE/<?php echo $MENU_CODE?>/SEQ/<?php echo $row['SEQ']?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/view">
+													<a href="/_fullpage/board/view.php/MENU_CODE/<?php echo $MENU_CODE?>/SEQ/<?php echo $row['SEQ']?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/view">
 														<?php echo $row['TITLE']?>
 													</a>
 													<?php if($_SESSION['valid_user']!=$row[USER_ID] && ($BOARD_ID=="qa"|| $BOARD_ID=="repair") ){ //본인이 쓴 글 수정삭제기능 ?>
@@ -240,7 +241,7 @@
 										?>			
 													<tr><th>Next</th>
 													<td>
-													<a href="/board/view.php/MENU_CODE/<?php echo $MENU_CODE?>/SEQ/<?php echo $row['SEQ']?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/view">
+													<a href="/_fullpage/board/view.php/MENU_CODE/<?php echo $MENU_CODE?>/SEQ/<?php echo $row['SEQ']?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/view">
 														<?php echo $row['TITLE']?>
 													</a>
 													<?php if($_SESSION['valid_user']!=$row[USER_ID] && ($BOARD_ID=="qa"|| $BOARD_ID=="repair")){ //본인이 쓴 글 수정삭제기능 ?>
@@ -264,6 +265,6 @@
 				<!--코멘트 끝 -->
 		</div>
  	</div>
- </div>
-<?php include $_SERVER['DOCUMENT_ROOT']."/board/board_footer.php";?>
-<?php include $_SERVER['DOCUMENT_ROOT']."/_fullpage/footer.php";?>
+</div>
+<?php include_once "board_footer.php"; //보드공통 PHP푸터 ?>
+<?php include_once "../footer.php"; //전체공통 PHP푸터-현재 내용없음 ?>
