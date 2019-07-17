@@ -64,13 +64,18 @@ for ($i=0; $i<count($f); $i++) {
     if (trim($f[$i]) == "") continue;
     mysqli_query($connect,$f[$i]) or die(mysqli_error());
 }
-//초기값 입력
+/* 초기값 입력 Start */
 $sql = "
 INSERT INTO T_MEMBER (LOGIN_ID, LOGIN_PWD, USER_NM, USER_LEVEL, USE_YN, EMAIL_YN, AGREE_YN, CREATE_DT, UPDATE_DT) VALUES
 ('admin', sha1('admin1234'), '관리자', 1, 'Y', 'on', 'on', '2013-05-25 15:59:29', '2013-06-01 23:40:58');
 ";
 mysqli_query($connect,$sql) or die(mysqli_error());
-
+$sql = "
+INSERT INTO `t_cms` (`L_CODE`, `M_CODE`, `S_CODE`, `USER_ID`, `USER_NM`, `EMAIL`, `TITLE`, `CONTENT`, `REGDATE`, `READCOUNT`) VALUES
+('001', '000', '000', 'admin', '관리자', '@', 'MENU1', '&lt;?php include_once &quot;top_menu.php&quot;;?&gt;', '2019-07-17 14:36:05', 0);
+";
+/* 초기값 입력 End */
+mysqli_query($connect,$sql) or die(mysqli_error());
 // DB 설정 파일 생성
 @chmod(GPLDIR."/core/config", 0707);
 $file = GPLDIR."/core/config/db.php";

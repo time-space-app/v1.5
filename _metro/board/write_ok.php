@@ -200,6 +200,7 @@ if($_FILES["FILEUPLOAD1"]["tmp_name"]) {
 //
 //echo $COMMENT_MODE."여기";
 //exit; //디버그
+if ( $FILECNT < 0 || is_null($FILECNT) || empty($FILECNT) ) {$FILECNT=0;}
 if($MODE == "write"){
 	$SEQ = $BOARD_SEQ+1; //최신글 번호 구하기
 	$proc_save = "INSERT INTO T_BOARD (";
@@ -213,7 +214,7 @@ if($MODE == "write"){
 	$proc_save .=" ,'$TITLE'";
 	$proc_save .=" ,'$CONTENT'";
 	$proc_save .=" ,NOW()";
-	$proc_save .=" ,'$FILECNT'";
+	$proc_save .=" ,$FILECNT";
 	$proc_save .=" ,'$POPUP'";
 	$proc_save .=" ,'$POPUP_W'";
 	$proc_save .=" ,'$POPUP_H'";
@@ -270,7 +271,7 @@ if($MODE == "edit"){
 	$proc_edit .=" ,EMAIL ='$EMAIL'";
 	$proc_edit .=" ,TITLE ='$TITLE'";
 	$proc_edit .=" ,CONTENT ='$CONTENT'";
-	$proc_edit .=" ,FILECNT ='$FILECNT'";
+	$proc_edit .=" ,FILECNT =$FILECNT";
 	$proc_edit .=" ,STATE ='$STATE'";
 	$proc_edit .=" ,POPUP ='$POPUP'";
 	$proc_edit .=" ,POPUP_W ='$POPUP_W'";
