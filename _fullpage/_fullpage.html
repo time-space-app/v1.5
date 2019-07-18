@@ -258,70 +258,98 @@
 	})//})(jQuery)
 </script>
 <script>/* 사용자 지정js - fullPage 스크립트 */
-//$(document).ready(function() { //기존
-$("#fullpage").fullpage({    //기존
-//	var myFullpage = new fullpage("#fullpage",{ //3.x 버전은 더이상 오픈소스가 아니라서, 2.x로 변경
-		anchors: ['header', 'section1', 'section2', 'section3', 'section4', 'section5', 'footer'],
-		navigationTooltips: ['header', 'section1', 'section2', 'section3', 'section4', 'section5', 'footer'],
-		sectionsColor: ['#0798ec','#f2f2f2','#4bbfc3','#7baabe','whitesmoke','#000','#0d121b'],
-		navigation: true,
-		//loopBottom: true,
-		responsiveWidth: 767, //반응형 가로크기 기준
-		afterResponsive: function(isResponsive){ //반응형 일때 사용할 액션
-			if(isResponsive) {//기존클래스는 d-none d-md-block -> d-none-kim19 으로 변경.
-				$(".d-none-kim19").addClass('d-none');
-				$("#moveDown").addClass('d-none');
-			}else{
-				$(".d-none-kim19").removeClass('d-none');
-				$("#moveDown").removeClass('d-none');
+	//$(document).ready(function() { //기존
+	$("#fullpage").fullpage({    //기존
+	//	var myFullpage = new fullpage("#fullpage",{ //3.x 버전은 더이상 오픈소스가 아니라서, 2.x로 변경
+			anchors: ['header', 'section1', 'section2', 'section3', 'section4', 'section5', 'footer'],
+			navigationTooltips: ['header', 'section1', 'section2', 'section3', 'section4', 'section5', 'footer'],
+			sectionsColor: ['#0798ec','#f2f2f2','#4bbfc3','#7baabe','whitesmoke','#000','#0d121b'],
+			navigation: true,
+			//loopBottom: true,
+			responsiveWidth: 767, //반응형 가로크기 기준
+			afterResponsive: function(isResponsive){ //반응형 일때 사용할 액션
+				if(isResponsive) {//기존클래스는 d-none d-md-block -> d-none-kim19 으로 변경.
+					$(".d-none-kim19").addClass('d-none');
+					$("#moveDown").addClass('d-none');
+				}else{
+					$(".d-none-kim19").removeClass('d-none');
+					$("#moveDown").removeClass('d-none');
+				}
+			},
+			afterLoad: function(section_name, section_num){ // 마지막 페이지 도착 확인, onLeave: //페이지 이동 후 확인
+					//alert(section_name);alert(section_num);//디버그
+					if(section_name=="footer"){
+						$("#moveDown").addClass('d-none');
+					}else{
+						$("#moveDown").removeClass('d-none');
+					}
+			},
+			/* 3.x 버전 전용
+			afterLoad: function(none, object, direction){ // 마지막 페이지 도착 확인, onLeave: //페이지 이동 후 확인
+					obj = JSON.stringify(object); alert(obj);alert(direction);//디버그
+					if(object["isLast"]){
+						$("#moveDown").addClass('d-none');
+					}else{
+						$("#moveDown").removeClass('d-none');
+					}
+			},
+			*/
+			//controlArrows: false
+	//	});
+	}); //기존
+	/* 아래페이지 이동 버튼 */
+	$(function(){ //3.x 버전은 더이상 오픈소스가 아니라서, 2.x로 변경
+			$('#moveDown').click(function (event) {
+					event.preventDefault();
+					$.fn.fullpage.moveSectionDown();
+			});
+	});
+	/* $(function(){ //3.x 버전 전용
+	$(document).on('click', '#moveDown', function(){
+		fullpage_api.moveSectionDown();
+	});
+	*/
+</script>
+<script> /* 다국어선택 버튼 */
+	$('.language').click(function (event) {
+		event.preventDefault();
+		$(this).toggleClass("active");
+	});
+	$("body").click(function(e){
+		if(e.target.className == "language-current" || ((e.target.className).indexOf("flag") != -1) || e.target.className == "language-name") { 
+					//alert("don't hide");  
 			}
-		},
-		afterLoad: function(section_name, section_num){ // 마지막 페이지 도착 확인, onLeave: //페이지 이동 후 확인
-				//alert(section_name);alert(section_num);//디버그
-				if(section_name=="footer"){
-					$("#moveDown").addClass('d-none');
-				}else{
-					$("#moveDown").removeClass('d-none');
-				}
-		},
-		/* 3.x 버전 전용
-		afterLoad: function(none, object, direction){ // 마지막 페이지 도착 확인, onLeave: //페이지 이동 후 확인
-				obj = JSON.stringify(object); alert(obj);alert(direction);//디버그
-				if(object["isLast"]){
-					$("#moveDown").addClass('d-none');
-				}else{
-					$("#moveDown").removeClass('d-none');
-				}
-		},
-		*/
-		//controlArrows: false
-//	});
-}); //기존
-/* 아래페이지 이동 버튼 */
- $(function(){ //3.x 버전은 더이상 오픈소스가 아니라서, 2.x로 변경
-    $('#moveDown').click(function (event) {
-        event.preventDefault();
-        $.fn.fullpage.moveSectionDown();
-    });
-});
-/* $(function(){ //3.x 버전 전용
-$(document).on('click', '#moveDown', function(){
-  fullpage_api.moveSectionDown();
-});
-*/
-/* 언어선택 버튼 */
-$('.language').click(function (event) {
-	event.preventDefault();
-	$(this).toggleClass("active");
-});
-$("body").click(function(e){
-	if(e.target.className == "language-current" || ((e.target.className).indexOf("flag") != -1) || e.target.className == "language-name") { 
-				//alert("don't hide");  
+			else {
+				$('.language').removeClass('active');
+			}
+	});
+</script>
+<script> /* 구글 번역기 선택한 국가코드 구하기 */
+	$(document).ready(function(){
+		//checkChange();//사용시 주석을 해제해 주세요
+	});
+	var currentLang = "";
+	function checkChange()
+	{
+		setTimeout(function(){
+			readCookie('googtrans');
+		},2000);
+	}
+	function readCookie(name) {
+		var c = document.cookie.split('; '),
+		cookies = {}, i, C;
+
+		for (i = c.length - 1; i >= 0; i--) {
+			C = c[i].split('=');
+			cookies[C[0]] = C[1];
 		}
-		else {
-			$('.language').removeClass('active');
-		}
-});
+		currentLang = cookies[name]; //console.log(currentLang);
+		var jbSplit = String(currentLang).split('/');
+		orgLang = jbSplit[1];
+		newLang = jbSplit[2];
+		console.log(orgLang,newLang);
+		checkChange();
+	}
 </script>
 </body>
 </html>
