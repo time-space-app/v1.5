@@ -414,7 +414,6 @@
 					readCookie('googtrans');
 				},2000);
 			}
-
 			function readCookie(name) {
 				var c = document.cookie.split('; '),
 				cookies = {}, i, C;
@@ -423,9 +422,11 @@
 					C = c[i].split('=');
 					cookies[C[0]] = C[1];
 				}
-
-				currentLang = cookies[name];
-				console.log(currentLang);
+				currentLang = cookies[name]; //console.log(currentLang);
+				var jbSplit = String(currentLang).split('/');
+				orgLang = jbSplit[1];
+				newLang = jbSplit[2];
+				console.log(orgLang,newLang);
 				checkChange();
 			}
 		</script>

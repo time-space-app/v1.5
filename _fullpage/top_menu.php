@@ -112,21 +112,6 @@
 						.goog-te-menu2 {margin-top:5px; border:1px solid #dcdcdc !important;}
 						.goog-te-menu2-item div, .goog-te-menu2-item:link div, .goog-te-menu2-item:visited div, .goog-te-menu2-item:active div {color:#000 !important;}
 					</style>
-					<script type="text/javascript">
-						/* var origValue = document.getElementById("translationDetector").innerHTML;
-						document.getElementById("translationDetector").addEventListener("DOMSubtreeModified", translationCallback, false);
-						function translationCallback() {
-							var currentValue = document.getElementById("translationDetector").innerHTML;
-							if (currentValue && currentValue.indexOf(origValue) < 0) {
-								origValue = currentValue;
-								lang = document.documentElement.lang;
-								//console.log(lang);
-								//$('#google_translate_element').bind("DOMSubtreeModified",function(){
-								//console.log(document.documentElement.lang);
-								//});
-							}
-						} */
-					</script>
             </li>
 		</ul>
 	</div>	
