@@ -1,6 +1,6 @@
 <?php include_once "header.php";?><!-- 코어 PHP코드 -->
 <!doctype html>
-<html lang="ja">
+<html lang="<?php echo ($_REQUEST['$lang'])?'$_REQUEST["$lang"]':'ja'; ?>">
 	<head><!-- 메타태그 작성 -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -402,6 +402,32 @@
 						$('.language').removeClass('active');
 					}
 			});
+		</script>
+		<script> /* 구글 번역기 선택한 국가코드 구하기 */
+			$(document).ready(function(){
+				checkChange();
+			});
+			var currentLang = "";
+			function checkChange()
+			{
+				setTimeout(function(){
+					readCookie('googtrans');
+				},2000);
+			}
+
+			function readCookie(name) {
+				var c = document.cookie.split('; '),
+				cookies = {}, i, C;
+
+				for (i = c.length - 1; i >= 0; i--) {
+					C = c[i].split('=');
+					cookies[C[0]] = C[1];
+				}
+
+				currentLang = cookies[name];
+				console.log(currentLang);
+				checkChange();
+			}
 		</script>
 </body>
 </html>

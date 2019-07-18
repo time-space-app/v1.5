@@ -100,9 +100,11 @@
             <li class="nav-item">
 					<div id="google_translate_element"></div>
 					<script type="text/javascript">
-					function googleTranslateElementInit() {
-						new google.translate.TranslateElement({pageLanguage: 'ja', includedLanguages: 'en,ko,vi,zh-CN,zh-TW,de,es,fr,la,pt,ru,th', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-					}
+					var userLang = document.documentElement.lang;//navigator.language || navigator.userLanguage || navigator.languages;
+					//디버그 userLang.substr(0,2) autoDisplay: false, multilanguagePage: true, gaTrack: true, gaId: 'UA-403844-8'//,zh-TW,de,es,fr,la,pt,ru,th
+						function googleTranslateElementInit() {
+							new google.translate.TranslateElement({pageLanguage: userLang, autoDisplay: false, multilanguagePage: true,includedLanguages: 'ja,en,ko,vi,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+						}
 					</script>
 					<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 					<style>
@@ -110,6 +112,21 @@
 						.goog-te-menu2 {margin-top:5px; border:1px solid #dcdcdc !important;}
 						.goog-te-menu2-item div, .goog-te-menu2-item:link div, .goog-te-menu2-item:visited div, .goog-te-menu2-item:active div {color:#000 !important;}
 					</style>
+					<script type="text/javascript">
+						/* var origValue = document.getElementById("translationDetector").innerHTML;
+						document.getElementById("translationDetector").addEventListener("DOMSubtreeModified", translationCallback, false);
+						function translationCallback() {
+							var currentValue = document.getElementById("translationDetector").innerHTML;
+							if (currentValue && currentValue.indexOf(origValue) < 0) {
+								origValue = currentValue;
+								lang = document.documentElement.lang;
+								//console.log(lang);
+								//$('#google_translate_element').bind("DOMSubtreeModified",function(){
+								//console.log(document.documentElement.lang);
+								//});
+							}
+						} */
+					</script>
             </li>
 		</ul>
 	</div>	
