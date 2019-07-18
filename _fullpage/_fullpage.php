@@ -1,4 +1,4 @@
-<?php include_once "header.php";?><!-- 코어 PHP코드 -->
+<?php include_once "header.php";//코어 PHP코드 ?>
 <!doctype html>
 <html lang="<?php echo ($_REQUEST['$lang'])?'$_REQUEST["$lang"]':'ja'; ?>">
 	<head><!-- 메타태그 작성 -->
@@ -405,7 +405,7 @@
 		</script>
 		<script> /* 구글 번역기 선택한 국가코드 구하기 */
 			$(document).ready(function(){
-				checkChange();
+				//checkChange();//사용시 주석을 해제해 주세요
 			});
 			var currentLang = "";
 			function checkChange()
@@ -432,4 +432,4 @@
 		</script>
 </body>
 </html>
-<?php include_once "footer.php";?><!-- 코어 PHP코드 -->
+<?php include_once "footer.php";//코어 PHP코드 ?>
