@@ -370,7 +370,7 @@ foreach($cfg_array as $key=>$value) { //환경설정 배열을 변수로 생성
 		$assoc_arr = array_merge($assoc_arr,array($arr_key[$i] => $_POST[$arr_key[$i]]) );
 	}
 }
-if(count($_POST)){
+if(isset($_POST['GPLplugin'])){ //count($_POST)
 	if(write_cfg_file($assoc_arr,$cfg_file_path)) { 
 		$GPLplugin=$_POST['GPLplugin'];
 		echo "<script type='text/javascript'>alert('환경 설정이 저장 되었습니다.');</script>";

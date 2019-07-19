@@ -11,6 +11,18 @@
 	$GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);//상속받은 개체 멤버클래스 사용
 	$GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 ?>
+<?php //플러그인과 현재 URL이 같지 않으면 자동이동
+function match_uri($str)
+{
+  preg_match('|^/([^/]+)|', $str, $matches);
+  if (!isset($matches[1]))
+    return false;
+  return $matches[1];  
+}
+$current_url = match_uri($_SERVER['REQUEST_URI']);
+$flugin_url = $GPLbase->GPLplugin;
+if($current_url!=$flugin_url)header("Location: /$flugin_url");
+?>
 <?php //검색엔진최적화를 위한 URl쿼리 특수문자 / 문자로 대체 후 변수 뽑기 작업
 	if(strpos( $_SERVER['REQUEST_URI'] , "MENU_CODE/" )){
 	$arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "MENU_CODE" ));

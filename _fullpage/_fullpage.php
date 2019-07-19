@@ -130,7 +130,7 @@
 											<tbody><tr><td>
 												<div class="listview">
 													<div class="list-content">
-														<a href="board/view.php?SEQ=<?php echo $row['SEQ']?>&now_page=<?php echo $now_page?>&GUBN=<?php echo $GUBN?>&SEARCH=<?php echo $SEARCH?>&BOARD_ID=<?php echo $BOARD_ID?>&MODE=view">
+														<a href="/<?php echo $GPLbase->GPLplugin?>/board/view.php?SEQ=<?php echo $row['SEQ']?>&now_page=<?php echo $now_page?>&GUBN=<?php echo $GUBN?>&SEARCH=<?php echo $SEARCH?>&BOARD_ID=<?php echo $BOARD_ID?>&MODE=view">
 														<span><img src="<?php echo get_image_file_from_html($row[CONTENT],1)?>" style="width:80px;float:left;padding-right:10px;"></span>
 														<span class="list-title ribbed-darkPink">[<?php echo cut_str($row[TITLE],88,'...')?>]<?php echo ($COMMENT_CNT>0)?"(".$COMMENT_CNT.")":"";?></span>
 														<br><span style="font-size:12px;spadding:5px;"><?php echo cut_str($row[CONTENT],388,'...')?></span>

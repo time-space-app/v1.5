@@ -81,6 +81,18 @@ $S_CODE= SUBSTR($MENU_CODE,6,3);
 	$proc_file .= " FROM T_L_MENU WHERE L_CODE = '$L_CODE'";
 	$ROW3 = $GPLdb5->GPLquery_fetch_assoc_one($proc_file);
 ?>
+<?php //플러그인과 현재 URL이 같지 않으면 자동이동
+function match_uri($str)
+{
+  preg_match('|^/([^/]+)|', $str, $matches);
+  if (!isset($matches[1]))
+    return false;
+  return $matches[1];  
+}
+$current_url = match_uri($_SERVER['REQUEST_URI']);
+$flugin_url = $GPLbase->GPLplugin;
+if($current_url!=$flugin_url)header("Location: /$flugin_url");
+?>
 <!DOCTYPE html>
 <html lang="auto">
 <head>
