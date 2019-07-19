@@ -4,7 +4,7 @@ open HTML
 */
 echo '
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
         <title>'.$code['name'].'</title>
 	<meta charset="utf-8">

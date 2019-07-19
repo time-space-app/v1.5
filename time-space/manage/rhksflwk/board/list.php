@@ -73,7 +73,7 @@ if(!$BOARD_ID) $BOARD_ID = "notice"; //notice, qa, qa, pds, faq
 	}
 ?>
 ﻿<!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
 <meta charset="utf-8">
 <META HTTP-EQUIV="Content-Language" CONTENT="ja">

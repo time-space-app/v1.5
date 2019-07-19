@@ -1,9 +1,18 @@
+<?php
+session_start();
+define('DS', DIRECTORY_SEPARATOR);
+define('GPLDIR', $_SERVER['DOCUMENT_ROOT'].DS.'time-space/manage');
+include_once GPLDIR . '/core/config/default.php';
+include_once GPLDIR_CLASS . '/GPLbase.class.php';
+$GPLbase = new GPLmember($GPLcookie_domain, $GPLurl_default, $GPLpath_default);//상속받은 개체 멤버클래스 사용
+$GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
+?>
 <!DOCTYPE html>
 <html lang="en">
 <HEAD>
 <TITLE>Time-Space</TITLE>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0;url=/_fullpage/">
+<meta http-equiv="refresh" content="0;url=/<?php echo $GPLbase->GPLplugin ?>/">
 </HEAD>
 <?php //phpinfo(); ?>
 </HTML>

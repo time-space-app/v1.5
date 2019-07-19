@@ -1,7 +1,7 @@
 ==========================================================================================================
-1. CMS ∏ﬁ¥∫ ≈◊¿Ã∫Ì ª˝º∫
----------------------------------- db √ﬂ∞°Ω√¿€ -------------------------------------
-- T_L_MENU(¥Î∏ﬁ¥∫)
+1. CMS Î©îÎâ¥ ÌÖåÏù¥Î∏î ÏÉùÏÑ±
+---------------------------------- db Ï∂îÍ∞ÄÏãúÏûë -------------------------------------
+- T_L_MENU(ÎåÄÎ©îÎâ¥)
  CREATE TABLE T_L_MENU (
  SEQ               INT(5)         NOT NULL,
  SUN               INT(5)         NOT NULL,
@@ -10,9 +10,9 @@
  L_URL             VARCHAR(255)   DEFAULT NULL,
  USE_YN            VARCHAR(2)     DEFAULT NULL,
  PRIMARY KEY(SEQ,SUN,L_CODE)
-) ENGINE=MYISAM DEFAULT CHARSET=UTF8;
+) DEFAULT CHARSET=UTF8;
 
-- T_M_MENU(¡ﬂ∏ﬁ¥∫)
+- T_M_MENU(Ï§ëÎ©îÎâ¥)
 CREATE TABLE T_M_MENU (
  SEQ               INT(5)         NOT NULL,
  SUN               INT(5)         NOT NULL,
@@ -22,9 +22,9 @@ CREATE TABLE T_M_MENU (
  M_URL             VARCHAR(255)   DEFAULT NULL,
  USE_YN            VARCHAR(2)     DEFAULT NULL,
  PRIMARY KEY(SEQ,SUN,L_CODE,M_CODE)
-) ENGINE=MYISAM DEFAULT CHARSET=UTF8;
+) DEFAULT CHARSET=UTF8;
 
-- T_S_MENU(º“∏ﬁ¥∫)
+- T_S_MENU(ÏÜåÎ©îÎâ¥)
 CREATE TABLE T_S_MENU (
  SEQ               INT(5)         NOT NULL,
  SUN               INT(5)         NOT NULL,
@@ -35,20 +35,20 @@ CREATE TABLE T_S_MENU (
  S_URL             VARCHAR(255)   DEFAULT NULL,
  USE_YN            VARCHAR(2)     DEFAULT NULL,
   PRIMARY KEY(SEQ,SUN,L_CODE,M_CODE,S_CODE)
-) ENGINE=MYISAM DEFAULT CHARSET=UTF8;
- ---------------------------------- db √ﬂ∞°Ω√¿€ -------------------------------------
-2 CMS ƒ‹≈Ÿ√˜ ≈◊¿Ã∫Ì ª˝º∫
+) DEFAULT CHARSET=UTF8;
+ ---------------------------------- db Ï∂îÍ∞ÄÏãúÏûë -------------------------------------
+2 CMS ÏΩòÌÖêÏ∏† ÌÖåÏù¥Î∏î ÏÉùÏÑ±
 ------------------------------------------------------------------------------------------
  CREATE TABLE T_CMS (
 	L_CODE       VARCHAR(10)    	NOT NULL,
 	M_CODE       VARCHAR(10)    	NOT NULL,
 	S_CODE       VARCHAR(10)    	NOT NULL,
-    USER_ID      VARCHAR(20)        DEFAULT NULL,
-    USER_NM      VARCHAR(20)        DEFAULT NULL,
-    EMAIL        VARCHAR(200)       DEFAULT NULL,
-    TITLE        VARCHAR(200)       DEFAULT NULL,
-    CONTENT      TEXT               DEFAULT NULL,
-    REGDATE      DATETIME           DEFAULT NULL,
-    READCOUNT    INT(10)            UNSIGNED DEFAULT NULL,
+  USER_ID      VARCHAR(20)        DEFAULT NULL,
+  USER_NM      VARCHAR(20)        DEFAULT NULL,
+  EMAIL        VARCHAR(200)       DEFAULT NULL,
+  TITLE        VARCHAR(200)       DEFAULT NULL,
+  CONTENT      TEXT               DEFAULT NULL,
+  REGDATE      DATETIME           DEFAULT NULL,
+  READCOUNT    INT(10)            UNSIGNED DEFAULT NULL,
 	PRIMARY KEY(L_CODE,M_CODE,S_CODE)
-) ENGINE=MYISAM DEFAULT CHARSET=UTF8;
+) DEFAULT CHARSET=UTF8;

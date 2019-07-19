@@ -23,11 +23,12 @@
 		d = new dTree('d');
 		d.add(0,-1,'Management');
 		d.add(1,0,'Basic Info','','');
-		d.add(2,1,'Member','/time-space/manage/rhksflwk/page/member/list.php','','mainFrame');
-		d.add(3,0,'Cms Info','','');
-		d.add(4,3,'Cms','/time-space/manage/rhksflwk/page/cms/list.php','','mainFrame');
-		d.add(5,0,'Board Info','','');
-		d.add(6,5,'Notice','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=notice','','mainFrame');
+		d.add(2,1,'Site Info','/time-space/manage/rhksflwk/page/cfg/config.php','','mainFrame');
+		d.add(3,1,'Member','/time-space/manage/rhksflwk/page/member/list.php','','mainFrame');
+		d.add(4,0,'Cms Info','','');
+		d.add(5,4,'Cms','/time-space/manage/rhksflwk/page/cms/list.php','','mainFrame');
+		d.add(6,0,'Board Info','','');
+		d.add(7,6,'Notice','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=notice','','mainFrame');
 		//추후지원예정 d.add(7,5,'Community','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=community','','mainFrame');
 		//추후지원예정 d.add(8,5,'QA','/time-space/manage/rhksflwk/board/list.php?BOARD_ID=qa','','mainFrame');
 -		d.add(14,-1,'File-Management','/time-space/index.php','','_top');

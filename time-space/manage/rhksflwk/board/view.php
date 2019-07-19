@@ -68,7 +68,7 @@ $now_page = $_REQUEST['now_page'];
 	}
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
 <meta charset="utf-8">
 <META HTTP-EQUIV="Content-Language" CONTENT="ja">

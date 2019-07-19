@@ -41,7 +41,7 @@ $CATEGORY= $_REQUEST['CATEGORY'];
 	if(empty($ROW['USER_ID'])) $MODE = "cms_write"; else $MODE = "cms_edit";
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
 <meta charset="utf-8">
 <META HTTP-EQUIV="Content-Language" CONTENT="ja">

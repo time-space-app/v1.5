@@ -28,7 +28,7 @@ $CATEGORY= $_REQUEST['CATEGORY'];
 $MODE= $_REQUEST['MODE'];
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
 <meta charset="utf-8">
 <META HTTP-EQUIV="Content-Language" CONTENT="ja">

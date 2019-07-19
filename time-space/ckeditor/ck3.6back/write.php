@@ -63,7 +63,7 @@ $se_num1 = mt_rand(1, 9);
 $se_num2 = mt_rand(1, 9);
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
 <meta charset="utf-8">
 <META HTTP-EQUIV="Content-Language" CONTENT="ja">

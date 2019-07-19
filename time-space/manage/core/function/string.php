@@ -346,4 +346,118 @@ function dateDiff($sStartDate, $sEndDate)
 
     return $aReturnValue;
 }
+/*****************************************************************
+사이트 환경설정 파일 읽고 쓰기
+*****************************************************************/
+$cfg_file_path = GPLDIR_CONFIG . '/cfg.php';
+$cfg_array = parse_ini_file($cfg_file_path); //환경설정 배열로 불러오기
+//print_r($cfg_array);//디버그
+$i = 0;
+$arr_key = array();
+$arr_value = array();
+$post_var = "";
+foreach($cfg_array as $key=>$value) { //환경설정 배열을 변수로 생성
+	$arr_key[$i] = $key;
+	if(!is_array($value)){
+		$arr_value[$i] = $value;
+		$$key = $arr_value[$i];
+	}
+	//$post_var .= "arr_key($i): $$key => $arr_value[$i] <br>"; //디버그
+	$this->$key = $arr_value[$i];
+	if(count($_POST)){
+		$assoc_arr = array();
+		$assoc_arr = $cfg_array;
+		$assoc_arr = array_merge($assoc_arr,array($arr_key[$i] => $_POST[$arr_key[$i]]) );
+	}
+}
+if(count($_POST)){
+	if(write_cfg_file($assoc_arr,$cfg_file_path)) { 
+		$GPLplugin=$_POST['GPLplugin'];
+		echo "<script type='text/javascript'>alert('환경 설정이 저장 되었습니다.');</script>";
+	}else{
+		echo "<script type='text/javascript'>alert('환경 설정이 저장 되지 않았습니다.');</script>";
+	}
+}
+function write_cfg_file($assoc_arr, $path) { // cfg 파일 write : 호출 write_cfg_file(배열, 파일경로, 섹션);
+	$content = "";
+	foreach ($assoc_arr as $key=>$elem) {
+		if(is_array($elem))
+		{
+			for($i=0;$i<count($elem);$i++)
+			{
+				$content .= $key."[] = \"".$elem[$i]."\"\n";
+			}
+		} else if($elem=="") {
+			$content .= $key." = \n";
+		} else {
+			if (preg_match('/[^0-9]/i',$elem)) {
+				$content .= $key." = \"".$elem."\"\n";
+			}else {
+				$content .= $key." = ".$elem."\n";
+			}
+		}
+	}
+	if (!$handle = fopen($path, 'w')) {
+		return false;
+	}
+	$success = fwrite($handle, $content);
+	fclose($handle);
+	return $success;
+}
+/* function write_ini_file($assoc_arr, $path, $has_sections=FALSE) { //그룹명 환경설정 있을때
+	$content = "";
+	if ($has_sections) {
+		$i = 0;
+		foreach ($assoc_arr as $key=>$elem) {
+			if ($i > 0) {
+				$content .= "\n";
+			}
+			$content .= "[".$key."]\n";
+			foreach ($elem as $key2=>$elem2) {
+				if(is_array($elem2))
+				{
+					for($i=0;$i<count($elem2);$i++)
+					{
+						$content .= $key2."[] = \"".$elem2[$i]."\"\n";
+					}
+				} else if($elem2=="") {
+					$content .= $key2." = \n";
+				} else {
+					if (preg_match('/[^0-9]/i',$elem2)) {
+						$content .= $key2." = \"".$elem2."\"\n";
+					}else {
+						$content .= $key2." = ".$elem2."\n";
+					}
+				}
+			}
+			$i++;
+		}
+	}
+	else {
+		foreach ($assoc_arr as $key=>$elem) {
+			if(is_array($elem))
+			{
+				for($i=0;$i<count($elem);$i++)
+				{
+					$content .= $key."[] = \"".$elem[$i]."\"\n";
+				}
+			} else if($elem=="") {
+				$content .= $key." = \n";
+			} else {
+				if (preg_match('/[^0-9]/i',$elem)) {
+					$content .= $key." = \"".$elem."\"\n";
+				}else {
+					$content .= $key." = ".$elem."\n";
+				}
+			}
+		}
+	}
+		if (!$handle = fopen($path, 'w')) {
+		return false;
+	}
+		$success = fwrite($handle, $content);
+	fclose($handle);
+
+	return $success;
+} */
 ?>

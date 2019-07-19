@@ -60,7 +60,7 @@ $LOGIN_ID = $_REQUEST['LOGIN_ID'];
 	$next_block = $end_num + 1;
 ?>
 ﻿<!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
 <meta charset="utf-8">
 <META HTTP-EQUIV="Content-Language" CONTENT="ja">

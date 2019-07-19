@@ -1,6 +1,6 @@
 <?php include_once "header.php";//코어 PHP코드 ?>
 <!doctype html>
-<html lang="<?php echo ($_REQUEST['$lang'])?'$_REQUEST["$lang"]':'ja'; ?>">
+<html lang="<?php echo ($_REQUEST['$lang'])?'$_REQUEST["$lang"]':'auto'; ?>">
 	<head><!-- 메타태그 작성 -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

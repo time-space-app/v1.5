@@ -65,7 +65,7 @@
 	}
 ?>
 <!doctype html> <!-- 보드공통 헤드 HTML -->
-<html lang="ja">
+<html lang="auto">
 <head><!-- 메타태그 작성 -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

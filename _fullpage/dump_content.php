@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="auto">
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">

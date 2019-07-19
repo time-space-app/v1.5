@@ -82,7 +82,7 @@ $S_CODE= SUBSTR($MENU_CODE,6,3);
 	$ROW3 = $GPLdb5->GPLquery_fetch_assoc_one($proc_file);
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
     <meta charset="utf-8">
     <META HTTP-EQUIV="Content-Language" CONTENT="ja">

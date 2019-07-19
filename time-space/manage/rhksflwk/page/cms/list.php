@@ -16,7 +16,7 @@ $T_S_MENU = "T_S_MENU";
 $T_CMS = "T_CMS";
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
 <meta charset="utf-8">
 <META HTTP-EQUIV="Content-Language" CONTENT="ja">

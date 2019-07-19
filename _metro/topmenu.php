@@ -16,7 +16,7 @@ $T_CMS = "T_CMS";
 ?>
 <div class="navigation-bar dark">
     <div class="navigation-bar-content container">
-        <a href="/_metro/" class="element" style="width:150px;">
+        <a href="/" class="element" style="width:150px;">
         <img src="/_metro/image/small_logo.png" alt="" style="width:20px;height:20px;vertical-align:middle"/>타임스페이스</a>
         <span class="element-divider"></span>
 	<?php

@@ -15,7 +15,7 @@ if (file_exists(GPLDIR.'/core/config/db.php')) {
 ?>
 <?php include $_SERVER['DOCUMENT_ROOT']."/time-space/version.php";?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="auto">
 <head>
     <meta charset="utf-8">
     <META HTTP-EQUIV="Content-Language" CONTENT="ja">

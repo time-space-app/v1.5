@@ -60,8 +60,8 @@ $LOGIN_ID = $_SESSION['valid_user'];
 	// 9 - 다음 블럭 설정
 	$next_block = $end_num + 1;
 ?>
-﻿<!DOCTYPE html>
-<html lang="ja">
+<!DOCTYPE html>
+<html lang="auto">
 <head>
 <meta charset="utf-8">
 <META HTTP-EQUIV="Content-Language" CONTENT="ko">

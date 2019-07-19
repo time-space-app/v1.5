@@ -80,7 +80,7 @@ INSERT INTO `T_L_MENU` (`SEQ`, `SUN`, `L_CODE`, `L_NAME`, `L_URL`, `USE_YN`) VAL
 (1, 1, '001', 'MENU1', '001000000', 'Y');
 ";
 mysqli_query($connect,$sql) or die(mysqli_error());
-$fp19=fopen(GPLPLUGIN."/dump_content.html", "r");
+$fp19=fopen(GPLPLUGIN."/dump_content.php", "r");
 if($fp19 == null){ echo "파일이 없습니다.<br />"; exit; }
 $fr19=fread($fp19, filesize(GPLPLUGIN."/dump_content.html"));fclose($fp19);
 $CONTENT19=addslashes($fr19);
