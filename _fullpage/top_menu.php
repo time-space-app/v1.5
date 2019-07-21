@@ -15,7 +15,7 @@
             //css드롭다운디자인적용및 HTTP URL 입력시 새창띄우기
             (STRTOLOWER(SUBSTR($row['L_URL'],0,7))=="http://")?$TARGET = " target='_new' ":$TARGET = "";
             if($row['L_URL']==$MENU_CODE) $ACTIVE=" active"; else $ACTIVE="";
-            if(is_numeric($row['L_URL']))$row['L_URL']="/_fullpage/index.php/CATEGORY/0/MENU_CODE/".$row['L_URL'];
+            if(is_numeric($row['L_URL']))$row['L_URL']="/$flugin_url/index.php/CATEGORY/0/MENU_CODE/".$row['L_URL'];
 		?>
 			<?php
 			//중메뉴
@@ -42,7 +42,7 @@
 					//css드롭다운디자인적용및 HTTP URL 입력시 새창띄우기
 					(str_replace(" ","",$row2['M_URL'])=="")?$dropdown=" dropdown-toggle":$dropdown="";
 					(STRTOLOWER(SUBSTR($row2['M_URL'],0,7))=="http://")?$TARGET2 = " target='_new' ":$TARGET2 = "";
-					if(is_numeric($row2['M_URL']))$row2['M_URL']="/_fullpage/index.php/CATEGORY/1/MENU_CODE/".$row2['M_URL'];
+					if(is_numeric($row2['M_URL']))$row2['M_URL']="/$flugin_url/index.php/CATEGORY/1/MENU_CODE/".$row2['M_URL'];
 					?>
 						<?php
 						//소메뉴

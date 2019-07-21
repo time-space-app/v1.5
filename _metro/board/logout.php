@@ -7,5 +7,5 @@
   unset($_SESSION['login_security']);
   session_destroy();
   echo "<script>alert('LOGOUT SUCCESS.')</script>";
-  echo "<meta http-equiv='Refresh' content='0;url=/_metro/'>";
+  echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/'>";
 ?>

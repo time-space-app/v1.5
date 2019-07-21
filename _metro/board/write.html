@@ -11,7 +11,7 @@ $arremail = split("@",$_SESSION['valid_email']);
 //===========================공지사항 쓰기는 관리자만
 if(($_SESSION['valid_level'] >= 3 || is_null($_SESSION['valid_level'])) && $BOARD_ID =='notice' ) {
 		echo "<script type='text/javascript'>alert(\"Access Stop.Manager Only\");</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/BOARD_ID/$BOARD_ID'>";exit;
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/list.html/MENU_CODE/$MENU_CODE/BOARD_ID/$BOARD_ID'>";exit;
 	}
 if($MODE == "edit"){ //&& $_SESSION['valid_user'] 로그인사용자만
 	$proc_file = "SELECT CONTENT,EMAIL,TITLE,USER_NM,REGDATE,READCOUNT,FILECNT,USER_ID,STATE,POPUP,POPUP_W,POPUP_H,TOP_NEWS";
@@ -32,7 +32,7 @@ if($MODE == "edit"){ //&& $_SESSION['valid_user'] 로그인사용자만
 			$fileresult = $GPLdb5->GPLexcute_query($SQL);
 			$i=0;
 			if($fileresult){
-				while($filerow = mysql_fetch_array($fileresult)) {	
+				while($filerow = mysqli_fetch_array($fileresult)) {	
 					if($filerow['FILE_NM']){
 					$FILE_NM[$i] = $filerow['FILE_NM'];
 					$FILE_NUM[$i] = $filerow['SEQ'];
@@ -67,7 +67,7 @@ if($MODE == "edit"){ //&& $_SESSION['valid_user'] 로그인사용자만
         <?php include "../submenu.php";?>
 	<!--게시판 시작-->
 	<div class="span9">
-	<form method="post" name="frm" id="frm" action="/_metro/board/write_ok.php" onsubmit="return submitFormWrite(this)" enctype="multipart/form-data" >
+	<form method="post" name="frm" id="frm" action="/<?php echo $flugin_url ?>/board/write_ok.php" onsubmit="return submitFormWrite(this)" enctype="multipart/form-data" >
 	<!-- 테이블 시작 -->
 		<div class="board_write_table">
 		     <table summary="" class="table">
@@ -212,7 +212,7 @@ if($MODE == "edit"){ //&& $_SESSION['valid_user'] 로그인사용자만
 		</div>
 		<!-- 등록버튼 시작 -->
 		<div id="board_list_button_table" style="text-align:right">
-			<a href="/_metro/board/list.html/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/list">
+			<a href="/<?php echo $flugin_url ?>/board/list.html/MENU_CODE/<?php echo $MENU_CODE?>/now_page/<?php echo $now_page?>/GUBN/<?php echo $GUBN?>/SEARCH/<?php echo $SEARCH?>/BOARD_ID/<?php echo $BOARD_ID?>/MODE/list">
 			<span class="button large info">CANCEL</span></a>
 			<?php if($MODE=="edit"){?>
 			<button type="button" class="button large info" onclick="del_chk(this.form);">DELETE</button>

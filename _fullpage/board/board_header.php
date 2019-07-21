@@ -75,7 +75,7 @@
 	<!-- 외부 플러그인 CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css">
 	<!-- 사용자가 추가한 CSS -->
-	<link rel="stylesheet" href="/_fullpage/css/style.css">
+	<link rel="stylesheet" href="/<?php echo $flugin_url ?>/css/style.css">
 	<title>부트스트랩4.0으로 홈페이지 만들기</title>
 </head>
 <body><!-- 보드공통 BODY 상단 -->

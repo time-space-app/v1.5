@@ -36,7 +36,7 @@ function theHTTPResponse() {
        document.getElementById('show_id').innerHTML = timeString.childNodes[0].nodeValue;
     }
   } else {
-    document.getElementById('show_id').innerHTML = '<img src="/_metro/board/ajax-loader.gif"/>';
+    document.getElementById('show_id').innerHTML = '<img src="/<?php echo $flugin_url ?>/board/ajax-loader.gif"/>';
   }
 }
 
@@ -59,6 +59,6 @@ function searhIdHTTPResponse() {
        document.getElementById('show_id').innerHTML = "응답에 문제가 있습니다.";
        }
   } else {
-    document.getElementById('show_id').innerHTML = '<img src="/_metro/board/ajax-loader.gif"/>';
+    document.getElementById('show_id').innerHTML = '<img src="/<?php echo $flugin_url ?>/board/ajax-loader.gif"/>';
   }
 }

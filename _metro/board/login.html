@@ -14,14 +14,14 @@
                                     <div class="row">
                                         <div class="span3">
                                             <p>신규아이디를 신청하시려면 아래버튼을 이용해 주세요.</p>
-                                            <a href="/_metro/board/join.html"><span class="button default">New Id</span></a>
+                                            <a href="/<?php echo $flugin_url ?>/board/join.html"><span class="button default">New Id</span></a>
                                         </div>
                                         <div class="span3" style="border:solid 1px blue;padding:0px 10px;margin:0px 10px;">
                                         <?php if($_SESSION['valid_user'] != "") { ?>
                                             <form>
 						<h3>WELCOME<br><?php echo $_SESSION['valid_user'];?></h3>
-						<a href="/_metro/board/logout.php"><span class="button default info">Log Out</span></a>
-						<a href="/_metro/board/join.html"><span class="button default info">Mypage</span></a>
+						<a href="/<?php echo $flugin_url ?>/board/logout.php"><span class="button default info">Log Out</span></a>
+						<a href="/<?php echo $flugin_url ?>/board/join.html"><span class="button default info">Mypage</span></a>
 					    </form>
                                          <?php }else{ ?>
 					    <form name="form_login" id="form_login" action="" autocomplete="on" method="post">

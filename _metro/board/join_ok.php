@@ -72,7 +72,7 @@ if($MODE == "write"){
 	$i = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0){
 		echo "<script type='text/javascript'>alert('SAVE OK.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/login.html'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/login.html'>";
 	}
 	else
 	{

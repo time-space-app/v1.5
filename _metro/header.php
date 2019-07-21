@@ -48,6 +48,18 @@ $arr_param= explode('/',strstr( $_SERVER['REQUEST_URI'] , "COMMENT_MODE" ));
 $_REQUEST['COMMENT_MODE']=str_replace(" ","",$arr_param[1]);//echo $MODE.'<br/>';
 }
 ?>
+<?php //플러그인과 현재 URL이 같지 않으면 자동이동
+function match_uri($str)
+{
+  preg_match('|^/([^/]+)|', $str, $matches);
+  if (!isset($matches[1]))
+    return false;
+  return $matches[1];  
+}
+$current_url = match_uri($_SERVER['REQUEST_URI']);
+$flugin_url = $GPLbase->GPLplugin;
+if($current_url!=$flugin_url)header("Location: /$flugin_url");
+?>
 <?php include $_SERVER['DOCUMENT_ROOT']."/time-space/board/auth.php"; ?>
 <?php
 $userid = $_SESSION['valid_user'];
@@ -80,18 +92,6 @@ $S_CODE= SUBSTR($MENU_CODE,6,3);
 	$proc_file = "SELECT L_NAME AS MENU_TITLE";
 	$proc_file .= " FROM T_L_MENU WHERE L_CODE = '$L_CODE'";
 	$ROW3 = $GPLdb5->GPLquery_fetch_assoc_one($proc_file);
-?>
-<?php //플러그인과 현재 URL이 같지 않으면 자동이동
-function match_uri($str)
-{
-  preg_match('|^/([^/]+)|', $str, $matches);
-  if (!isset($matches[1]))
-    return false;
-  return $matches[1];  
-}
-$current_url = match_uri($_SERVER['REQUEST_URI']);
-$flugin_url = $GPLbase->GPLplugin;
-if($current_url!=$flugin_url)header("Location: /$flugin_url");
 ?>
 <!DOCTYPE html>
 <html lang="auto">
@@ -129,27 +129,27 @@ if(preg_match('/(?i)msie [10]/',$_SERVER['HTTP_USER_AGENT']))
 <!--[if !IE]> -->
  <script src="http://code.jquery.com/jquery-2.0.0b2.js"></script>
 <!-- <![endif]-->
-<script src="/_metro/js/ajax_functions.js"></script>
+<script src="/<?php echo $flugin_url ?>/js/ajax_functions.js"></script>
 <script type="text/javascript">
 var myReq = getXMLHTTPRequest();
 </script>
 <link href="/time-space/skin/one/design/favicon.ico" rel="shortcut icon" type="image/ico" />
-    <link href="/_metro/css/metro-bootstrap.css" rel="stylesheet">
-    <link href="/_metro/css/metro-bootstrap-responsive.css" rel="stylesheet">
-    <link href="/_metro/css/docs.css" rel="stylesheet">
-    <link href="/_metro/js/prettify/prettify.css" rel="stylesheet">
+    <link href="/<?php echo $flugin_url ?>/css/metro-bootstrap.css" rel="stylesheet">
+    <link href="/<?php echo $flugin_url ?>/css/metro-bootstrap-responsive.css" rel="stylesheet">
+    <link href="/<?php echo $flugin_url ?>/css/docs.css" rel="stylesheet">
+    <link href="/<?php echo $flugin_url ?>/js/prettify/prettify.css" rel="stylesheet">
 
     <!-- Load JavaScript Libraries -->
-    <script src="/_metro/js/jquery/jquery.min.js"></script>
-    <script src="/_metro/js/jquery/jquery.widget.min.js"></script>
-    <script src="/_metro/js/jquery/jquery.mousewheel.js"></script>
-    <script src="/_metro/js/prettify/prettify.js"></script>
+    <script src="/<?php echo $flugin_url ?>/js/jquery/jquery.min.js"></script>
+    <script src="/<?php echo $flugin_url ?>/js/jquery/jquery.widget.min.js"></script>
+    <script src="/<?php echo $flugin_url ?>/js/jquery/jquery.mousewheel.js"></script>
+    <script src="/<?php echo $flugin_url ?>/js/prettify/prettify.js"></script>
 
     <!-- Metro UI CSS JavaScript plugins -->
-    <script src="/_metro/js/load-metro.js"></script>
+    <script src="/<?php echo $flugin_url ?>/js/load-metro.js"></script>
 
     <!-- Local JavaScript -->
-    <script src="/_metro/js/docs.js"></script>
+    <script src="/<?php echo $flugin_url ?>/js/docs.js"></script>
 
     <title>Time-Space:웹 CMS툴</title>
 
@@ -317,4 +317,4 @@ var myReq = getXMLHTTPRequest();
 <?php } ?>
 </head>
 <body class="metro" style="background-color: #efeae3">
-    <header class="bg-dark" data-load="/_metro/topmenu.php"></header>
+    <header class="bg-dark" data-load="/<?php echo $flugin_url ?>/topmenu.php"></header>

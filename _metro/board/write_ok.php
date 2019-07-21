@@ -51,6 +51,18 @@ $_REQUEST['COMMENT_MODE']=str_replace(" ","",$arr_param[1]);//echo $MODE.'<br/>'
 //echo $COMMENT_MODE;
 //exit;
 ?>
+<?php //플러그인과 현재 URL이 같지 않으면 자동이동
+function match_uri($str)
+{
+  preg_match('|^/([^/]+)|', $str, $matches);
+  if (!isset($matches[1]))
+    return false;
+  return $matches[1];  
+}
+$current_url = match_uri($_SERVER['REQUEST_URI']);
+$flugin_url = $GPLbase->GPLplugin;
+if($current_url!=$flugin_url)header("Location: /$flugin_url");
+?>
 <?php //메뉴값 바인딩
 //게시판 공통변수 항상 페이지 상단에 위치
 $MENU_CODE= str_replace(" ","",$_REQUEST['MENU_CODE']);
@@ -62,11 +74,11 @@ $S_CODE= SUBSTR($MENU_CODE,6,3);
 if($_SESSION['valid_user'] == ""){
 if($_POST['SE_NUM1']=='' || $_POST['SE_NUM2']=='' || trim($_POST['SE_NUM1'])+trim($_POST['SE_NUM2'])!=trim($_POST['SE_NUM'])){
 		echo "<script type='text/javascript'>alert('보안코드=INSERT NOT NULL OR WRONG.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
 		exit;
 	}
 		echo "<script type='text/javascript'>alert('보안코드=로그인 Only.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
 		exit;
 }
 ?>
@@ -257,12 +269,12 @@ if($MODE == "write"){
 		 }
 
 		echo "<script type='text/javascript'>alert('SAVE OK.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('SAVE FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/list.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/list'>";
 	}
 }
 if($MODE == "edit"){
@@ -313,13 +325,13 @@ if($MODE == "edit"){
 			         </script>";
 			 }*/
 		}
-		echo "<script type='text/javascript'>alert('EDIT OK.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
+		echo "<script type='text/javascript'>alert('EDIT OK!.');</script>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('EDIT FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
 	}
 }
 
@@ -332,12 +344,12 @@ if($MODE == "delete"){
 	$i = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0){
 		echo "<script type='text/javascript'>alert(\"DELETE OK.\");</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE/BOARD_ID/$BOARD_ID'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/list.html/MENU_CODE/$MENU_CODE/BOARD_ID/$BOARD_ID'>";
 	}
 	else 
 	{
 		echo "<script type='text/javascript'>alert('DELETE FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/list.html/MENU_CODE/$MENU_CODE'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/list.html/MENU_CODE/$MENU_CODE'>";
 	}
 exit;
 }
@@ -371,12 +383,12 @@ if($_REQUEST['COMMENT_MODE'] == "write"){
 	$i2 = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0 || $i2>0){
 		echo "<script type='text/javascript'>alert('SAVE OK.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('SAVE FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
 	}
 }
 if($_REQUEST['COMMENT_MODE'] == "edit"){
@@ -400,12 +412,12 @@ if($_REQUEST['COMMENT_MODE'] == "edit"){
 	$i2 = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0 || $i2>0){
 		echo "<script type='text/javascript'>alert('COMMENT OK.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('COMMENT FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/view.html/MENU_CODE/$MENU_CODE/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/SEQ/$BOARD_SEQ'>";
 	}
 }
 if($_REQUEST['COMMENT_MODE'] == "delete"){
@@ -418,12 +430,12 @@ if($_REQUEST['COMMENT_MODE'] == "delete"){
 	$i = $GPLdb5->GPLmysql_affected_rows();
 	if($i>0){
 		echo "<script type='text/javascript'>alert(\"DELETE OK.\");</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
 	}
 	else
 	{
 		echo "<script type='text/javascript'>alert('DELETE FAIL.');</script>";
-		echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
+		echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/view.html/MENU_CODE/$MENU_CODE/SEQ/$BOARD_SEQ/now_page/$now_page/GUBN/$GUBN/SEARCH/$SEARCH/BOARD_ID/$BOARD_ID/MODE/view'>";
 	}
 	exit;
 }

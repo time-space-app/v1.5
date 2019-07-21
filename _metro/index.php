@@ -4,14 +4,14 @@ $MENU_CODE= "001001000";
 ?>
 <div class="">
 <div data-role="scrollbox" data-scroll="horizontal" style=""><!--min-width: 1800px; height: 100%;-->
-    <div class="tile-area tile-area-dark" style="background: url(/_metro/image/main-bg.jpg) top left no-repeat; background-size: cover;">
+    <div class="tile-area tile-area-dark" style="background: url(/<?php echo $flugin_url ?>/image/main-bg.jpg) top left no-repeat; background-size: cover;">
         <h1 class="tile-area-title fg-white" style="padding-top:5px">
         <span style="font-size:40px;line-height:0px;padding-top:0px;margin-top:0px;"><i class="icon-sun-3 on-left fg-yellow"></i><a href="/" style="color:white">
         Time-Space<br/>& 웹 CMS툴</a></h1>
         <div class="user-id" style="margin-top:5px">
             <div class="user-id-image">
                 <span class="icon-user no-display1"></span>
-                <img src="/_metro/image/small_logo.png" class="no-display">
+                <img src="/<?php echo $flugin_url ?>/image/small_logo.png" class="no-display">
             </div>
             <div class="user-id-name">
                 <span class="first-name">Welcome</span>
@@ -60,7 +60,7 @@ $MENU_CODE= "001001000";
         </div>
 
         <div class="tile-group six" style="padding-top:10px;">
-            <a class="tile double bg-lightBlue live" data-role="live-tile" data-effect="slideUp" href="/_metro/board/list.html/MENU_CODE/<?php echo $MENU_CODE?>/BOARD_ID/notice">
+            <a class="tile double bg-lightBlue live" data-role="live-tile" data-effect="slideUp" href="/<?php echo $flugin_url ?>/board/list.html/MENU_CODE/<?php echo $MENU_CODE?>/BOARD_ID/notice">
 		<!--[if lte IE 8 ]>
 		<div id="carousel21" class="carousel bg-transparent no-overflow">
 		<![endif]-->
@@ -130,7 +130,7 @@ $MENU_CODE= "001001000";
             </a> <!-- end tile -->
 
             <div class="tile double">
-            	<a href="/_metro/board/list.html/MENU_CODE/003001000/BOARD_ID/community">
+            	<a href="/<?php echo $flugin_url ?>/board/list.html/MENU_CODE/003001000/BOARD_ID/community">
                 <div class="tile-content image-set">
             	<?php
 			 //셀렉트 
@@ -148,7 +148,7 @@ $MENU_CODE= "001001000";
 		          	}
 		        }
                     	for($line = 0; $line < 5; $line++){
-	        		if(empty($img_array[$line]))$img_array[$line]="/_metro/image/small_logo.png";
+	        		if(empty($img_array[$line]))$img_array[$line]="/<?php echo $flugin_url ?>/image/small_logo.png";
 			?>
 	                    <img src="<?php echo $img_array[$line]?>">
 	                <?php 	} ?>
@@ -177,7 +177,7 @@ $MENU_CODE= "001001000";
 			}
 	   ?>
 
-           <a class="tile double double-vertical bg-steel" href="/_metro/board/list.html/BOARD_ID/<?php echo $grow[BOARD_ID]?>/MENU_CODE/<?php echo $menu?>">
+           <a class="tile double double-vertical bg-steel" href="/<?php echo $flugin_url ?>/board/list.html/BOARD_ID/<?php echo $grow[BOARD_ID]?>/MENU_CODE/<?php echo $menu?>">
                 <div class="tile double double-vertical live <?php echo $class?>" data-role="live-tile" data-effect="slideUpDown">
 		<!--[if lte IE 8 ]>
 		<div id="<?php echo $grow[BOARD_ID]?>" class="carousel bg-transparent no-overflow">

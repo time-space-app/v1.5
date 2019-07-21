@@ -24,7 +24,7 @@ $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 		(STRTOLOWER(SUBSTR($row['L_URL'],0,7))=="http://")?$TARGET = "target='_new' ":$TARGET = "";
 	?>
 	<div class="element">
-            <a class="<?php echo $dropdown?> fg-white"  href="<?php echo $row['L_URL']?>" <?php echo $TARGET?>><?php echo $row['L_NAME']?></a>
+            <a class="<?=$dropdown?> fg-white"  href="<?=$row['L_URL']?>" <?=$TARGET?>><?=$row['L_NAME']?></a>
             <ul class="dropdown-menu inverse" id="components-submenu" data-role="dropdown">
                 <?php
 		//중메뉴
@@ -37,7 +37,7 @@ $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 			(str_replace(" ","",$row2['M_URL'])=="")?$dropdown="dropdown-toggle":$dropdown="";
 			(STRTOLOWER(SUBSTR($row2['M_URL'],0,7))=="http://")?$TARGET2 = "target='_new' ":$TARGET2 = "";
 		?>
-                <li><a class="<?php echo $dropdown?>" href="<?php echo $row2['M_URL']?>" <?php echo $TARGET2?>><?php echo $row2['M_NAME']?></a>
+                <li><a class="<?=$dropdown?>" href="<?=$row2['M_URL']?>" <?=$TARGET2?>><?=$row2['M_NAME']?></a>
                     <ul class="dropdown-menu inverse" data-role="dropdown">
                     	<?php
 			//소메뉴
@@ -49,7 +49,7 @@ $GPLdb5 =& $GPLbase->db5;//db 커넥션 오브젝트생성 MYSQL5
 				//css드롭다운디자인적용및 HTTP URL 입력시 새창띄우기
 				(STRTOLOWER(SUBSTR($row3['S_URL'],0,7))=="http://")?$TARGET3 = "target='_new' ":$TARGET3 = "";
 			?>
-                        <li><a  href="<?php echo $row3['S_URL']?>" <?php echo $TARGET3?>><?php echo $row3['S_NAME']?></a></li>
+                        <li><a  href="<?=$row3['S_URL']?>" <?=$TARGET3?>><?=$row3['S_NAME']?></a></li>
 			<?php }} //소메뉴끝?>
                     </ul>
                 </li>

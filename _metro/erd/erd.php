@@ -1,7 +1,7 @@
 <?php include "../header.php";?>
 <?php if($_SESSION['valid_level'] > 3 || $_SESSION['valid_level'] == '') { 
 	echo "<script type='text/javascript'>alert(' 스태프 이상 권한만 이용가능 합니다.');</script>";
-	echo "<meta http-equiv='Refresh' content='0;url=/_metro/board/login.html'>";
+	echo "<meta http-equiv='Refresh' content='0;url=/$flugin_url/board/login.html'>";
 	exit;
 }
 ?>
@@ -86,10 +86,10 @@ ERD<small class="on-right">Entity-Relationship Diagram(작업한 테이블 개�
 			</ul>
 			<div class="frames">
 				<div class="frame" id="_page_1">
-				<a href="javascript:imgPop('/_metro/erd/model.jpg');"><img src="/_metro/erd/model.jpg" title="개체관계도"></a>
+				<a href="javascript:imgPop('/<?php echo $flugin_url ?>/erd/model.jpg');"><img src="/<?php echo $flugin_url ?>/erd/model.jpg" title="개체관계도"></a>
 				</div>
 				<div class="frame" id="_page_2">
-				<a href="javascript:imgPop('/_metro/erd/model_ko.jpg');"><img src="/_metro/erd/model_ko.jpg" title="개체관계도"></a>
+				<a href="javascript:imgPop('/<?php echo $flugin_url ?>/erd/model_ko.jpg');"><img src="/<?php echo $flugin_url ?>/erd/model_ko.jpg" title="개체관계도"></a>
 				</div>
 			</div>
 			</div>
@@ -104,7 +104,7 @@ ERD<small class="on-right">Entity-Relationship Diagram(작업한 테이블 개�
 		
 		<script>
 		        function SnagIt(erd){                 
-		                frmExcel.action="/_metro/erd/erd_down.php";
+		                frmExcel.action="/<?php echo $flugin_url ?>/erd/erd_down.php";
 		                frmExcel.strBuffer.value= erd;
 		                //alert(frmExcel.strBuffer.value);//디버그
 		                frmExcel.submit();

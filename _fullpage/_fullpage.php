@@ -10,7 +10,7 @@
 		<!-- 외부 플러그인 CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css">
 		<!-- 사용자가 추가한 CSS -->
-		<link rel="stylesheet" href="/_fullpage/css/style.css">
+		<link rel="stylesheet" href="/<?php echo $flugin_url ?>/css/style.css">
 		<title>부트스트랩4.0으로 홈페이지 만들기</title>
 	</head>
 	<body>
@@ -178,7 +178,7 @@
 					<div class="slide">
 						<div class="row">
 							<div class="d-none d-md-block col-md-3 col-sm-3">
-								<img src="/_fullpage/images/lock-icon.jpg" class="cover-image float-right">
+								<img src="/<?php echo $flugin_url ?>/images/lock-icon.jpg" class="cover-image float-right">
 							</div>
 							<div class="col-md-9 col-sm-9">
 								<h3><span class="highlight">O O O O O O O学校</span></h3>
@@ -198,7 +198,7 @@
 					<div class="slide">
 						<div class="row">
 							<div class="d-none d-md-block col-md-3 col-sm-3">
-								<img src="/_fullpage/images/lock-icon.jpg" class="cover-image float-right">
+								<img src="/<?php echo $flugin_url ?>/images/lock-icon.jpg" class="cover-image float-right">
 							</div>
 							<div class="col-md-9 col-sm-9">
 								<h3><span class="highlight">O O O O O O O学校</span></h3>
@@ -226,7 +226,7 @@
 							<p><strong>Drop your project anywhere</strong><br>Symu will prepare a mockup of your website for you!</p>
 						</div>
 						<div class="col-md-7">
-							<img src="/_fullpage/images/symu-panel-1.png">
+							<img src="/<?php echo $flugin_url ?>/images/symu-panel-1.png">
 						</div>
 					</div>
 				</div>
@@ -235,7 +235,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-7">
-							<img src="/_fullpage/images/symu-panel-2.png">
+							<img src="/<?php echo $flugin_url ?>/images/symu-panel-2.png">
 						</div>
 						<div class="col-md-5">
 							<h2>The simplest way to<br><strong>get feedback from your clients!</strong></h2>
@@ -254,7 +254,7 @@
 							<p>The program will divide your files into responsive versions on its own! You have the option to view the projects in either normal or responsive modes!</p>
 						</div>
 						<div class="col-md-7">
-							<img src="/_fullpage/images/home-panel-3.jpg">
+							<img src="/<?php echo $flugin_url ?>/images/home-panel-3.jpg">
 						</div>
 					</div>
 				</div>	
@@ -263,12 +263,12 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
-							<img src="/_fullpage/images/envelope-icon.jpg" style="float:left">  
+							<img src="/<?php echo $flugin_url ?>/images/envelope-icon.jpg" style="float:left">  
 							<h2 class="icon-title">Email<br><strong>notifications</strong></h2>
 							<p>An email notification will be sent when your client comments or opens a project. You will know when a client recieves the projects and if he has seen it!</p>
 						</div>
 						<div class="col-md-6">
-							<img src="/_fullpage/images/lock-icon.jpg" style="float:left">　　
+							<img src="/<?php echo $flugin_url ?>/images/lock-icon.jpg" style="float:left">　　
 							<h2 class="icon-title">Project<br><strong>protection</strong></h2>
 							<p>Your projects will be perfectly safe, Symu uses SSL encryption and every project added receives a unique link. Additionally you have the option to secure your project with a password.</p>
 						</div>
