@@ -1,4 +1,4 @@
-... 
+` 
  [타임스페이스 홈페이지 솔루션](이하 솔루션)은 개인/기업/관공서/학교/회사/법인/가정/군부대 등  
  언제나 어디서나 무료로 사용이 가능합니다. 
  저작권은 Time-Space.biz(이하 회사)에 있으며, 누구나 수정해서 사용 가능한 <a href="http://opensource.org/licenses/mit-license.php" target="_new"> 
