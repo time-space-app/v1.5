@@ -1,4 +1,4 @@
-<pre> 
+... 
  [타임스페이스 홈페이지 솔루션](이하 솔루션)은 개인/기업/관공서/학교/회사/법인/가정/군부대 등  
  언제나 어디서나 무료로 사용이 가능합니다. 
  저작권은 Time-Space.biz(이하 회사)에 있으며, 누구나 수정해서 사용 가능한 <a href="http://opensource.org/licenses/mit-license.php" target="_new"> 
@@ -28,4 +28,3 @@
   5) 코드미러 v5.2.1 에디터 플러그인 
    - MIT라이센스, 소스배포: <a href="http://codemirror.net/LICENSE" target="_new">http://codemirror.net/LICENSE</a> 
  2. 타임스페이스 최신버전 다운로드   <a href="http://blog.daum.net/_blog/ArticleCateList.do?blogid=0FnMj&vblogid=&beforePage=1&maxarticleno=271&minarticleno=271&maxregdt=20140914132233&minregdt=20140914132233&currentPage=1&listScale=&viewKind=&dispkind=B2202&CATEGORYID=17093&categoryId=17093&articleno=&regdt=&date=&calv=&chgkey=QiMsURbwKis7rBYJKXlbajB71C7EyIjFcebP8JVEtj50&totalcnt=1" target="_new" class="button bg-darkRed bg-hover-red fg-white fg-hover-white bd-orange" style="margin-top: 10px"><h4 style="margin: 0px 10px;">Download <span class="icon-download-2 on-right"></span></h4></a> 
-</pre> 
