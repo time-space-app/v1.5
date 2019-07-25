@@ -1,4 +1,4 @@
-[타임스페이스 홈페이지 솔루션](이하 솔루션)은 개인/기업/관공서/학교/회사/법인/가정/군부대 등  
+ [타임스페이스 홈페이지 솔루션](이하 솔루션)은 개인/기업/관공서/학교/회사/법인/가정/군부대 등  
  언제나 어디서나 무료로 사용이 가능합니다. 
  저작권은 Time-Space.biz(이하 회사)에 있으며, 누구나 수정해서 사용 가능한
  [MIT 라이센스]http://opensource.org/licenses/mit-license.php(오픈소스이며 수정, 배포도 가능하며, 실무에서 사용해도 됩니다.  
@@ -13,7 +13,7 @@
  1. 솔루션에 적용된 기술항목 이용에 동의 
  솔루션에서는 아래와 같은 자유소프트웨어를 이용합니다. 
   1) 메트로UI CSS 2.0 
-   - MIT라이센스, 소스배포: http://metroui.org.ua/ 
+   - MIT라이센스, [소스배포]: http://metroui.org.ua/ 
   2) 웹파일관리자 ecoder 0.4.10 + elfinder 2.1.x(php5.3이상~php7까지테스트) 
  	- 엔코더 GNU GPL라이센스, [소스배포]: 
  		http://sourceforge.net/projects/ecoder/?source=navbar
