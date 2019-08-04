@@ -217,7 +217,7 @@
 										$SQL .= " ORDER BY TOP_NEWS DESC, SEQ DESC";
 										$result = $GPLdb5->GPLexcute_query($SQL);
 										$Prevtcnt = $result->num_rows;//echo $num_rows; //디버그
-										//$Prevtcnt = mysql_num_rows($result);
+										//$Prevtcnt = mysqli_num_rows($result);
 										//echo $BOARD_SEQ."여기".$Prevtcnt;
 										if($Prevtcnt>0){
 											while($row = mysqli_fetch_array($result)) {

@@ -295,7 +295,7 @@ $T_CMS = "T_CMS";
 		$result = $GPLdb5->GPLexcute_query($SQL);
 		$i=0;
 		?>
-		<tr><th colspan="6" style="background-color:#787878;text-align:center;font-weight:bold;height:30px;color:#fff">TOTAL MENU: <?php echo mysql_num_rows($result);?> ea</th></tr>
+		<tr><th colspan="6" style="background-color:#787878;text-align:center;font-weight:bold;height:30px;color:#fff">TOTAL MENU: <?php echo mysqli_num_rows($result);?> ea</th></tr>
 		<?php
 		if($result){
 			while($row = mysqli_fetch_array($result)) {

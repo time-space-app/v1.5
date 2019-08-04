@@ -322,7 +322,7 @@ $now_page = $_REQUEST['now_page'];
 		$SQL .= " AND BOARD_ID = '$BOARD_ID'";
 		$SQL .= " ORDER BY SEQ ASC";
 		$result = $GPLdb5->GPLexcute_query($SQL);
-		$Prevtcnt = mysql_num_rows($result);
+		$Prevtcnt = mysqli_num_rows($result);
 		if($result){
 			while($row = mysqli_fetch_array($result)) {
 		        if ($BOARD_SEQ > $row['SEQ'])
